@@ -1,72 +1,103 @@
 # Hunexture
 
-> Hunexture is an Ahmedabad-based software company building custom AI & ML solutions, web and mobile apps, and cloud platforms for startups and enterprises worldwide.
+> Hunexture is an Ahmedabad-based software company building custom AI & ML solutions, web and mobile apps, and cloud platforms for startups and enterprises worldwide. Contact: info@hunexture.com, Ahmedabad, Gujarat, India.
 
-Contact: info@hunexture.com | Ahmedabad, Gujarat, India
+Hunexture offers AI Solutions, Web Development, App Development, Cloud Integration, UI/UX Design, Digital Marketing. Pages below are available as Markdown (.md); the whole site is in one file at https://hunexture.com/llms-full.txt.
+
+## Company
+- [Home](https://hunexture.com/index.md): Hunexture is an Ahmedabad-based software company building custom AI & ML solutions, web and mobile apps, and cloud platforms for startups and enterprises worldwide.
+- [Company facts](https://hunexture.com/about/facts/index.md): A citable fact sheet: who Hunexture is, what it builds, the industries it serves, how it works, engagement models and how to contact the team in Ahmedabad, India.
+- [Business profile](https://hunexture.com/business-profile/index.md): Company profile of Hunexture: who we are, what we do, how we work and how to contact us in Ahmedabad, Gujarat, India.
+- [Full site content](https://hunexture.com/llms-full.txt): Every page of this site as one Markdown document.
 
 ## Services
-- [AI Solutions](https://hunexture.com/services/ai-solutions/): Transform your business with cutting-edge artificial intelligence and machine learning solutions. We develop custom AI models tailored to your specific…
-- [Web Development](https://hunexture.com/services/web-development/): Build powerful, scalable web applications that deliver exceptional user experiences. Our expert team uses the latest technologies and best practices to…
-- [App Development](https://hunexture.com/services/app-development/): Create stunning mobile applications that engage users and drive business results. We develop both native and cross-platform apps that deliver smooth…
-- [Cloud Integration](https://hunexture.com/services/cloud-integration/): Leverage the power of cloud computing to build scalable, reliable, and cost-effective solutions. We help you migrate to the cloud and build cloud-native…
-- [UI/UX Design](https://hunexture.com/services/uiux-design/): Create engaging digital experiences that users love. Our design team combines aesthetics with usability to craft interfaces that are both beautiful and…
-- [Digital Marketing](https://hunexture.com/services/digital-marketing/): Grow your online presence and reach your target audience with comprehensive digital marketing strategies. We combine creativity with data analytics to…
+- [What we build](https://hunexture.com/services/index.md): Explore Hunexture services: AI solutions, web development, mobile app development, cloud integration, UI/UX design and digital marketing.
+- [AI Solutions](https://hunexture.com/services/ai-solutions/index.md): Transform your business with cutting-edge artificial intelligence and machine learning solutions. We develop custom AI models tailored to your specific…
+- [Web Development](https://hunexture.com/services/web-development/index.md): Build powerful, scalable web applications that deliver exceptional user experiences. Our expert team uses the latest technologies and best practices to…
+- [App Development](https://hunexture.com/services/app-development/index.md): Create stunning mobile applications that engage users and drive business results. We develop both native and cross-platform apps that deliver smooth…
+- [Cloud Integration](https://hunexture.com/services/cloud-integration/index.md): Leverage the power of cloud computing to build scalable, reliable, and cost-effective solutions. We help you migrate to the cloud and build cloud-native…
+- [UI/UX Design](https://hunexture.com/services/uiux-design/index.md): Create engaging digital experiences that users love. Our design team combines aesthetics with usability to craft interfaces that are both beautiful and…
+- [Digital Marketing](https://hunexture.com/services/digital-marketing/index.md): Grow your online presence and reach your target audience with comprehensive digital marketing strategies. We combine creativity with data analytics to…
 
 ## AI & machine learning
-- [Custom AI Services](https://hunexture.com/ai/custom-ai-services/): At Hunexture, we design custom AI solutions that meet the specific challenges of businesses. Our expertise in Artificial Intelligence (AI) and Machine…
-- [NLP Solutions](https://hunexture.com/ai/nlp-solutions/): At Hunexture, we build powerful NLP architectures designed to understand, process, and generate human language at scale. By leveraging advanced…
-- [Computer Vision Services](https://hunexture.com/ai/computer-vision-services/): Our Computer Vision division at Hunexture creates robust AI visual systems replacing tedious human physical inspection. From manufacturing quality control…
-- [Generative AI Solutions](https://hunexture.com/ai/generative-ai-solutions/): Transform ideation workflows with Generative AI built by Hunexture. By hooking up large language models and diffusion networks to your enterprise data, we…
-- [Data Science & Analytics](https://hunexture.com/ai/data-science-analytics/): Hunexture’s Data Science & Analytics practice builds robust pipelines that aggregate fragmented data into singular sources of truth. From descriptive…
-- [AI Tech Stack](https://hunexture.com/ai/ai-tech-stack/): Deploying AI requires fundamentally different infrastructure than traditional web apps. Hunexture designs GPU-optimized topologies, orchestrates complex…
-- [AI Agents](https://hunexture.com/ai/ai-agents/): Move beyond passive prompts. Hunexture builds AI Agents capable of formulating plans, iterating through obstacles, and utilizing external software tools…
-- [AI Operations (AI Ops)](https://hunexture.com/ai/ai-operations/): Through robust AI Operations (AIOps/MLOps), Hunexture ensures that deployed models never degrade. We implement automated monitoring, continuous retraining…
-- [Machine Learning](https://hunexture.com/ai/machine-learning/): At the heart of the AI revolution lies foundational Machine Learning. Hunexture excels at classic and modern ML techniques, meticulously engineering…
-- [AI & ML Overview](https://hunexture.com/ai/ai-ml-overview/): Initiating an AI journey requires intense strategic alignment. Hunexture’s advisory services demystify the AI landscape, mapping out high-ROI use cases and…
-- [Transform Business](https://hunexture.com/ai/transform-business/): For organizations seeking total operational overhaul, Hunexture orchestrates massive, multi-departmental AI integration. This holistic approach interlinks…
-- [AI & ML Models](https://hunexture.com/ai/ai-ml-models/): Proprietary AI and ML models inherently constitute your most valuable intellectual property. Hunexture offers secure, isolated hosting and inferencing…
+- [AI and machine learning](https://hunexture.com/ai/index.md): Custom AI, machine learning, NLP, computer vision, generative AI and AI agent development. Production-ready AI solutions from Hunexture.
+- [Custom AI Services](https://hunexture.com/ai/custom-ai-services/index.md): At Hunexture, we design custom AI solutions that meet the specific challenges of businesses. Our expertise in Artificial Intelligence (AI) and Machine…
+- [NLP Solutions](https://hunexture.com/ai/nlp-solutions/index.md): At Hunexture, we build powerful NLP architectures designed to understand, process, and generate human language at scale. By leveraging advanced…
+- [Computer Vision Services](https://hunexture.com/ai/computer-vision-services/index.md): Our Computer Vision division at Hunexture creates robust AI visual systems replacing tedious human physical inspection. From manufacturing quality control…
+- [Generative AI Solutions](https://hunexture.com/ai/generative-ai-solutions/index.md): Transform ideation workflows with Generative AI built by Hunexture. By hooking up large language models and diffusion networks to your enterprise data, we…
+- [Data Science & Analytics](https://hunexture.com/ai/data-science-analytics/index.md): Hunexture’s Data Science & Analytics practice builds robust pipelines that aggregate fragmented data into singular sources of truth. From descriptive…
+- [AI Tech Stack](https://hunexture.com/ai/ai-tech-stack/index.md): Deploying AI requires fundamentally different infrastructure than traditional web apps. Hunexture designs GPU-optimized topologies, orchestrates complex…
+- [AI Agents](https://hunexture.com/ai/ai-agents/index.md): Move beyond passive prompts. Hunexture builds AI Agents capable of formulating plans, iterating through obstacles, and utilizing external software tools…
+- [AI Operations (AI Ops)](https://hunexture.com/ai/ai-operations/index.md): Through robust AI Operations (AIOps/MLOps), Hunexture ensures that deployed models never degrade. We implement automated monitoring, continuous retraining…
+- [Machine Learning](https://hunexture.com/ai/machine-learning/index.md): At the heart of the AI revolution lies foundational Machine Learning. Hunexture excels at classic and modern ML techniques, meticulously engineering…
+- [AI & ML Overview](https://hunexture.com/ai/ai-ml-overview/index.md): Initiating an AI journey requires intense strategic alignment. Hunexture’s advisory services demystify the AI landscape, mapping out high-ROI use cases and…
+- [Transform Business](https://hunexture.com/ai/transform-business/index.md): For organizations seeking total operational overhaul, Hunexture orchestrates massive, multi-departmental AI integration. This holistic approach interlinks…
+- [AI & ML Models](https://hunexture.com/ai/ai-ml-models/index.md): Proprietary AI and ML models inherently constitute your most valuable intellectual property. Hunexture offers secure, isolated hosting and inferencing…
 
 ## Industries
-- [Healthcare software solutions](https://hunexture.com/industries/healthcare/): Transform patient care with cutting-edge technology solutions. We help healthcare organizations improve patient outcomes, streamline operations, and ensure…
-- [Legal software solutions](https://hunexture.com/industries/legal/): Empower legal professionals with innovative technology. From case management to document automation, we help law firms work smarter and serve clients better.
-- [Logistics software solutions](https://hunexture.com/industries/logistics/): Optimize your supply chain with intelligent logistics solutions. Real-time tracking, route optimization, and predictive analytics to keep your business…
-- [Education software solutions](https://hunexture.com/industries/education/): Transform education with innovative learning platforms. From LMS to virtual classrooms, we help educational institutions deliver engaging digital experiences.
-- [Media & OTT software solutions](https://hunexture.com/industries/media-ott/): Build the next generation of media and entertainment platforms. From OTT streaming to content management, we create engaging digital experiences.
-- [Travel software solutions](https://hunexture.com/industries/travel/): Transform the travel experience with innovative technology. Booking systems, itinerary management, and personalized recommendations.
-- [Retail software solutions](https://hunexture.com/industries/retail/): Modernize retail operations with digital solutions. From e-commerce platforms to POS systems, we help retailers thrive in the digital age.
-- [Construction software solutions](https://hunexture.com/industries/construction/): Build better with digital tools. Project management, resource planning, and site tracking solutions for modern construction.
-- [Sports software solutions](https://hunexture.com/industries/sports/): Engage fans and optimize performance with sports technology. From fan apps to performance analytics, we bring innovation to sports.
-- [Marketplace software solutions](https://hunexture.com/industries/marketplace/): Build thriving marketplaces that connect buyers and sellers. Scalable platforms with robust features for multi-vendor success.
-- [Finance software solutions](https://hunexture.com/industries/finance/): Transform financial services with innovative technology. Secure, compliant, and user-friendly solutions for modern finance.
-- [Social Media software solutions](https://hunexture.com/industries/social-media/): Build engaging social platforms that connect people. From social networks to community forums, we create spaces for meaningful interaction.
-- [Insurance software solutions](https://hunexture.com/industries/insurance/): Modernize insurance operations with digital solutions. From policy management to claims processing, streamline your insurance business.
-- [Manufacturing software solutions](https://hunexture.com/industries/manufacturing/): Transform manufacturing with Industry 4.0 solutions. IoT, automation, and analytics for smarter production.
-- [IT & Telecom software solutions](https://hunexture.com/industries/it-telecom/): Build the backbone of digital communication. Network management, service provisioning, and customer management solutions for telecom operators.
-- [Beauty & Lifestyle software solutions](https://hunexture.com/industries/beauty-lifestyle/): Enhance beauty and wellness businesses with digital solutions. Booking systems, inventory management, and customer engagement tools.
-- [On Demand software solutions](https://hunexture.com/industries/on-demand/): Build on-demand platforms that connect service providers with customers. Real-time matching, tracking, and payment solutions.
-- [E-Commerce software solutions](https://hunexture.com/industries/ecommerce/): Build powerful e-commerce platforms that drive sales. From storefronts to payment processing, complete e-commerce solutions.
+- [Industries we serve](https://hunexture.com/industries/index.md): Hunexture builds software for healthcare, finance, retail, logistics, education, legal, manufacturing and more. See how we solve industry-specific problems.
+- [Healthcare software solutions](https://hunexture.com/industries/healthcare/index.md): Transform patient care with cutting-edge technology solutions. We help healthcare organizations improve patient outcomes, streamline operations, and ensure…
+- [Legal software solutions](https://hunexture.com/industries/legal/index.md): Empower legal professionals with innovative technology. From case management to document automation, we help law firms work smarter and serve clients better.
+- [Logistics software solutions](https://hunexture.com/industries/logistics/index.md): Optimize your supply chain with intelligent logistics solutions. Real-time tracking, route optimization, and predictive analytics to keep your business…
+- [Education software solutions](https://hunexture.com/industries/education/index.md): Transform education with innovative learning platforms. From LMS to virtual classrooms, we help educational institutions deliver engaging digital experiences.
+- [Media & OTT software solutions](https://hunexture.com/industries/media-ott/index.md): Build the next generation of media and entertainment platforms. From OTT streaming to content management, we create engaging digital experiences.
+- [Travel software solutions](https://hunexture.com/industries/travel/index.md): Transform the travel experience with innovative technology. Booking systems, itinerary management, and personalized recommendations.
+- [Retail software solutions](https://hunexture.com/industries/retail/index.md): Modernize retail operations with digital solutions. From e-commerce platforms to POS systems, we help retailers thrive in the digital age.
+- [Construction software solutions](https://hunexture.com/industries/construction/index.md): Build better with digital tools. Project management, resource planning, and site tracking solutions for modern construction.
+- [Sports software solutions](https://hunexture.com/industries/sports/index.md): Engage fans and optimize performance with sports technology. From fan apps to performance analytics, we bring innovation to sports.
+- [Marketplace software solutions](https://hunexture.com/industries/marketplace/index.md): Build thriving marketplaces that connect buyers and sellers. Scalable platforms with robust features for multi-vendor success.
+- [Finance software solutions](https://hunexture.com/industries/finance/index.md): Transform financial services with innovative technology. Secure, compliant, and user-friendly solutions for modern finance.
+- [Social Media software solutions](https://hunexture.com/industries/social-media/index.md): Build engaging social platforms that connect people. From social networks to community forums, we create spaces for meaningful interaction.
+- [Insurance software solutions](https://hunexture.com/industries/insurance/index.md): Modernize insurance operations with digital solutions. From policy management to claims processing, streamline your insurance business.
+- [Manufacturing software solutions](https://hunexture.com/industries/manufacturing/index.md): Transform manufacturing with Industry 4.0 solutions. IoT, automation, and analytics for smarter production.
+- [IT & Telecom software solutions](https://hunexture.com/industries/it-telecom/index.md): Build the backbone of digital communication. Network management, service provisioning, and customer management solutions for telecom operators.
+- [Beauty & Lifestyle software solutions](https://hunexture.com/industries/beauty-lifestyle/index.md): Enhance beauty and wellness businesses with digital solutions. Booking systems, inventory management, and customer engagement tools.
+- [On Demand software solutions](https://hunexture.com/industries/on-demand/index.md): Build on-demand platforms that connect service providers with customers. Real-time matching, tracking, and payment solutions.
+- [E-Commerce software solutions](https://hunexture.com/industries/ecommerce/index.md): Build powerful e-commerce platforms that drive sales. From storefronts to payment processing, complete e-commerce solutions.
 
-## Case studies
-- [AI-Powered Analytics Platform](https://hunexture.com/portfolio/ai-powered-analytics-platform/): Enterprise-level analytics platform with machine learning predictions and real-time insights.
-- [E-Commerce Mobile App](https://hunexture.com/portfolio/ecommerce-mobile-app/): Cross-platform shopping app with AR product visualization and seamless checkout experience.
-- [Cloud Infrastructure Dashboard](https://hunexture.com/portfolio/cloud-infrastructure-dashboard/): Comprehensive monitoring and management dashboard for multi-cloud environments.
-- [Healthcare Management System](https://hunexture.com/portfolio/healthcare-management-system/): HIPAA-compliant patient management platform with telemedicine capabilities.
-- [Smart Home IoT Platform](https://hunexture.com/portfolio/smart-home-iot-platform/): Intelligent home automation system with voice control and predictive learning.
-- [Financial Trading App](https://hunexture.com/portfolio/financial-trading-app/): Real-time trading platform with advanced charting and portfolio management.
-- [E-Commerce Digital Marketing Campaign](https://hunexture.com/portfolio/ecommerce-digital-marketing-campaign/): Multi-channel marketing campaign that drove 300% revenue growth for online retailer.
-- [FinTech Alpha Dashboard](https://hunexture.com/portfolio/fintech-trading-dashboard/): Real-time cryptocurrency and options trading dashboard with dark-mode optimized charts.
-- [Smart Supply Chain Optimizer](https://hunexture.com/portfolio/ai-supply-chain/): Computer vision and predictive modeling system for automated warehouse logistics.
-- [Enterprise Knowledge Assistant (RAG)](https://hunexture.com/portfolio/rag-knowledge-assistant/): Chat assistant that answers from company documents with cited sources and role-based access.
-- [Support Copilot with AI Agents](https://hunexture.com/portfolio/ai-agent-support-copilot/): Agents that triage tickets, draft replies and take approved actions in the help desk.
-- [Telehealth App with FHIR Records](https://hunexture.com/portfolio/telehealth-fhir-app/): Patient app for video visits, prescriptions and records, built on HL7 FHIR.
-- [Multi-tenant SaaS Billing Platform](https://hunexture.com/portfolio/saas-billing-platform/): Usage-based billing, invoicing and a customer portal for a B2B software product.
-- [Kubernetes Platform and FinOps Dashboard](https://hunexture.com/portfolio/platform-engineering-finops/): Internal platform with self-service environments and cloud cost visibility per team.
-- [AI-assisted SEO and Content Engine](https://hunexture.com/portfolio/ai-seo-content-engine/): Topic research, briefs and a publishing workflow that keeps human editors in charge.
-- [Visual Quality Inspection on the Line](https://hunexture.com/portfolio/visual-quality-inspection/): Camera-based defect detection for a packaging line, running on edge devices.
-- [Voice Agent for Appointment Booking](https://hunexture.com/portfolio/voice-agent-appointments/): Phone assistant that books, moves and cancels appointments in English and Hindi.
-- [B2B Wholesale Marketplace](https://hunexture.com/portfolio/b2b-wholesale-marketplace/): Ordering portal with tiered pricing, credit terms and reorder in one click.
-- [Contract Lifecycle Portal](https://hunexture.com/portfolio/contract-lifecycle-portal/): Request, review, sign and track contracts with clause search and renewal alerts.
-- [Driver App with Proof of Delivery](https://hunexture.com/portfolio/driver-app-proof-of-delivery/): Offline-first app for routes, scanning, photos and signatures.
-- [Fitness and Habit Coaching App](https://hunexture.com/portfolio/fitness-habit-app/): Training plans, wearable sync and coach chat in one subscription app.
-- [Cloud Data Lakehouse and BI](https://hunexture.com/portfolio/data-lakehouse-analytics/): One governed data platform feeding dashboards, forecasts and AI features.
-- [Conversion Rate Optimisation Program](https://hunexture.com/portfolio/conversion-rate-optimisation/): Research-led testing program for a lead-generation website.
+## Insights
+- [Insights](https://hunexture.com/insights/index.md): Plain-language articles from Team Hunexture on websites, apps, WhatsApp automation, chatbots and AI features for growing businesses.
+- [Does your small business need an app, or just a better website?](https://hunexture.com/insights/app-or-better-website/index.md): Most small businesses should start with a fast, clear website. Here is how to tell when an app is worth the extra cost and effort.
+- [WhatsApp automation for Indian businesses: what to automate first](https://hunexture.com/insights/whatsapp-automation-what-to-automate-first/index.md): WhatsApp is where your customers already are. Here is a simple order for automating it, starting with the easy wins.
+- [How we ship AI features you can trust: evals, guardrails and human review](https://hunexture.com/insights/ai-features-you-can-trust/index.md): AI can be wrong. This is how we test it, limit it and keep people in the loop before it talks to your customers.
+- [Chatbot or AI agent? Picking the right level of automation](https://hunexture.com/insights/chatbot-or-ai-agent/index.md): A chatbot answers. An agent acts. Here is how to choose the simplest option that does the job.
+
+## Interactive lab
+- [Interactive AI lab](https://hunexture.com/lab/index.md): Hands-on 3D visual explainers of the maths behind the AI we ship: vectors, matrices, loss functions, gradient descent, logistic regression and probability.
+- [3D Vector Representation](https://hunexture.com/lab/3d-vector-representation/index.md): Interactive 3D visualization of vectors in three-dimensional space. Understand vector components and their geometric representation.
+- [3D Dot Product](https://hunexture.com/lab/3d-dot-product/index.md): Explore the dot product of vectors in 3D space. Visualize how the angle between vectors affects their dot product.
+- [Matrix Transformation](https://hunexture.com/lab/matrix-transformation/index.md): Discover how matrices transform vectors in 3D space. Experiment with different transformation matrices and see the results in real-time.
+- [Loss Function Visualizer (MSE)](https://hunexture.com/lab/loss-function-mse/index.md): Understand Mean Squared Error through interactive 3D loss landscape and 2D regression visualization. Adjust parameters to minimize the error.
+- [Gradient Descent Visualizer](https://hunexture.com/lab/gradient-descent/index.md): Watch gradient descent in action! See how the algorithm automatically finds the minimum of the loss function by following the gradient downhill.
+- [Gradient Descent 3D (Normalization)](https://hunexture.com/lab/gradient-descent-3d/index.md): Advanced gradient descent visualization showing the critical importance of data normalization. Toggle between normalized and unnormalized data to see the dramatic effects!
+- [Conditional Probability 3D](https://hunexture.com/lab/conditional-probability-3d/index.md): Understand conditional probability P(A|B) through an interactive 3D particle system. Step through the logic of restricting sample spaces.
+- [3D Logistic Regression Explorer](https://hunexture.com/lab/logistic-regression-3d/index.md): Explore logistic regression in 3D! See how the sigmoid function creates a decision boundary. Compare linear vs sigmoid modes and understand why logistic regression works for classification.
+
+## Optional
+- [Our work](https://hunexture.com/portfolio/index.md): Selected AI, web, mobile and cloud projects delivered by Hunexture, with the problem, solution, tech stack and results for each.
+- [Privacy policy](https://hunexture.com/privacy-policy/index.md): How Hunexture collects, uses and protects your personal information.
+- [Terms of service](https://hunexture.com/terms-of-service/index.md): The terms that govern use of the Hunexture website and services.
+- [Cookie policy](https://hunexture.com/cookie-policy/index.md): How Hunexture uses cookies and how you can control them.
+- [AI-Powered Analytics Platform](https://hunexture.com/portfolio/ai-powered-analytics-platform/index.md): Enterprise-level analytics platform with machine learning predictions and real-time insights.
+- [E-Commerce Mobile App](https://hunexture.com/portfolio/ecommerce-mobile-app/index.md): Cross-platform shopping app with AR product visualization and seamless checkout experience.
+- [Cloud Infrastructure Dashboard](https://hunexture.com/portfolio/cloud-infrastructure-dashboard/index.md): Comprehensive monitoring and management dashboard for multi-cloud environments.
+- [Healthcare Management System](https://hunexture.com/portfolio/healthcare-management-system/index.md): HIPAA-compliant patient management platform with telemedicine capabilities.
+- [Smart Home IoT Platform](https://hunexture.com/portfolio/smart-home-iot-platform/index.md): Intelligent home automation system with voice control and predictive learning.
+- [Financial Trading App](https://hunexture.com/portfolio/financial-trading-app/index.md): Real-time trading platform with advanced charting and portfolio management.
+- [E-Commerce Digital Marketing Campaign](https://hunexture.com/portfolio/ecommerce-digital-marketing-campaign/index.md): Multi-channel marketing campaign that drove 300% revenue growth for online retailer.
+- [FinTech Alpha Dashboard](https://hunexture.com/portfolio/fintech-trading-dashboard/index.md): Real-time cryptocurrency and options trading dashboard with dark-mode optimized charts.
+- [Smart Supply Chain Optimizer](https://hunexture.com/portfolio/ai-supply-chain/index.md): Computer vision and predictive modeling system for automated warehouse logistics.
+- [Enterprise Knowledge Assistant (RAG)](https://hunexture.com/portfolio/rag-knowledge-assistant/index.md): Chat assistant that answers from company documents with cited sources and role-based access.
+- [Support Copilot with AI Agents](https://hunexture.com/portfolio/ai-agent-support-copilot/index.md): Agents that triage tickets, draft replies and take approved actions in the help desk.
+- [Telehealth App with FHIR Records](https://hunexture.com/portfolio/telehealth-fhir-app/index.md): Patient app for video visits, prescriptions and records, built on HL7 FHIR.
+- [Multi-tenant SaaS Billing Platform](https://hunexture.com/portfolio/saas-billing-platform/index.md): Usage-based billing, invoicing and a customer portal for a B2B software product.
+- [Kubernetes Platform and FinOps Dashboard](https://hunexture.com/portfolio/platform-engineering-finops/index.md): Internal platform with self-service environments and cloud cost visibility per team.
+- [AI-assisted SEO and Content Engine](https://hunexture.com/portfolio/ai-seo-content-engine/index.md): Topic research, briefs and a publishing workflow that keeps human editors in charge.
+- [Visual Quality Inspection on the Line](https://hunexture.com/portfolio/visual-quality-inspection/index.md): Camera-based defect detection for a packaging line, running on edge devices.
+- [Voice Agent for Appointment Booking](https://hunexture.com/portfolio/voice-agent-appointments/index.md): Phone assistant that books, moves and cancels appointments in English and Hindi.
+- [B2B Wholesale Marketplace](https://hunexture.com/portfolio/b2b-wholesale-marketplace/index.md): Ordering portal with tiered pricing, credit terms and reorder in one click.
+- [Contract Lifecycle Portal](https://hunexture.com/portfolio/contract-lifecycle-portal/index.md): Request, review, sign and track contracts with clause search and renewal alerts.
+- [Driver App with Proof of Delivery](https://hunexture.com/portfolio/driver-app-proof-of-delivery/index.md): Offline-first app for routes, scanning, photos and signatures.
+- [Fitness and Habit Coaching App](https://hunexture.com/portfolio/fitness-habit-app/index.md): Training plans, wearable sync and coach chat in one subscription app.
+- [Cloud Data Lakehouse and BI](https://hunexture.com/portfolio/data-lakehouse-analytics/index.md): One governed data platform feeding dashboards, forecasts and AI features.
+- [Conversion Rate Optimisation Program](https://hunexture.com/portfolio/conversion-rate-optimisation/index.md): Research-led testing program for a lead-generation website.
