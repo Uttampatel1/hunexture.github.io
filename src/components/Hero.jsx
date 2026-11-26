@@ -18,7 +18,7 @@ const Hero = () => (
       <div className="bp-hero-top">
         <div className="bp-hero-copy">
           <h1 id="hero-title" className="bp-hero-title">
-            AI software, engineered to spec.
+            AI software, engineered to <span className="hl-mark">spec.</span>
           </h1>
           <p className="bp-hero-lede">
             Hunexture designs, builds and runs AI-powered products for startups and growing

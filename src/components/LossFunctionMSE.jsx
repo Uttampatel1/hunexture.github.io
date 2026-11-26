@@ -59,7 +59,7 @@ const LossFunctionMSE = () => {
         const metrics = context.measureText(message);
         const textWidth = metrics.width;
 
-        context.fillStyle = "rgba(255, 255, 255, 1.0)";
+        context.fillStyle = "#0B1020";
         context.fillText(message, borderThickness, fontsize + borderThickness);
 
         const texture = new THREE.Texture(canvas);
@@ -91,7 +91,7 @@ const LossFunctionMSE = () => {
 
         // Draw Axes
         const origin = toScreen(0, 0, width, height);
-        ctx.strokeStyle = '#475569';
+        ctx.strokeStyle = '#A3ABC2';
         ctx.lineWidth = 2;
 
         // X Axis
@@ -109,7 +109,7 @@ const LossFunctionMSE = () => {
         // Draw Data Points
         dataPoints.forEach(p => {
             const pos = toScreen(p.x, p.y, width, height);
-            ctx.fillStyle = '#60a5fa';
+            ctx.fillStyle = '#6366F1';
             ctx.beginPath();
             ctx.arc(pos.x, pos.y, 6, 0, Math.PI * 2);
             ctx.fill();
@@ -124,7 +124,7 @@ const LossFunctionMSE = () => {
         const p1 = toScreen(startX, startY, width, height);
         const p2 = toScreen(endX, endY, width, height);
 
-        ctx.strokeStyle = '#facc15';
+        ctx.strokeStyle = '#2DE0A7';
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
@@ -132,7 +132,7 @@ const LossFunctionMSE = () => {
         ctx.stroke();
 
         // Draw Residuals
-        ctx.strokeStyle = '#f87171';
+        ctx.strokeStyle = '#FF6B5B';
         ctx.lineWidth = 1;
         ctx.setLineDash([5, 5]);
 
@@ -155,8 +155,8 @@ const LossFunctionMSE = () => {
 
         const container = mount3DRef.current;
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color('#0f172a');
-        scene.fog = new THREE.Fog('#0f172a', 10, 50);
+        scene.background = new THREE.Color('#F4F6FB');
+        scene.fog = new THREE.Fog('#F4F6FB', 10, 50);
         sceneRef.current = scene;
 
         const camera = new THREE.PerspectiveCamera(
@@ -186,7 +186,7 @@ const LossFunctionMSE = () => {
         scene.add(dirLight);
 
         // Grid
-        const gridHelper = new THREE.GridHelper(20, 20, 0x444444, 0x222222);
+        const gridHelper = new THREE.GridHelper(20, 20, 0xA3ABC2, 0xDDE2EE);
         scene.add(gridHelper);
 
         // Axis Labels
@@ -222,7 +222,7 @@ const LossFunctionMSE = () => {
             geometry.attributes.position.setZ(i, displayHeight);
 
             const t = Math.min(lossVal / 20, 1);
-            colorObject.setHSL(0.7 - (t * 0.7), 1.0, 0.5);
+            colorObject.set(0x6366F1).lerp(new THREE.Color(0xFF6B5B), t);
             colors.push(colorObject.r, colorObject.g, colorObject.b);
         }
 
@@ -256,8 +256,8 @@ const LossFunctionMSE = () => {
         // Marker Sphere
         const sphereGeo = new THREE.SphereGeometry(0.3, 32, 32);
         const sphereMat = new THREE.MeshPhongMaterial({
-            color: 0xffea00,
-            emissive: 0xff0000,
+            color: 0x2DE0A7,
+            emissive: 0x000000,
             emissiveIntensity: 0.2
         });
         const marker = new THREE.Mesh(sphereGeo, sphereMat);
@@ -270,7 +270,7 @@ const LossFunctionMSE = () => {
             new THREE.Vector3(0, -10, 0)
         ]);
         const lineMat = new THREE.LineBasicMaterial({
-            color: 0xffea00,
+            color: 0x2DE0A7,
             transparent: true,
             opacity: 0.5
         });

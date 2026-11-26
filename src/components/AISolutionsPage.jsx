@@ -15,7 +15,7 @@ const expertiseData = [
         id: 'ml',
         icon: FaBrain,
         title: 'Machine Learning',
-        color: '#667eea',
+        color: '#6366F1',
         items: [
             {
                 subtitle: 'Predictive Analytics',
@@ -35,7 +35,7 @@ const expertiseData = [
         id: 'nlp',
         icon: FaComments,
         title: 'Natural Language Processing (NLP)',
-        color: '#4facfe',
+        color: '#4338CA',
         items: [
             {
                 subtitle: 'Sentiment Analysis',
@@ -55,7 +55,7 @@ const expertiseData = [
         id: 'cv',
         icon: FaEye,
         title: 'Computer Vision',
-        color: '#30cfd0',
+        color: '#2DE0A7',
         items: [
             {
                 subtitle: 'Image and Video Analysis',
@@ -75,7 +75,7 @@ const expertiseData = [
         id: 'genai',
         icon: FaMagic,
         title: 'Generative AI',
-        color: '#fa709a',
+        color: '#FF6B5B',
         items: [
             {
                 subtitle: 'Transformative Generative AI Solutions',
@@ -95,7 +95,7 @@ const expertiseData = [
         id: 'models',
         icon: FaFlask,
         title: 'Machine Learning Model Expertise',
-        color: '#f7971e',
+        color: '#475069',
         items: [
             {
                 subtitle: 'Diverse Algorithm Expertise',
@@ -115,7 +115,7 @@ const expertiseData = [
         id: 'agents',
         icon: FaRobot,
         title: 'AI-Powered Agents',
-        color: '#764ba2',
+        color: '#818CF8',
         items: [
             {
                 subtitle: 'Revolutionize Business with AI Agents',

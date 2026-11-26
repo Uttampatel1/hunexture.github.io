@@ -73,7 +73,7 @@ const GradientDescentVisualizer = () => {
         context.font = "Bold 24px Arial";
         const metrics = context.measureText(message);
 
-        context.fillStyle = "rgba(255, 255, 255, 1.0)";
+        context.fillStyle = "#0B1020";
         context.fillText(message, 0, 24);
 
         const texture = new THREE.Texture(canvas);
@@ -106,7 +106,7 @@ const GradientDescentVisualizer = () => {
 
         // Axes
         const origin = toScreen(0, 0, width, height);
-        ctx.strokeStyle = '#475569';
+        ctx.strokeStyle = '#A3ABC2';
         ctx.lineWidth = 2;
         ctx.beginPath(); ctx.moveTo(0, origin.y); ctx.lineTo(width, origin.y); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(origin.x, 0); ctx.lineTo(origin.x, height); ctx.stroke();
@@ -114,7 +114,7 @@ const GradientDescentVisualizer = () => {
         // Data Points
         dataPoints.forEach(p => {
             const pos = toScreen(p.x, p.y, width, height);
-            ctx.fillStyle = '#60a5fa';
+            ctx.fillStyle = '#6366F1';
             ctx.beginPath(); ctx.arc(pos.x, pos.y, 6, 0, Math.PI * 2); ctx.fill();
         });
 
@@ -125,12 +125,12 @@ const GradientDescentVisualizer = () => {
         const p1 = toScreen(startX, startY, width, height);
         const p2 = toScreen(endX, endY, width, height);
 
-        ctx.strokeStyle = '#facc15';
+        ctx.strokeStyle = '#2DE0A7';
         ctx.lineWidth = 3;
         ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
 
         // Residuals
-        ctx.strokeStyle = '#f87171';
+        ctx.strokeStyle = '#FF6B5B';
         ctx.lineWidth = 1;
         ctx.setLineDash([5, 5]);
         dataPoints.forEach(p => {
@@ -148,8 +148,8 @@ const GradientDescentVisualizer = () => {
 
         const container = mount3DRef.current;
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color('#0f172a');
-        scene.fog = new THREE.Fog('#0f172a', 10, 60);
+        scene.background = new THREE.Color('#F4F6FB');
+        scene.fog = new THREE.Fog('#F4F6FB', 10, 60);
         sceneRef.current = scene;
 
         const camera = new THREE.PerspectiveCamera(
@@ -179,7 +179,7 @@ const GradientDescentVisualizer = () => {
         scene.add(dirLight);
 
         // Grid
-        const gridHelper = new THREE.GridHelper(20, 20, 0x444444, 0x222222);
+        const gridHelper = new THREE.GridHelper(20, 20, 0xA3ABC2, 0xDDE2EE);
         scene.add(gridHelper);
 
         // Labels
@@ -207,7 +207,7 @@ const GradientDescentVisualizer = () => {
             geometry.attributes.position.setZ(i, displayHeight);
 
             const t = Math.min(lossVal / 25, 1);
-            colorObject.setHSL(0.66 - (t * 0.66), 1.0, 0.5);
+            colorObject.set(0x6366F1).lerp(new THREE.Color(0xFF6B5B), t);
             colors.push(colorObject.r, colorObject.g, colorObject.b);
         }
 
@@ -226,7 +226,7 @@ const GradientDescentVisualizer = () => {
         // Wireframe
         const wireframe = new THREE.LineSegments(
             new THREE.WireframeGeometry(geometry),
-            new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.05 })
+            new THREE.LineBasicMaterial({ color: 0x0B1020, transparent: true, opacity: 0.12 })
         );
         wireframe.rotation.x = -Math.PI / 2;
         wireframe.position.copy(surface.position);
@@ -235,7 +235,7 @@ const GradientDescentVisualizer = () => {
         // Marker
         const marker = new THREE.Mesh(
             new THREE.SphereGeometry(0.3, 32, 32),
-            new THREE.MeshPhongMaterial({ color: 0xffea00, emissive: 0xff0000, emissiveIntensity: 0.2 })
+            new THREE.MeshPhongMaterial({ color: 0x2DE0A7, emissive: 0x000000, emissiveIntensity: 0.2 })
         );
         scene.add(marker);
         markerRef.current = marker;
@@ -247,7 +247,7 @@ const GradientDescentVisualizer = () => {
         pathGeometry.setDrawRange(0, 0);
         const pathLine = new THREE.Line(
             pathGeometry,
-            new THREE.LineBasicMaterial({ color: 0x00ffff, linewidth: 2 })
+            new THREE.LineBasicMaterial({ color: 0x0B1020, linewidth: 2 })
         );
         scene.add(pathLine);
         pathLineRef.current = pathLine;

@@ -11,20 +11,34 @@
    existing component picks up the blueprint palette.
    ───────────────────────────────────────────────────────────── */
 :root {
-  --paper: #F4F7FB;
+  --paper: #F4F6FB;
   --paper-raised: #FFFFFF;
-  --paper-sunk: #E9EFF7;
-  --ink: #0B1F3A;
-  --ink-muted: #47597A;
-  --line: #CBD6E6;
-  --line-strong: #9DB0CB;
-  --signal: #1D4ED8;
-  --signal-deep: #1E3A8A;
-  --signal-tint: #E3EBFC;
+  --paper-sunk: #E9EDF6;
+  --ink: #0B1020;
+  --ink-muted: #475069;
+  --ink-faint: #6B7389;
+  --line: #DDE2EE;
+  --line-strong: #A3ABC2;
+  --signal: #6366F1;
+  --signal-deep: #4338CA;
+  --signal-tint: #E8E9FD;
 
-  --font-display: 'Bricolage Grotesque', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-body: 'Figtree', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-annot: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  /* Hunexture "Neural Night" design system — Cloud (light) theme */
+  --accent: #2DE0A7;      /* Signal Mint: one highlight per headline, as a fill block behind ink text — never mint text on light */
+  --on-accent: #0B1020;
+  --accent-deep: #047857; /* mint for small text/icons on light backgrounds (AA contrast); use instead of --accent for text */
+  --accent-tint: #D5F9EC; /* soft mint wash for subtle fills/hover backgrounds */
+  --alert: #FF6B5B;       /* Website Roast only; never with --accent */
+  --midnight-ink: #0B1020;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+  --brand-glow: linear-gradient(90deg, #6366F1 0%, #2DE0A7 100%);
+
+  --font-display: 'Space Grotesk', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-annot: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
 
   /* Legacy aliases (do not add new usages — prefer the tokens above) */
   --navy-blue: var(--paper);
@@ -34,8 +48,8 @@
   --light-blue: var(--ink-muted);
   --text-white: var(--ink);
   --text-gray: var(--ink-muted);
-  --gradient-1: linear-gradient(135deg, #E3EBFC 0%, #FFFFFF 100%);
-  --gradient-2: linear-gradient(135deg, #FFFFFF 0%, #E9EFF7 100%);
+  --gradient-1: linear-gradient(135deg, #E8E9FD 0%, #FFFFFF 100%);
+  --gradient-2: linear-gradient(135deg, #FFFFFF 0%, #E9EDF6 100%);
   --accent-color: var(--signal);
   --primary-color: var(--signal);
   --dark-black: var(--ink);
@@ -45,26 +59,26 @@
   --border-color: var(--line);
 
   --glass-bg: rgba(255, 255, 255, 0.78);
-  --glass-border: rgba(11, 31, 58, 0.12);
-  --shimmer-gradient: linear-gradient(90deg, transparent, rgba(29, 78, 216, 0.06), transparent);
-  --glow-color: rgba(29, 78, 216, 0.08);
-  --neon-cyan: #1D4ED8;
-  --neon-purple: #3B6FE8;
+  --glass-border: rgba(11, 16, 32, 0.12);
+  --shimmer-gradient: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.06), transparent);
+  --glow-color: rgba(99, 102, 241, 0.08);
+  --neon-cyan: #6366F1;
+  --neon-purple: #818CF8;
 
-  --electric-blue-03: rgba(29, 78, 216, 0.03);
-  --electric-blue-05: rgba(29, 78, 216, 0.05);
-  --electric-blue-08: rgba(29, 78, 216, 0.08);
-  --electric-blue-10: rgba(29, 78, 216, 0.1);
-  --electric-blue-15: rgba(29, 78, 216, 0.15);
-  --electric-blue-20: rgba(29, 78, 216, 0.2);
-  --electric-blue-25: rgba(29, 78, 216, 0.25);
-  --electric-blue-30: rgba(29, 78, 216, 0.3);
-  --electric-blue-40: rgba(29, 78, 216, 0.4);
-  --electric-blue-50: rgba(29, 78, 216, 0.5);
-  --electric-blue-60: rgba(29, 78, 216, 0.6);
-  --electric-blue-80: rgba(29, 78, 216, 0.8);
-  --overlay-bg: rgba(244, 247, 251, 0.96);
-  --overlay-light: rgba(244, 247, 251, 0.88);
+  --electric-blue-03: rgba(99, 102, 241, 0.03);
+  --electric-blue-05: rgba(99, 102, 241, 0.05);
+  --electric-blue-08: rgba(99, 102, 241, 0.08);
+  --electric-blue-10: rgba(99, 102, 241, 0.1);
+  --electric-blue-15: rgba(99, 102, 241, 0.15);
+  --electric-blue-20: rgba(99, 102, 241, 0.2);
+  --electric-blue-25: rgba(99, 102, 241, 0.25);
+  --electric-blue-30: rgba(99, 102, 241, 0.3);
+  --electric-blue-40: rgba(99, 102, 241, 0.4);
+  --electric-blue-50: rgba(99, 102, 241, 0.5);
+  --electric-blue-60: rgba(99, 102, 241, 0.6);
+  --electric-blue-80: rgba(99, 102, 241, 0.8);
+  --overlay-bg: rgba(244, 246, 251, 0.96);
+  --overlay-light: rgba(244, 246, 251, 0.88);
   --card-overlay: rgba(255, 255, 255, 0.7);
   --card-overlay-dark: rgba(255, 255, 255, 0.92);
 }
@@ -100,14 +114,12 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display);
-  font-stretch: 112%;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .tech-font {
   font-family: var(--font-display);
-  font-stretch: 115%;
   letter-spacing: 0.01em;
 }
 
@@ -502,3 +514,13 @@ html {
 .theme-ai  { --signal: #6D28D9; --signal-deep: #4C1D95; --signal-tint: #EDE5FB; --accent-color: #6D28D9; }
 .theme-ind { --signal: #0F766E; --signal-deep: #134E4A; --signal-tint: #D8F1ED; --accent-color: #0F766E; }
 .theme-pf  { --signal: #C2410C; --signal-deep: #7C2D12; --signal-tint: #FCE6D8; --accent-color: #C2410C; }
+
+/* Mint highlight animations: reduced motion shows the finished state */
+@media (prefers-reduced-motion: reduce) {
+  .hl-mark { animation: none !important; background-size: 100% 100% !important; }
+  .bp-hero-title, .bp-hero-lede, .bp-hero-actions, .bp-hero-stack { animation: none !important; }
+  .hl-figure::before { animation: none !important; }
+  .bp-stage::after { animation: none !important; }
+  .bp-btn-primary::after { display: none; }
+  .nav-link::after, .bp-btn, .bp-stage { transition: none !important; }
+}

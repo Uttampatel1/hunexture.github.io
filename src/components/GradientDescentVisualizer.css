@@ -2,8 +2,8 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background-color: #0f172a;
-    color: white;
+    background-color: #F4F6FB;
+    color: #0B1020;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -18,19 +18,19 @@
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: var(--primary-color);
-    color: white;
+    background: var(--signal);
+    color: #FFFFFF;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(11, 16, 32, 0.08);
 }
 
 .back-button-gd:hover {
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
 }
 
 /* Split View Layout */
@@ -44,7 +44,7 @@
 .view-3d-gd {
     flex: 2;
     position: relative;
-    background: #000;
+    background: #F4F6FB;
     overflow: hidden;
 }
 
@@ -56,8 +56,8 @@
 .view-2d-gd {
     flex: 1;
     position: relative;
-    background: #1e293b;
-    border-left: 1px solid #334155;
+    background: #FFFFFF;
+    border-left: 1px solid #DDE2EE;
 }
 
 .canvas-2d-gd {
@@ -70,7 +70,7 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    background: rgba(0, 0, 0, 0.6);
+    background: #FFFFFF;
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -83,9 +83,9 @@
 .controls-gd {
     height: auto;
     min-height: 220px;
-    background: #1e293b;
+    background: #FFFFFF;
     padding: 15px;
-    border-top: 1px solid #334155;
+    border-top: 1px solid #DDE2EE;
     z-index: 10;
     display: flex;
     gap: 24px;
@@ -99,19 +99,19 @@
 }
 
 .border-left-gd {
-    border-left: 1px solid #475569;
+    border-left: 1px solid #DDE2EE;
     padding-left: 24px;
 }
 
 .controls-gd h1 {
     font-size: 1.25rem;
     font-weight: bold;
-    color: #60a5fa;
+    color: #4338CA;
     margin: 0 0 5px 0;
 }
 
 .controls-gd p {
-    color: #94a3b8;
+    color: #6B7389;
     font-size: 0.85rem;
     margin: 0 0 10px 0;
 }
@@ -128,38 +128,38 @@
 }
 
 .slider-header-gd label {
-    color: #cbd5e1;
+    color: #0B1020;
 }
 
 .val-w-gd {
-    color: #60a5fa;
+    color: #4338CA;
     font-weight: bold;
 }
 
 .val-b-gd {
-    color: #4ade80;
+    color: #4338CA;
     font-weight: bold;
 }
 
 .val-lr-gd {
-    color: #facc15;
+    color: #4338CA;
     font-weight: bold;
 }
 
 .slider-group-gd input[type="range"] {
     width: 100%;
     cursor: pointer;
-    accent-color: #3b82f6;
+    accent-color: #6366F1;
     height: 6px;
     border-radius: 3px;
-    background: #334155;
+    background: #FFFFFF;
 }
 
 .slider-group-gd input[type="range"]::-webkit-slider-thumb {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: #3b82f6;
+    background: #6366F1;
     cursor: pointer;
 }
 
@@ -167,7 +167,7 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: #3b82f6;
+    background: #6366F1;
     cursor: pointer;
     border: none;
 }
@@ -191,31 +191,31 @@
 }
 
 .btn-primary-gd {
-    background: #3b82f6;
-    color: white;
+    background: #6366F1;
+    color: #FFFFFF;
 }
 
 .btn-primary-gd:hover {
-    background: #2563eb;
+    background: #4338CA;
 }
 
 .btn-danger-gd {
-    background: #ef4444;
-    color: white;
+    background: #FF6B5B;
+    color: #FFFFFF;
 }
 
 .btn-danger-gd:hover {
-    background: #dc2626;
+    background: #E85746;
 }
 
 .btn-secondary-gd {
-    background: #475569;
-    color: white;
+    background: #FFFFFF;
+    color: #0B1020;
     flex: 0.5;
 }
 
 .btn-secondary-gd:hover {
-    background: #334155;
+    background: #E9EDF6;
 }
 
 /* Stats Panel */
@@ -228,18 +228,18 @@
 }
 
 .stat-box-gd {
-    background: #334155;
+    background: #FFFFFF;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     text-align: center;
 }
 
 .border-red {
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    border: 1px solid #DDE2EE;
 }
 
 .border-purple {
-    border: 1px solid rgba(168, 85, 247, 0.3);
+    border: 1px solid #DDE2EE;
 }
 
 .stat-value-gd {
@@ -248,16 +248,16 @@
 }
 
 .text-red {
-    color: #f87171;
+    color: #FF6B5B;
 }
 
 .text-purple {
-    color: #a78bfa;
+    color: #4338CA;
 }
 
 .stat-label-gd {
     font-size: 0.75rem;
-    color: #cbd5e1;
+    color: #0B1020;
     margin-top: 4px;
 }
 
@@ -272,7 +272,7 @@
     .view-2d-gd {
         flex: 1;
         border-left: none;
-        border-bottom: 1px solid #334155;
+        border-bottom: 1px solid #DDE2EE;
     }
 
     .controls-gd {
@@ -283,7 +283,7 @@
 
     .border-left-gd {
         border-left: none;
-        border-top: 1px solid #475569;
+        border-top: 1px solid #DDE2EE;
         padding-left: 0;
         padding-top: 16px;
     }

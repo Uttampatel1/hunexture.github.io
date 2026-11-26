@@ -60,7 +60,6 @@
 
 .sd-section-title {
   font-family: var(--font-display);
-  font-stretch: 105%;
   font-size: clamp(1.85rem, 3.2vw, 2.5rem);
   font-weight: 800;
   line-height: 1.1;
@@ -103,7 +102,7 @@
   gap: 10px;
   min-height: 48px;
   padding: 0 24px;
-  border-radius: 4px;
+  border-radius: var(--radius-pill);
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
@@ -192,7 +191,6 @@
 
 .sd-hero-title {
   font-family: var(--font-display);
-  font-stretch: 118%;
   font-weight: 800;
   font-size: clamp(2.2rem, 4.6vw, 3.5rem);
   line-height: 1.06;
@@ -223,7 +221,7 @@
   padding: 6px 12px;
   border: 1px solid var(--line-strong);
   background: var(--paper-raised);
-  border-radius: 2px;
+  border-radius: var(--radius-pill);
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--ink);
@@ -255,7 +253,6 @@
 .sd-hero-stat strong {
   display: block;
   font-family: var(--font-display);
-  font-stretch: 118%;
   font-weight: 800;
   font-size: 2rem;
   line-height: 1;
@@ -468,7 +465,7 @@
   height: 100%;
   border-radius: 28px;
   overflow: hidden;
-  background: #0f172a;
+  background: var(--ink);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -590,7 +587,7 @@
 .phone-toggle {
   width: 24px;
   height: 12px;
-  background: #334155;
+  background: #475069;
   border-radius: 10px;
   position: relative;
   cursor: pointer;
@@ -1104,7 +1101,7 @@
   padding: 0 32px;
 }
 
-.sd-cta .sd-tag { color: #DCE7FF; }
+.sd-cta .sd-tag { color: var(--signal-tint); }
 
 .sd-cta h2 {
   font-size: clamp(1.7rem, 3vw, 2.3rem);
@@ -1118,7 +1115,7 @@
   max-width: 60ch;
   font-size: 1.05rem;
   line-height: 1.65;
-  color: #E6EEFF;
+  color: var(--signal-tint);
   margin: 0 0 28px;
 }
 
@@ -1162,7 +1159,7 @@
 
 /* Accents inside dark device screens need a light tone */
 .phone-screen .phone-nav-item.active {
-  color: #8DB4FF;
+  color: #A5B4FC;
 }
 
 .node-status.active {

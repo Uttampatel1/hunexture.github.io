@@ -18,7 +18,7 @@
     background: var(--electric-blue);
     color: var(--navy-blue);
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-pill);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -27,7 +27,7 @@
 }
 
 .back-button:hover {
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
 }
 
 .blog-header {
@@ -61,7 +61,7 @@
 
 .blog-card {
     background: var(--card-background);
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     padding: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -87,7 +87,7 @@
 }
 
 .blog-card:hover {
-    box-shadow: 0 15px 40px rgba(0, 123, 255, 0.2);
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
     border-color: var(--electric-blue);
 }
 
@@ -148,7 +148,7 @@
     background: var(--electric-blue);
     color: var(--navy-blue);
     padding: 4px 12px;
-    border-radius: 20px;
+    border-radius: var(--radius-pill);
     font-size: 0.85rem;
     font-weight: 500;
 }

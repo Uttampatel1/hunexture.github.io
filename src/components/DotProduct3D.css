@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background-color: #1a1a1a;
+    background-color: #F4F6FB;
     overflow: hidden;
 }
 
@@ -15,19 +15,19 @@
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: var(--primary-color);
-    color: white;
+    background: var(--signal);
+    color: #FFFFFF;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(11, 16, 32, 0.08);
 }
 
 .back-button-dot:hover {
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
 }
 
 .canvas-container-dot {
@@ -39,12 +39,12 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    color: white;
-    background: rgba(0, 0, 0, 0.85);
+    color: #0B1020;
+    background: #FFFFFF;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     max-width: 320px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(11, 16, 32, 0.08);
     max-height: 90vh;
     overflow-y: auto;
     z-index: 100;
@@ -54,7 +54,7 @@
 .panel-dot h3 {
     margin-top: 5px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #DDE2EE;
     padding-bottom: 5px;
     font-size: 1.1em;
 }
@@ -63,17 +63,17 @@
     font-size: 0.9em;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #ddd;
+    color: #0B1020;
     display: block;
     margin-top: 10px;
 }
 
 .text-yellow {
-    color: #ffff00;
+    color: #4338CA;
 }
 
 .text-cyan {
-    color: #00ffff;
+    color: #475069;
 }
 
 .input-group-dot {
@@ -91,9 +91,9 @@
 }
 
 .input-group-dot input[type="number"] {
-    background: #333;
-    border: 1px solid #555;
-    color: white;
+    background: #FFFFFF;
+    border: 1px solid #DDE2EE;
+    color: #0B1020;
     padding: 4px;
     border-radius: 4px;
     width: 60px;
@@ -103,28 +103,28 @@
 
 .input-group-dot input[type="number"]:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    border-color: var(--signal);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
 }
 
 .color-x {
-    color: #ff4444;
+    color: #FF6B5B;
 }
 
 .color-y {
-    color: #44ff44;
+    color: #4338CA;
 }
 
 .color-z {
-    color: #4444ff;
+    color: #6366F1;
 }
 
 .results {
-    background: #222;
+    background: #FFFFFF;
     padding: 10px;
-    border-radius: 6px;
+    border-radius: var(--radius-lg);
     margin-top: 15px;
-    border: 1px solid #444;
+    border: 1px solid #DDE2EE;
 }
 
 .result-row {
@@ -140,7 +140,7 @@
 }
 
 .highlight {
-    color: #4da6ff;
+    color: #4338CA;
 }
 
 .meaning-text {
@@ -154,8 +154,8 @@
     margin-top: 15px;
     width: 100%;
     padding: 8px;
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--signal);
+    color: #FFFFFF;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -165,15 +165,15 @@
 }
 
 .update-btn-dot:hover {
-    background-color: #0063b1;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    background-color: #4338CA;
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.25);
 }
 
 .instructions-dot {
     margin-top: 15px;
     font-size: 0.8em;
-    color: #ccc;
-    border-top: 1px solid #444;
+    color: #0B1020;
+    border-top: 1px solid #DDE2EE;
     padding-top: 10px;
     line-height: 1.6;
 }

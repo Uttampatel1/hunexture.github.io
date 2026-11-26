@@ -5,7 +5,18 @@
   margin: 0;
   padding: 120px 0 72px;
   background-color: var(--paper);
-  /* drafting grid: major lines every 96px, minor every 24px */
+  overflow: hidden; /* clip glow so it never causes horizontal scroll */
+  isolation: isolate;
+  border-bottom: 1px solid var(--line);
+}
+
+/* drafting grid: major lines every 96px, minor every 24px; fades toward the edges */
+.bp-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background-image:
     linear-gradient(rgba(157, 176, 203, 0.35) 1px, transparent 1px),
     linear-gradient(90deg, rgba(157, 176, 203, 0.35) 1px, transparent 1px),
@@ -13,10 +24,12 @@
     linear-gradient(90deg, rgba(203, 214, 230, 0.35) 1px, transparent 1px);
   background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
   background-position: -1px -1px;
-  border-bottom: 1px solid var(--line);
+  -webkit-mask-image: radial-gradient(ellipse 80% 75% at 50% 45%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 75% at 50% 45%, #000 40%, transparent 100%);
 }
 
 .bp-hero-inner {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 32px;
@@ -37,13 +50,42 @@
 
 .bp-hero-title {
   font-family: var(--font-display);
-  font-stretch: 118%;
   font-weight: 800;
   font-size: clamp(2.4rem, 5.2vw, 4rem);
   line-height: 1.04;
   letter-spacing: -0.02em;
   color: var(--ink);
   margin: 0 0 20px;
+}
+
+/* mint highlight block behind ink text, swept in left to right */
+.hl-mark {
+  color: var(--ink);
+  padding: 0 0.12em;
+  border-radius: var(--radius-sm);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 100% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  animation: hl-mark-sweep 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s backwards;
+}
+
+@keyframes hl-mark-sweep {
+  from { background-size: 0% 100%; }
+  to { background-size: 100% 100%; }
+}
+
+/* staggered entrance */
+.bp-hero-title { animation: bp-fade-up 0.6s ease both; }
+.bp-hero-lede { animation: bp-fade-up 0.6s ease 0.08s both; }
+.bp-hero-actions { animation: bp-fade-up 0.6s ease 0.16s both; }
+.bp-hero-stack { animation: bp-fade-up 0.6s ease 0.24s both; }
+
+@keyframes bp-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
 }
 
 .bp-hero-lede {
@@ -68,17 +110,19 @@
   justify-content: center;
   min-height: 48px;
   padding: 0 24px;
-  border-radius: 4px;
+  border-radius: var(--radius-pill);
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
   border: 1.5px solid var(--signal);
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .bp-btn-primary {
+  position: relative;
+  overflow: hidden;
   background: var(--signal);
   color: #FFFFFF;
 }
@@ -86,6 +130,26 @@
 .bp-btn-primary:hover {
   background: var(--signal-deep);
   border-color: var(--signal-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(99, 102, 241, 0.35);
+}
+
+/* light sheen sweeping across once on hover */
+.bp-btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 60%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: translateX(-120%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.bp-btn-primary:hover::after {
+  transform: translateX(260%) skewX(-20deg);
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .bp-btn-ghost {
@@ -95,6 +159,7 @@
 
 .bp-btn-ghost:hover {
   background: var(--signal-tint);
+  border-color: var(--signal);
 }
 
 .bp-hero-stack {
@@ -132,9 +197,19 @@
   gap: 6px;
   padding: 18px 18px 20px;
   border: 1.5px solid var(--signal);
-  background: var(--paper-raised);
-  animation: bp-stage-in 0.5s ease both;
+  background:
+    var(--brand-glow) top left / 0% 3px no-repeat,
+    var(--paper-raised);
+  animation: bp-stage-in 0.5s ease backwards;
   animation-delay: calc(0.15s + var(--i) * 0.18s);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-size 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.bp-stage:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(11, 16, 32, 0.08);
+  border-color: var(--signal);
+  background-size: 100% 3px, auto;
 }
 
 /* connector line to the next stage */
@@ -145,10 +220,12 @@
   right: -41px;
   width: 40px;
   height: 1.5px;
-  background: var(--signal);
+  /* dashed mint flow */
+  background: repeating-linear-gradient(var(--flow-dir, 90deg), var(--accent) 0 6px, transparent 6px 10px);
+  background-size: 20px 100%;
   transform-origin: left center;
-  animation: bp-line-in 0.35s ease both;
-  animation-delay: calc(0.3s + var(--i) * 0.18s);
+  animation: bp-line-in 0.35s ease backwards, bp-flow 1.2s linear infinite;
+  animation-delay: calc(0.3s + var(--i) * 0.18s), 0s;
 }
 
 /* arrowhead */
@@ -161,19 +238,18 @@
   height: 0;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-left: 8px solid var(--signal);
+  border-left: 8px solid var(--accent);
   z-index: 1;
 }
 
 .bp-stage-num {
   font-family: var(--font-annot);
   font-size: 0.8rem;
-  color: var(--signal);
+  color: var(--accent-deep);
 }
 
 .bp-stage-name {
   font-family: var(--font-display);
-  font-stretch: 112%;
   font-weight: 700;
   font-size: 1.3rem;
   color: var(--ink);
@@ -192,13 +268,13 @@
   margin-top: 8px;
   font-family: var(--font-annot);
   font-size: 0.78rem;
-  color: var(--signal);
+  color: var(--accent-deep);
 }
 
 .bp-stage-loop svg {
   width: 28px;
   height: 17px;
-  stroke: var(--signal);
+  stroke: var(--accent-deep);
   stroke-width: 1.8;
   flex-shrink: 0;
 }
@@ -264,7 +340,16 @@
 
 @keyframes bp-stage-in {
   from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
+}
+
+@keyframes bp-flow {
+  from { background-position: 0 0; }
+  to { background-position: 20px 0; }
+}
+
+@keyframes bp-flow-v {
+  from { background-position: 0 0; }
+  to { background-position: 0 20px; }
 }
 
 @keyframes bp-line-in {
@@ -276,6 +361,10 @@
   .bp-stage,
   .bp-stage::after {
     animation: none;
+  }
+
+  .bp-stage:hover {
+    transform: none;
   }
 }
 
@@ -336,7 +425,9 @@
     width: 1.5px;
     height: 28px;
     transform-origin: top center;
-    animation-name: bp-line-in-v;
+    --flow-dir: 180deg;
+    background-size: 100% 20px;
+    animation-name: bp-line-in-v, bp-flow-v;
   }
 
   .bp-stage:not(:last-child)::before,
@@ -348,7 +439,7 @@
     left: 30px;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 8px solid var(--signal);
+    border-top: 8px solid var(--accent);
     border-bottom: 0;
   }
 

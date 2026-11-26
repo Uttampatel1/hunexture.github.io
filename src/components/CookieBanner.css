@@ -55,7 +55,7 @@
 
 .cookie-btn {
   padding: 10px 24px;
-  border-radius: 50px;
+  border-radius: var(--radius-pill);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;

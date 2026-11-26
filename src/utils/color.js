@@ -2,8 +2,8 @@
 // Per-item accent colours in the data files were picked for dark backgrounds;
 // textTone() darkens one toward ink until it meets WCAG AA contrast on paper.
 
-const INK = [11, 31, 58] // --ink #0B1F3A
-const DARKEST_PAPER = [233, 239, 247] // --paper-sunk #E9EFF7 (worst case background)
+const INK = [11, 16, 32] // --ink #0B1020
+const DARKEST_PAPER = [233, 237, 246] // --paper-sunk #E9EDF6 (worst case background)
 
 const parseHex = (hex) => {
   if (typeof hex !== 'string' || !hex.startsWith('#')) return null

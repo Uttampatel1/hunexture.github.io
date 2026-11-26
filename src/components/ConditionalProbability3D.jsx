@@ -24,18 +24,18 @@ const ConditionalProbability3D = () => {
     const PARTICLE_COUNT = 3000;
     const CUBE_SIZE = 40;
 
-    const COLOR_NEITHER = new THREE.Color(0x475569);
-    const COLOR_A = new THREE.Color(0xef4444);
-    const COLOR_B = new THREE.Color(0x3b82f6);
-    const COLOR_INTERSECTION = new THREE.Color(0xd946ef);
+    const COLOR_NEITHER = new THREE.Color(0xA3ABC2);
+    const COLOR_A = new THREE.Color(0xFF6B5B);
+    const COLOR_B = new THREE.Color(0x6366F1);
+    const COLOR_INTERSECTION = new THREE.Color(0x2DE0A7);
 
     useEffect(() => {
         if (!mountRef.current) return;
 
         const container = mountRef.current;
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x0f172a);
-        scene.fog = new THREE.FogExp2(0x0f172a, 0.008);
+        scene.background = new THREE.Color(0xF4F6FB);
+        scene.fog = new THREE.FogExp2(0xF4F6FB, 0.008);
         sceneRef.current = scene;
 
         const camera = new THREE.PerspectiveCamera(
@@ -77,7 +77,7 @@ const ConditionalProbability3D = () => {
 
         const planeB = new THREE.Mesh(
             planeGeom,
-            new THREE.MeshBasicMaterial({ color: 0x3b82f6, opacity: 0.1, transparent: true, side: THREE.DoubleSide })
+            new THREE.MeshBasicMaterial({ color: 0x6366F1, opacity: 0.1, transparent: true, side: THREE.DoubleSide })
         );
         planeB.rotation.y = Math.PI / 2;
         scene.add(planeB);
@@ -85,7 +85,7 @@ const ConditionalProbability3D = () => {
 
         const planeA = new THREE.Mesh(
             planeGeom,
-            new THREE.MeshBasicMaterial({ color: 0xef4444, opacity: 0.1, transparent: true, side: THREE.DoubleSide })
+            new THREE.MeshBasicMaterial({ color: 0xFF6B5B, opacity: 0.1, transparent: true, side: THREE.DoubleSide })
         );
         planeA.rotation.x = Math.PI / 2;
         scene.add(planeA);
@@ -389,13 +389,13 @@ const ConditionalProbability3D = () => {
 
                     <div className="legend-cp">
                         <div className="legend-item-cp">
-                            <div className="dot-cp" style={{ background: '#ef4444' }} /> Event A
+                            <div className="dot-cp" style={{ background: '#FF6B5B' }} /> Event A
                         </div>
                         <div className="legend-item-cp">
-                            <div className="dot-cp" style={{ background: '#3b82f6' }} /> Event B
+                            <div className="dot-cp" style={{ background: '#6366F1' }} /> Event B
                         </div>
                         <div className="legend-item-cp">
-                            <div className="dot-cp" style={{ background: '#d946ef' }} /> A & B
+                            <div className="dot-cp" style={{ background: '#2DE0A7' }} /> A & B
                         </div>
                     </div>
                 </div>

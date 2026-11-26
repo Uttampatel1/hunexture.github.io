@@ -6,11 +6,11 @@ import './CoverArt.css'
    different. Pure SVG: no image files to load or break. */
 
 const PALETTE = {
-  ai:        ['#2E1065', '#6D28D9', '#C4B5FD'],
-  web:       ['#0B1F3A', '#1D4ED8', '#93C5FD'],
-  mobile:    ['#134E4A', '#0F766E', '#5EEAD4'],
-  cloud:     ['#0C4A6E', '#0284C7', '#7DD3FC'],
-  marketing: ['#7C2D12', '#C2410C', '#FDBA74'],
+  ai:        ['#1E1B4B', '#6366F1', '#C7C8FB'],
+  web:       ['#0B1020', '#4338CA', '#A5A7F5'],
+  mobile:    ['#0B3B30', '#1FB98A', '#2DE0A7'],
+  cloud:     ['#1B2150', '#818CF8', '#E8E9FD'],
+  marketing: ['#4A1A14', '#FF6B5B', '#FFC2BA'],
 }
 
 const rand = (seed, i) => {

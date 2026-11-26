@@ -29,7 +29,7 @@ const DotProduct3D = () => {
     // Results
     const [dotProduct, setDotProduct] = useState(0);
     const [angle, setAngle] = useState(0);
-    const [meaning, setMeaning] = useState({ text: '', color: '#aaa' });
+    const [meaning, setMeaning] = useState({ text: '', color: '#6B7389' });
 
     // Text Label Function
     const makeTextSprite = (message, parameters = {}) => {
@@ -45,7 +45,7 @@ const DotProduct3D = () => {
         const textWidth = metrics.width;
 
         context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
-        context.fillStyle = "rgba(255, 255, 255, 1.0)";
+        context.fillStyle = "#0B1020";
         context.fillText(message, borderThickness, fontsize + borderThickness);
 
         const texture = new THREE.Texture(canvas);
@@ -87,8 +87,8 @@ const DotProduct3D = () => {
         const vecB = new THREE.Vector3(bx, by, bz);
 
         // Draw Arrows
-        arrowARef.current = createArrow(ax, ay, az, 0xffff00); // Yellow
-        arrowBRef.current = createArrow(bx, by, bz, 0x00ffff); // Cyan
+        arrowARef.current = createArrow(ax, ay, az, 0x6366F1); // Yellow
+        arrowBRef.current = createArrow(bx, by, bz, 0x2DE0A7); // Cyan
         scene.add(arrowARef.current);
         scene.add(arrowBRef.current);
 
@@ -105,13 +105,13 @@ const DotProduct3D = () => {
 
         // Update Meaning
         if (vecA.length() === 0 || vecB.length() === 0) {
-            setMeaning({ text: "One vector has zero length.", color: "#aaa" });
+            setMeaning({ text: "One vector has zero length.", color: "#6B7389" });
         } else if (Math.abs(dot) < 0.1 || Math.abs(angleDeg - 90) < 0.1) {
-            setMeaning({ text: "Perpendicular (Unrelated). Result is Zero.", color: "#aaa" });
+            setMeaning({ text: "Perpendicular (Unrelated). Result is Zero.", color: "#6B7389" });
         } else if (dot > 0) {
-            setMeaning({ text: "Similar directions (Positive).", color: "#44ff44" });
+            setMeaning({ text: "Similar directions (Positive).", color: "#4338CA" });
         } else {
-            setMeaning({ text: "Opposite directions (Negative).", color: "#ff4444" });
+            setMeaning({ text: "Opposite directions (Negative).", color: "#FF6B5B" });
         }
 
         // Add Labels
@@ -131,8 +131,8 @@ const DotProduct3D = () => {
 
         // Scene Setup
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x1a1a1a);
-        scene.fog = new THREE.Fog(0x1a1a1a, 100, 1000);
+        scene.background = new THREE.Color(0xF4F6FB);
+        scene.fog = new THREE.Fog(0xF4F6FB, 100, 1000);
         sceneRef.current = scene;
 
         // Camera Setup
@@ -158,7 +158,7 @@ const DotProduct3D = () => {
         controlsRef.current = controls;
 
         // Grid and Axes
-        const gridHelper = new THREE.GridHelper(400, 40, 0x444444, 0x222222);
+        const gridHelper = new THREE.GridHelper(400, 40, 0xA3ABC2, 0xDDE2EE);
         scene.add(gridHelper);
 
         const axesHelper = new THREE.AxesHelper(100);

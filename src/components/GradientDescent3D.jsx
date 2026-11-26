@@ -112,7 +112,7 @@ const GradientDescent3D = () => {
                 positions.push(w, visualY, b);
 
                 const colorScale = isUnnormalized ? 0.002 : 0.02;
-                const color = new THREE.Color().setHSL(0.6 - Math.min(cost * colorScale, 0.6), 1, 0.5);
+                const color = new THREE.Color(0x6366F1).lerp(new THREE.Color(0xFF6B5B), Math.min(cost * colorScale / 0.6, 1));
                 colors.push(color.r, color.g, color.b);
             }
         }
@@ -146,7 +146,7 @@ const GradientDescent3D = () => {
         const mesh = new THREE.Mesh(geometry, material);
 
         const wireGeo = new THREE.WireframeGeometry(geometry);
-        const wireMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.1 });
+        const wireMat = new THREE.LineBasicMaterial({ color: 0x0B1020, transparent: true, opacity: 0.12 });
         const wireMesh = new THREE.LineSegments(wireGeo, wireMat);
         mesh.add(wireMesh);
 
@@ -218,19 +218,19 @@ const GradientDescent3D = () => {
         scene.add(pointLight);
 
         // Grid
-        const grid = new THREE.GridHelper(20, 20, 0x444444, 0x222222);
+        const grid = new THREE.GridHelper(20, 20, 0xA3ABC2, 0xDDE2EE);
         grid.position.y = -0.05;
         scene.add(grid);
 
         // Axes
-        scene.add(createAxis([0, 0, 0], [5, 0, 0], 0xff0000)); // W (Red)
-        scene.add(createAxis([0, 0, 0], [0, 0, 3], 0x0000ff)); // B (Blue)
-        scene.add(createAxis([0, 0, 0], [0, 5, 0], 0x00ff00)); // Cost (Green)
+        scene.add(createAxis([0, 0, 0], [5, 0, 0], 0xFF6B5B)); // W (Coral)
+        scene.add(createAxis([0, 0, 0], [0, 0, 3], 0x6366F1)); // B (Indigo)
+        scene.add(createAxis([0, 0, 0], [0, 5, 0], 0x4338CA)); // Cost (Deep indigo)
 
         // Agent
         const agentMesh = new THREE.Mesh(
             new THREE.SphereGeometry(0.15, 32, 32),
-            new THREE.MeshStandardMaterial({ color: 0xff00ff, emissive: 0xff00ff, emissiveIntensity: 0.5 })
+            new THREE.MeshStandardMaterial({ color: 0x2DE0A7, emissive: 0x2DE0A7, emissiveIntensity: 0.5 })
         );
         scene.add(agentMesh);
         agentMeshRef.current = agentMesh;
@@ -242,7 +242,7 @@ const GradientDescent3D = () => {
         trailGeometry.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));
         const trailMesh = new THREE.Line(
             trailGeometry,
-            new THREE.LineBasicMaterial({ color: 0xff00ff })
+            new THREE.LineBasicMaterial({ color: 0x2DE0A7 })
         );
         scene.add(trailMesh);
         trailMeshRef.current = trailMesh;
@@ -370,11 +370,11 @@ const GradientDescent3D = () => {
 
         return (
             <svg width="100%" height="180" viewBox="0 0 280 180">
-                <line x1="20" y1="160" x2="260" y2="160" stroke="#666" strokeWidth="2" />
-                <line x1="20" y1="160" x2="20" y2="20" stroke="#666" strokeWidth="2" />
+                <line x1="20" y1="160" x2="260" y2="160" stroke="#A3ABC2" strokeWidth="2" />
+                <line x1="20" y1="160" x2="20" y2="20" stroke="#A3ABC2" strokeWidth="2" />
 
                 {X.map((x, i) => (
-                    <circle key={i} cx={xScale(x)} cy={yScale(Y[i])} r="4" fill="#4ade80" />
+                    <circle key={i} cx={xScale(x)} cy={yScale(Y[i])} r="4" fill="#6366F1" />
                 ))}
 
                 <line
@@ -382,13 +382,13 @@ const GradientDescent3D = () => {
                     y1={yScale(current.b)}
                     x2={xScale(xMax)}
                     y2={yScale(current.w * xMax + current.b)}
-                    stroke="#ff00ff"
+                    stroke="#2DE0A7"
                     strokeWidth="2"
                     strokeDasharray="4"
                 />
 
-                <text x="140" y="180" fill="#888" fontSize="10" textAnchor="middle">Size (x)</text>
-                <text x="10" y="90" fill="#888" fontSize="10" transform="rotate(-90, 10, 90)">Price (y)</text>
+                <text x="140" y="180" fill="#475069" fontSize="10" textAnchor="middle">Size (x)</text>
+                <text x="10" y="90" fill="#475069" fontSize="10" transform="rotate(-90, 10, 90)">Price (y)</text>
             </svg>
         );
     };
@@ -405,9 +405,9 @@ const GradientDescent3D = () => {
                     <p>Visualizing how the machine "learns" weights (w) and bias (b) by minimizing Error.</p>
                     <div className="goal-text">Goal: Find the bottom of the valley.</div>
                     <div className="legend-gd3d">
-                        <span style={{ color: '#f87171' }}>Red: Weight (x)</span>
-                        <span style={{ color: '#60a5fa' }}>Blue: Bias (z)</span>
-                        <span style={{ color: '#4ade80' }}>Green: Loss (y)</span>
+                        <span style={{ color: '#FF6B5B' }}>Coral: Weight (x)</span>
+                        <span style={{ color: '#6366F1' }}>Indigo: Bias (z)</span>
+                        <span style={{ color: '#4338CA' }}>Deep indigo: Loss (y)</span>
                     </div>
                     {isUnnormalized && (
                         <div className="warning-box-gd3d">

@@ -53,7 +53,7 @@ const MatrixTransformation3D = () => {
         const metrics = context.measureText(message);
         const textWidth = metrics.width;
 
-        context.fillStyle = "rgba(255, 255, 255, 1.0)";
+        context.fillStyle = "#0B1020";
         context.fillText(message, borderThickness, fontsize + borderThickness);
 
         const texture = new THREE.Texture(canvas);
@@ -101,8 +101,8 @@ const MatrixTransformation3D = () => {
         setResZ(outputZ);
 
         // Draw Arrows
-        arrowInputRef.current = createArrow(vx, vy, vz, 0xffff00); // Yellow
-        arrowOutputRef.current = createArrow(outputX, outputY, outputZ, 0x00ffff); // Cyan
+        arrowInputRef.current = createArrow(vx, vy, vz, 0x6366F1); // Yellow
+        arrowOutputRef.current = createArrow(outputX, outputY, outputZ, 0x2DE0A7); // Cyan
         scene.add(arrowInputRef.current);
         scene.add(arrowOutputRef.current);
 
@@ -148,8 +148,8 @@ const MatrixTransformation3D = () => {
 
         // Scene Setup
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x1a1a1a);
-        scene.fog = new THREE.Fog(0x1a1a1a, 100, 1000);
+        scene.background = new THREE.Color(0xF4F6FB);
+        scene.fog = new THREE.Fog(0xF4F6FB, 100, 1000);
         sceneRef.current = scene;
 
         // Camera Setup
@@ -175,7 +175,7 @@ const MatrixTransformation3D = () => {
         controlsRef.current = controls;
 
         // Grid and Axes
-        const gridHelper = new THREE.GridHelper(200, 20, 0x444444, 0x222222);
+        const gridHelper = new THREE.GridHelper(200, 20, 0xA3ABC2, 0xDDE2EE);
         scene.add(gridHelper);
 
         const axesHelper = new THREE.AxesHelper(50);

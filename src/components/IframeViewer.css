@@ -2,7 +2,7 @@
     position: relative;
     width: 100vw;
     height: 100vh;
-    background-color: #0f172a;
+    background-color: var(--ink);
     overflow: hidden;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .back-button-iframe:hover {
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.5);
 }
 
 .visualization-iframe {

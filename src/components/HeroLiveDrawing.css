@@ -10,6 +10,28 @@
 .hl-figure {
   --hl-cycle: 9s;
   margin: 0;
+  position: relative;
+  isolation: isolate;
+}
+
+/* soft breathing glow behind the illustration (indigo + mint) */
+.hl-figure::before {
+  content: '';
+  position: absolute;
+  inset: 4% 2%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 30% 35%, var(--signal) 0%, transparent 60%),
+    radial-gradient(circle at 72% 70%, var(--accent) 0%, transparent 60%);
+  opacity: 0.25;
+  filter: blur(60px);
+  animation: hl-breathe 12s ease-in-out infinite;
+}
+
+@keyframes hl-breathe {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(2%, -2%) scale(1.06); }
 }
 
 .hl-svg {
@@ -120,12 +142,17 @@
 }
 
 .hl-checkbox {
-  fill: var(--signal);
+  fill: var(--accent);
+}
+
+.hl-checkmark {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .hl-checkmark {
   fill: none;
-  stroke: #FFFFFF;
+  stroke: var(--on-accent);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -225,6 +252,7 @@
 .hl-a-lab3      { animation: hl-lab3      var(--hl-cycle) ease infinite; }
 .hl-a-sources   { animation: hl-sources   var(--hl-cycle) ease infinite; }
 .hl-a-check1    { animation: hl-check1    var(--hl-cycle) ease infinite; }
+.hl-a-check1 .hl-checkbox, .hl-a-check1 .hl-checkmark { transform-box: fill-box; transform-origin: center; animation: hl-pop var(--hl-cycle) ease infinite; }
 .hl-a-check2    { animation: hl-check2    var(--hl-cycle) ease infinite; }
 .hl-a-check3    { animation: hl-check3    var(--hl-cycle) ease infinite; }
 .hl-a-progress  { animation: hl-progress  var(--hl-cycle) linear infinite; }
@@ -357,6 +385,12 @@
   78%, 100% { opacity: 1; }
 }
 
+@keyframes hl-pop {
+  0%, 77% { transform: scale(0.6); }
+  80% { transform: scale(1.18); }
+  83%, 100% { transform: scale(1); }
+}
+
 @keyframes hl-check2 {
   0%, 80% { opacity: 0; }
   82%, 100% { opacity: 1; }
@@ -397,7 +431,7 @@
 
 @keyframes hl-ph4 {
   0%, 74.9% { fill: var(--ink-muted); }
-  75%, 100% { fill: var(--signal); }
+  75%, 100% { fill: var(--accent-deep); }
 }
 
 /* Reduced motion: show the finished frame, no loop */
@@ -417,6 +451,6 @@
   }
 
   .hl-a-ph4 {
-    fill: var(--signal);
+    fill: var(--accent-deep);
   }
 }

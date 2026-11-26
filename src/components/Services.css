@@ -38,7 +38,6 @@
 
 .svc-name {
   font-family: var(--font-display);
-  font-stretch: 112%;
   font-weight: 700;
   font-size: 1.2rem;
   color: var(--ink);

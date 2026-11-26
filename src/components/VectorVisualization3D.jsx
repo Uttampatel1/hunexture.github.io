@@ -36,7 +36,7 @@ const VectorVisualization3D = () => {
         const textWidth = metrics.width;
 
         context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
-        context.fillStyle = "rgba(255, 255, 255, 1.0)";
+        context.fillStyle = "#0B1020";
         context.fillText(message, borderThickness, fontsize + borderThickness);
 
         const texture = new THREE.Texture(canvas);
@@ -66,7 +66,7 @@ const VectorVisualization3D = () => {
             direction,
             origin,
             length,
-            0xffff00,
+            0x6366F1,
             Math.min(length * 0.2, 10),
             Math.min(length * 0.1, 5)
         );
@@ -78,7 +78,7 @@ const VectorVisualization3D = () => {
 
         // Floor Line
         const materialLine = new THREE.LineBasicMaterial({
-            color: 0xaaaaaa,
+            color: 0x6B7389,
             opacity: 0.4,
             transparent: true
         });
@@ -126,8 +126,8 @@ const VectorVisualization3D = () => {
 
         // Scene Setup
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x1a1a1a);
-        scene.fog = new THREE.Fog(0x1a1a1a, 100, 1000);
+        scene.background = new THREE.Color(0xF4F6FB);
+        scene.fog = new THREE.Fog(0xF4F6FB, 100, 1000);
         sceneRef.current = scene;
 
         // Camera Setup
@@ -153,7 +153,7 @@ const VectorVisualization3D = () => {
         controlsRef.current = controls;
 
         // Grid and Axes
-        const gridHelper = new THREE.GridHelper(400, 40, 0x444444, 0x222222);
+        const gridHelper = new THREE.GridHelper(400, 40, 0xA3ABC2, 0xDDE2EE);
         scene.add(gridHelper);
 
         const axesHelper = new THREE.AxesHelper(200);

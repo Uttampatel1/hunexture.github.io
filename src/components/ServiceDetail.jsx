@@ -7,7 +7,7 @@ import { ServiceSchematic } from './ServiceSchematic'
 import './ServiceDetail.css'
 
 // One accent for every service, matching the Home page. Per-service rainbow gradients are gone.
-const BLUEPRINT_ACCENT = { primary: '#1D4ED8', gradient: '#1D4ED8' }
+const BLUEPRINT_ACCENT = { primary: '#6366F1', gradient: '#4338CA' }
 
 /* ─────────────────────────────────────────────────────────────
    Main Service Detail Component

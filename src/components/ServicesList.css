@@ -51,7 +51,6 @@
 
 .sl-title {
   font-family: var(--font-display);
-  font-stretch: 118%;
   font-weight: 800;
   font-size: clamp(2.4rem, 5.2vw, 4rem);
   line-height: 1.04;
