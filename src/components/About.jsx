@@ -4,10 +4,11 @@ import ArchitectureDrawing from './ArchitectureDrawing'
 import './About.css'
 
 const About = () => (
-  <section id="about" className="bp-section about" aria-labelledby="about-title">
+  <section id="about" className="bp-section bp-section--alt about" aria-labelledby="about-title">
     <div className="bp-container">
-      <div className="bp-head">
-        <h2 id="about-title">A senior team that owns the whole build.</h2>
+      <div className="bp-head" data-reveal>
+        <span className="brand-eyebrow">About</span>
+        <h2 id="about-title">A senior team that owns the <span className="brand-mark">whole build.</span></h2>
         <p>
           Hunexture is an AI and software engineering company based in Ahmedabad, India.
           The same engineers scope, design, build and support your product, so nothing gets
@@ -15,16 +16,16 @@ const About = () => (
         </p>
       </div>
 
-      <dl className="about-titleblock">
+      <dl className="about-titleblock" data-reveal>
         {companyStats.map(stat => (
           <div key={stat.key} className="about-titleblock-cell">
             <dt>{stat.label}</dt>
-            <dd>{formatStat(stat)}</dd>
+            <dd data-count>{formatStat(stat)}</dd>
           </div>
         ))}
       </dl>
 
-      <div className="about-body">
+      <div className="about-body" data-reveal>
         <div className="about-copy">
           <p>
             We work best with founders and product leads who need a dependable engineering

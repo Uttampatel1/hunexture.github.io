@@ -115,7 +115,7 @@
 .stackfig { margin: 0; }
 .stackfig-svg { max-width: 460px; margin-left: auto; }
 .stackfig-cap {
-  margin: 14px 0 0;
+  margin: var(--space-4) 0 0;
   max-width: 44ch;
   font-size: 0.95rem;
   line-height: 1.55;
@@ -135,14 +135,11 @@
   width: 100%;
   max-width: 520px;
   margin-left: auto;
-  padding: 28px 28px 20px;
-  background-color: var(--paper-raised);
-  background-image:
-    linear-gradient(rgba(203, 214, 230, 0.55) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(203, 214, 230, 0.55) 1px, transparent 1px);
-  background-size: 20px 20px;
-  border: 1px solid var(--line-strong);
-  border-top: 4px solid var(--signal);
+  padding: var(--space-6) var(--space-6) var(--space-4);
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 
 @media (max-width: 900px) {

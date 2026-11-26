@@ -38,8 +38,10 @@ const Navbar = () => {
   }
 
   // Mobile tap toggles the submenu
-  const tapToggle = (name) => {
-    if (isDesktop()) return
+  // Pointer clicks on desktop are handled by hover; keyboard activation
+  // (detail === 0) still toggles so the menu is reachable without a mouse.
+  const tapToggle = (name, e) => {
+    if (isDesktop() && e && e.detail !== 0) return
     setOpenMenu((current) => (current === name ? null : name))
   }
 
@@ -57,17 +59,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Handle hash navigation when location changes
+  // Escape closes any open menu
   useEffect(() => {
-    if (location.hash) {
-      setTimeout(() => {
-        const element = document.querySelector(location.hash)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 100)
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        clearTimeout(closeTimer.current)
+        setMenuOpen(false)
+        setOpenMenu(null)
+      }
     }
-  }, [location])
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [])
 
   // Scroll-spy on the home route: mark the nav link whose section is in view
   useEffect(() => {
@@ -144,10 +147,13 @@ const Navbar = () => {
           className="logo hunexture-logo-wrapper"
           onClick={(e) => {
             e.preventDefault()
-            navigate('/')
-            setTimeout(() => {
+            closeAll()
+            // New route: RouteEffects scrolls to top. Already home: scroll here.
+            if (location.pathname === '/' && !location.hash) {
               window.scrollTo({ top: 0, behavior: 'smooth' })
-            }, 100)
+            } else {
+              navigate('/')
+            }
           }}
         >
           <Logo size="medium" variant="image" />
@@ -183,7 +189,7 @@ const Navbar = () => {
             <button
               className={linkClass('industries', 'dropdown-trigger')}
               {...activeProps('industries')}
-              onClick={() => tapToggle('industries')}
+              onClick={(e) => tapToggle('industries', e)}
               aria-expanded={openMenu === 'industries'}
             >
               Industries <FaChevronDown className={`dropdown-arrow ${openMenu === 'industries' ? 'open' : ''}`} />
@@ -220,7 +226,10 @@ const Navbar = () => {
                       <div
                         key={index}
                         className="dropdown-item ai-dropdown-item"
+                        role="link"
+                        tabIndex={0}
                         onClick={() => handleIndustryClick(industry.slug)}
+                        onKeyDown={(e) => { if (e.key === 'Enter') handleIndustryClick(industry.slug) }}
                       >
                         <div className="dropdown-icon-wrapper">
                           <IndustryIcon className="dropdown-icon" />
@@ -251,7 +260,7 @@ const Navbar = () => {
             <button
               className={linkClass('ai', 'dropdown-trigger')}
               {...activeProps('ai')}
-              onClick={() => tapToggle('ai')}
+              onClick={(e) => tapToggle('ai', e)}
               aria-expanded={openMenu === 'ai'}
             >
               AI <FaChevronDown className={`dropdown-arrow ${openMenu === 'ai' ? 'open' : ''}`} />
@@ -284,7 +293,10 @@ const Navbar = () => {
                       <div
                         key={index}
                         className="dropdown-item ai-dropdown-item"
+                        role="link"
+                        tabIndex={0}
                         onClick={() => handleAiClick(ai.slug)}
+                        onKeyDown={(e) => { if (e.key === 'Enter') handleAiClick(ai.slug) }}
                       >
                         <div className="dropdown-icon-wrapper">
                           <AiIcon className="dropdown-icon" />
@@ -330,6 +342,7 @@ const Navbar = () => {
             className={`hamburger ${menuOpen ? 'active' : ''}`}
             onClick={toggleMenu}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
           >
             <span></span>
             <span></span>

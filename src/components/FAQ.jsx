@@ -12,9 +12,10 @@ const FAQ = () => {
   }
 
   return (
-    <section id="faq" className="bp-section" aria-labelledby="faq-title">
+    <section id="faq" className="bp-section bp-section--alt" aria-labelledby="faq-title">
       <div className="bp-container faq-layout">
-        <div className="faq-intro">
+        <div className="faq-intro" data-reveal>
+          <span className="brand-eyebrow">FAQ</span>
           <h2 id="faq-title">Questions buyers ask us</h2>
           <p>
             Can't find your answer? <a href="#contact">Send us a message</a> and we'll reply
@@ -22,7 +23,7 @@ const FAQ = () => {
           </p>
         </div>
 
-        <ul className="faq-list">
+        <ul className="faq-list" data-reveal>
           {faqs.map((faq, i) => {
             const open = openIndex === i
             return (
@@ -45,9 +46,11 @@ const FAQ = () => {
                   id={`faq-answer-${i}`}
                   role="region"
                   aria-labelledby={`faq-question-${i}`}
-                  hidden={!open}
+                  aria-hidden={!open}
                 >
-                  <p>{faq.answer}</p>
+                  <div className="faq-answer-inner">
+                    <p>{faq.answer}</p>
+                  </div>
                 </div>
               </li>
             )

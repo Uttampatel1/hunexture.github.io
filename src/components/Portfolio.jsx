@@ -31,9 +31,10 @@ const Portfolio = () => {
   }
 
   return (
-    <section id="portfolio" className="bp-section bp-section--sunk" aria-labelledby="portfolio-title">
+    <section id="portfolio" className="bp-section" aria-labelledby="portfolio-title">
       <div className="bp-container">
-        <div className="bp-head">
+        <div className="bp-head" data-reveal>
+        <span className="brand-eyebrow">Work</span>
           <h2 id="portfolio-title">Sample work</h2>
           <p>
             Concept and sample builds that show how we approach a problem. Metrics on project
@@ -41,7 +42,7 @@ const Portfolio = () => {
           </p>
         </div>
 
-        <div className="pf-filters" role="group" aria-label="Filter projects by type">
+        <div className="pf-filters" data-reveal role="group" aria-label="Filter projects by type">
           {available.map(c => (
             <button
               key={c.id}
@@ -55,10 +56,10 @@ const Portfolio = () => {
           ))}
         </div>
 
-        <ul className="pf-grid">
-          {shown.map(project => (
+        <ul className="pf-grid" data-reveal data-reveal-stagger>
+          {shown.map((project) => (
             <li key={project.id}>
-              <Link to={`/portfolio/${project.slug}`} className="pf-sheet">
+              <Link to={`/portfolio/${project.slug}`} className="pf-sheet" data-spotlight>
                 <span className="pf-image" aria-hidden="true"><CoverArt category={project.category} seed={project.id} /></span>
                 <span className="pf-body">
                   <span className="pf-category">{project.categoryLabel}</span>

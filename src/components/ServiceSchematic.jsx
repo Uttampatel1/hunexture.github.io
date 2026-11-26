@@ -156,7 +156,7 @@ export const StackFigure = () => {
     return () => clearTimeout(t)
   }, [])
   return (
-    <figure className="stackfig">
+    <figure className="stackfig" data-reveal="wipe">
       <svg ref={ref} className={`sch stackfig-svg ${seen ? 'is-seen' : ''}`} viewBox="0 0 420 340" role="img"
         aria-label="Diagram: a web app calls an AI feature, and both run on cloud infrastructure.">
         <g transform="translate(0 0)">

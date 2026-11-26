@@ -136,7 +136,7 @@ const Footer = () => {
               <ul className="footer-links-list">
                 {footerLinks.company.map((link, index) => (
                   <li key={index}>
-                    <a href={`/${link.href}`} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
+                    <a className="brand-link" href={`/${link.href}`} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
                   </li>
                 ))}
               </ul>
@@ -147,7 +147,7 @@ const Footer = () => {
               <ul className="footer-links-list">
                 {footerLinks.services.map((link, index) => (
                   <li key={index}>
-                    <a href={`/${link.href}`} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
+                    <a className="brand-link" href={`/${link.href}`} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
                   </li>
                 ))}
               </ul>
@@ -158,7 +158,7 @@ const Footer = () => {
               <ul className="footer-links-list">
                 {footerLinks.legal.map((link, index) => (
                   <li key={index}>
-                    <a href={`/${link.href}`} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
+                    <a className="brand-link" href={`/${link.href}`} onClick={(e) => handleLinkClick(e, link.href)}>{link.name}</a>
                   </li>
                 ))}
               </ul>

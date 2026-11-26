@@ -8,7 +8,7 @@ import './EngagementModels.css'
 const ModelDiagram = ({ kind }) => {
   if (kind === 'fixed') {
     return (
-      <svg className="em-diagram" viewBox="0 0 160 64" aria-hidden="true" focusable="false">
+      <svg className="em-diagram" data-draw viewBox="0 0 160 64" aria-hidden="true" focusable="false">
         <rect x="24" y="18" width="112" height="34" className="em-d-fill" />
         <line x1="24" y1="8" x2="136" y2="8" className="em-d-dim" />
         <line x1="24" y1="4" x2="24" y2="12" className="em-d-dim" />
@@ -22,7 +22,7 @@ const ModelDiagram = ({ kind }) => {
   }
   if (kind === 'dedicated') {
     return (
-      <svg className="em-diagram" viewBox="0 0 160 64" aria-hidden="true" focusable="false">
+      <svg className="em-diagram" data-draw viewBox="0 0 160 64" aria-hidden="true" focusable="false">
         {[0, 1, 2, 3].map((i) => (
           <g key={i} transform={`translate(${8 + i * 38} 14)`}>
             <path d="M4 28 A14 14 0 1 1 30 28" className="em-d-line" />
@@ -45,9 +45,10 @@ const ModelDiagram = ({ kind }) => {
 }
 
 const EngagementModels = () => (
-  <section id="engagement-models" className="bp-section bp-section--sunk" aria-labelledby="em-title">
+  <section id="engagement-models" className="bp-section" aria-labelledby="em-title">
     <div className="bp-container">
-      <div className="bp-head">
+      <div className="bp-head" data-reveal>
+        <span className="brand-eyebrow">Pricing</span>
         <h2 id="em-title">How pricing works</h2>
         <p>
           Three ways to engage. Not sure which fits? We'll recommend one on the free
@@ -55,19 +56,21 @@ const EngagementModels = () => (
         </p>
       </div>
 
-      <ul className="em-grid">
+      <ul className="em-grid" data-reveal data-reveal-stagger>
         {engagementModels.map((model) => (
-          <li key={model.key} className="em-card">
+          <li key={model.key}>
+          <div className="em-card" data-spotlight>
             <ModelDiagram kind={model.key} />
             <h3 className="em-name">{model.name}</h3>
             <p className="em-best-for">Best for {model.bestFor.charAt(0).toLowerCase() + model.bestFor.slice(1)}</p>
             <p className="em-how">{model.howItWorks}</p>
             <p className="em-pricing">{model.pricing}</p>
+          </div>
           </li>
         ))}
       </ul>
 
-      <div className="em-cta">
+      <div className="em-cta" data-reveal>
         <a href="#contact" className="bp-btn bp-btn-primary">Get a proposal</a>
       </div>
     </div>

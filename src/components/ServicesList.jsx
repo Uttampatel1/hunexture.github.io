@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { servicesData } from '../data/servicesData'
 import { ServiceSchematic, StackFigure } from './ServiceSchematic'
@@ -7,16 +7,12 @@ import './brand.css'
 
 
 const ServicesList = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
   return (
     <main className="sl-page">
       <header className="sl-hero" aria-labelledby="sl-title">
         <div className="sl-hero-inner">
           <div className="sl-hero-copy">
-            <p className="sl-eyebrow brand-eyebrow">Services</p>
+            <p className="sl-eyebrow brand-eyebrow brand-fade-up">Services</p>
             <h1 id="sl-title" className="sl-title brand-title brand-fade-up">What we <span className="brand-mark">build</span></h1>
             <p className="sl-lede brand-fade-up brand-delay-1">
               Six disciplines, one team. Most projects combine two or three, for example an AI
@@ -27,9 +23,9 @@ const ServicesList = () => {
         </div>
       </header>
 
-      <section className="bp-section bp-section--sunk" aria-label="All services">
-        <div className="bp-container">
-          <ul className="sl-grid">
+      <section className="sl-section" aria-label="All services">
+        <div className="sl-container">
+          <ul className="sl-grid" data-reveal data-reveal-stagger>
             {servicesData.map((service, i) => {
               const Icon = service.icon
               return (

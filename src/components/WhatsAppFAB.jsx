@@ -14,7 +14,6 @@ const WhatsAppFAB = () => {
         onClick={handleClick}
         aria-label="Chat with us on WhatsApp"
       >
-        <span className="whatsapp-pulse"></span>
         <FaWhatsapp className="whatsapp-icon" />
       </button>
       <span className="whatsapp-tooltip">Chat with us on WhatsApp</span>

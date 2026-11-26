@@ -5,9 +5,10 @@ import './Testimonials.css'
 // Example scenarios, clearly labelled — not attributed client quotes.
 // Replace illustrativeOutcomes with real, permissioned case studies when available.
 const Testimonials = () => (
-  <section id="testimonials" className="bp-section" aria-labelledby="outcomes-title">
+  <section id="testimonials" className="bp-section bp-section--alt" aria-labelledby="outcomes-title">
     <div className="bp-container">
-      <div className="bp-head">
+      <div className="bp-head" data-reveal>
+        <span className="brand-eyebrow">Examples</span>
         <h2 id="outcomes-title">Example engagements</h2>
         <p>
           How we approach typical problems, and the outcome each project is designed for.
@@ -16,6 +17,7 @@ const Testimonials = () => (
         </p>
       </div>
 
+      <div className="outcomes-wrap" data-reveal>
       <table className="outcomes-table">
         <caption className="visually-hidden">Illustrative example engagements</caption>
         <thead>
@@ -39,6 +41,7 @@ const Testimonials = () => (
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   </section>
 )

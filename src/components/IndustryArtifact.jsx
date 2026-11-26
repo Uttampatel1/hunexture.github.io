@@ -369,7 +369,7 @@ const SCENES = {
 const IndustryArtifact = ({ slug, Icon, name }) => {
   const [Scene, status] = SCENES[slug] || SCENES.ecommerce
   return (
-    <figure className="ax">
+    <figure className="ax" data-reveal="wipe">
       <figcaption className="ax-head">
         <span className="ax-ico" aria-hidden="true">{Icon && <Icon />}</span>
         <span className="ax-status">{status}</span>

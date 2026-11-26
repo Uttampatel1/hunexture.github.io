@@ -53,14 +53,16 @@
 
 .footer-cta-title {
   margin: 0 0 6px;
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-size: var(--fs-h3);
+  letter-spacing: -0.02em;
   color: #FFFFFF;
 }
 
 .footer-cta-description {
   margin: 0;
   color: #B8C0D6;
-  font-size: 1.02rem;
+  font-size: var(--fs-body);
+  line-height: 1.6;
 }
 
 .footer-cta-btn {
@@ -73,11 +75,16 @@
   color: #FFFFFF;
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.2s var(--ease-out), transform 0.25s var(--ease-out);
 }
 
 .footer-cta-btn:hover {
   background: #6366F1;
+  transform: translateY(-2px);
+}
+
+.footer-cta-btn:active {
+  transform: translateY(0);
 }
 
 .footer-container {
@@ -108,14 +115,15 @@
   margin: 0 0 8px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: var(--fs-lead);
+  letter-spacing: -0.02em;
   color: #FFFFFF;
 }
 
 .footer-description {
-  margin: 0 0 24px;
-  font-size: 0.98rem;
-  line-height: 1.65;
+  margin: 0 0 var(--space-6);
+  font-size: var(--fs-small);
+  line-height: 1.6;
   max-width: 44ch;
 }
 
@@ -131,15 +139,21 @@
   width: 44px;
   height: 44px;
   border: 1px solid rgba(99, 102, 241, 0.45);
+  border-radius: var(--radius-pill);
   color: #FFFFFF;
-  font-size: 1.05rem;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  font-size: var(--fs-body);
+  transition: border-color 0.2s var(--ease-out), background-color 0.2s var(--ease-out), color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
 }
 
 .footer-social-link:hover {
   border-color: #2DE0A7;
   color: #2DE0A7;
   background: rgba(45, 224, 167, 0.08);
+  transform: translateY(-2px);
+}
+
+.footer-social-link:active {
+  transform: translateY(0);
 }
 
 .footer-links-grid {
@@ -152,7 +166,9 @@
   margin: 0 0 16px;
   font-family: var(--font-annot);
   font-weight: 400;
-  font-size: 0.8rem;
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #8C95AD;
 }
 
@@ -167,7 +183,9 @@
 .footer-links-list a {
   color: #B8C0D6;
   text-decoration: none;
-  font-size: 0.98rem;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  transition: color 0.2s var(--ease-out);
 }
 
 .footer-links-list a:hover {
@@ -182,7 +200,7 @@
 
 .footer-copyright {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: var(--fs-small);
   color: #8C95AD;
 }
 
@@ -200,16 +218,35 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
   background: var(--paper-raised);
   color: var(--ink);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   z-index: 900;
-  transition: background-color 0.15s ease;
+  animation: scroll-top-in 0.25s var(--ease-out);
+  transition: background-color 0.2s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+
+@keyframes scroll-top-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }
 
 .scroll-to-top:hover {
   background: var(--signal-tint);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.scroll-to-top:active {
+  transform: translateY(0);
+}
+
+.scroll-to-top:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
 }
 
 @media (max-width: 900px) {
@@ -246,8 +283,7 @@
   }
 
   .footer-description {
-    font-size: 0.94rem;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5, 20px);
   }
 
   /* Company | Legal side by side, Services full width underneath */
@@ -279,8 +315,8 @@
   /* Taller tap targets without making the list look sparse */
   .footer-links-list a {
     display: inline-block;
-    padding: 6px 0;
-    font-size: 0.95rem;
+    padding: 10px 0;
+    font-size: var(--fs-small);
   }
 
   /* Leave room so the floating WhatsApp button never covers the copyright */
@@ -299,3 +335,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-to-top { animation: none; }
+  .scroll-to-top:hover,
+  .footer-cta-btn:hover,
+  .footer-social-link:hover { transform: none; }
+}
+
+.footer-links-list a.brand-link:hover { text-decoration: none; }

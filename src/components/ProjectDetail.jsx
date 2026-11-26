@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { FaArrowLeft, FaCheck, FaExternalLinkAlt, FaGithub, FaClock, FaUsers, FaIndustry, FaQuoteLeft } from 'react-icons/fa';
 import { getProjectBySlug, getRelatedProjects } from '../data/portfolioData';
 import CoverArt from './CoverArt';
+import './PageKit.css';
 import './ProjectDetail.css';
 import BrandTitle from './BrandMark'
 import './brand.css'
@@ -14,382 +14,215 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
   const project = getProjectBySlug(slug);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
-
   if (!project) {
     return (
-      <div className="project-detail-container">
-        <div className="project-not-found">
-          <h1>Project Not Found</h1>
-          <p>The project you're looking for doesn't exist.</p>
-          <Link to="/" className="back-button">
-            <FaArrowLeft /> Back to Home
-          </Link>
-        </div>
-      </div>
+      <main className="pk-main pd-missing">
+        <h1>Project Not Found</h1>
+        <p>The project you're looking for doesn't exist.</p>
+        <Link to="/" className="pk-btn pk-btn--primary brand-btn-primary">
+          <FaArrowLeft aria-hidden="true" />&nbsp;Back to Home
+        </Link>
+      </main>
     );
   }
 
   const IconComponent = project.icon;
   const relatedProjects = getRelatedProjects(project.id);
+  // keep section backgrounds alternating when the optional testimonial is absent
+  const relatedSunk = Boolean(project.testimonial);
 
   return (
-    <div className="project-detail-container">
-      {/* Hero Section */}
-      <motion.section
-        className="project-hero"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <CoverArt category={project.category} seed={project.id} className="project-hero-art" />
-        <div className="project-hero-overlay">
-          <div className="project-hero-content">
-            <button onClick={() => navigate('/portfolio')} className="back-link">
-              <FaArrowLeft /> Back to Portfolio
-            </button>
-
-            <motion.div
-              className="project-hero-icon"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <IconComponent />
-            </motion.div>
-
-            <motion.span
-              className="project-category-badge tech-font"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              {project.categoryLabel}
-            </motion.span>
-
-            <motion.h1
-              className="brand-title"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <BrandTitle text={project.title} />
-            </motion.h1>
-
-            <motion.p
-              className="project-hero-description"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              {project.description}
-            </motion.p>
-
-            <motion.div
-              className="project-hero-tags"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              {project.tags.map((tag, index) => (
-                <span key={index} className="hero-tag tech-font">
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
-
-            <motion.div
-              className="project-hero-links"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-            >
-              {project.liveUrl && (
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="hero-link-btn">
-                  <FaExternalLinkAlt /> Live Demo
-                </a>
-              )}
-              {project.githubUrl && (
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="hero-link-btn secondary">
-                  <FaGithub /> View Code
-                </a>
-              )}
-            </motion.div>
+    <main className="theme-pf pk-main">
+      <header className="pk-hero" aria-labelledby="pd-title">
+        <div className="pk-hero-inner">
+          <div className="pk-hero-copy">
+            <nav className="pk-eyebrow pk-crumbs" aria-label="Breadcrumb">
+              <Link to="/portfolio" className="pd-back brand-link"><FaArrowLeft aria-hidden="true" /> Portfolio</Link>
+              <span aria-hidden="true">/</span><span>{project.categoryLabel}</span>
+            </nav>
+            <span className="pk-icon-lg" aria-hidden="true"><IconComponent /></span>
+            <h1 id="pd-title" className="pk-title brand-title brand-fade-up"><BrandTitle text={project.title} /></h1>
+            <p className="pk-lede brand-fade-up brand-delay-1">{project.description}</p>
+            <ul className="pk-tags pd-tags brand-fade-up brand-delay-2" aria-label="Technologies">
+              {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
+            </ul>
+            {(project.liveUrl || project.githubUrl) && (
+              <div className="pk-actions brand-fade-up brand-delay-3">
+                {project.liveUrl && (
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="pk-btn pk-btn--primary brand-btn-primary">
+                    <FaExternalLinkAlt aria-hidden="true" />&nbsp;Live Demo
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="pk-btn">
+                    <FaGithub aria-hidden="true" />&nbsp;View Code
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+          <div className="pd-art" data-reveal="wipe" aria-hidden="true">
+            <CoverArt category={project.category} seed={project.id} />
           </div>
         </div>
-      </motion.section>
+        <div className="pk-wrap">
+          <ul className="pd-info brand-fade-up brand-delay-3">
+            <li><FaClock className="pd-info-icon" aria-hidden="true" /><div><span className="pd-info-label">Timeline</span><span className="pd-info-value">{project.timeline}</span></div></li>
+            <li><FaUsers className="pd-info-icon" aria-hidden="true" /><div><span className="pd-info-label">Team Size</span><span className="pd-info-value">{project.teamSize}</span></div></li>
+            <li><FaIndustry className="pd-info-icon" aria-hidden="true" /><div><span className="pd-info-label">Industry</span><span className="pd-info-value">{project.industry}</span></div></li>
+          </ul>
+        </div>
+      </header>
 
-      {/* Project Info Bar */}
-      <section className="project-info-bar">
-        <div className="info-bar-container">
-          <div className="info-item">
-            <FaClock className="info-icon" />
-            <div>
-              <span className="info-label">Timeline</span>
-              <span className="info-value">{project.timeline}</span>
-            </div>
+      <section className="pk-section pk-section--sunk" aria-label="Challenge and solution">
+        <div className="pk-wrap pk-duo">
+          <div className="pk-tile pd-tile" data-reveal>
+            <h2>The Challenge</h2>
+            <p>{project.challenge}</p>
           </div>
-          <div className="info-item">
-            <FaUsers className="info-icon" />
-            <div>
-              <span className="info-label">Team Size</span>
-              <span className="info-value">{project.teamSize}</span>
-            </div>
-          </div>
-          <div className="info-item">
-            <FaIndustry className="info-icon" />
-            <div>
-              <span className="info-label">Industry</span>
-              <span className="info-value">{project.industry}</span>
-            </div>
+          <div className="pk-tile pd-tile" data-reveal data-reveal-delay="1">
+            <h2>Our Solution</h2>
+            <p>{project.solution}</p>
           </div>
         </div>
       </section>
 
-      {/* Challenge & Solution */}
-      <section className="project-section challenge-solution-section">
-        <div className="section-container">
-          <div className="challenge-solution-grid">
-            <motion.div
-              className="challenge-box"
-              initial={{ x: -50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2>The Challenge</h2>
-              <p>{project.challenge}</p>
-            </motion.div>
-
-            <motion.div
-              className="solution-box"
-              initial={{ x: 50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2>Our Solution</h2>
-              <p>{project.solution}</p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Results */}
-      <section className="project-section results-section">
-        <div className="section-container">
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Illustrative Results</h2>
-            <p className="results-disclaimer">
+      <section className="pk-section" aria-labelledby="pd-results">
+        <div className="pk-wrap">
+          <div className="pk-head" data-reveal>
+            <h2 id="pd-results">Illustrative Results</h2>
+            <p className="pd-disclaimer">
               Example metrics for a project of this kind — not figures reported by a named client.
             </p>
-            <div className="results-grid">
-              {project.results.map((result, index) => (
-                <motion.div
-                  key={index}
-                  className="result-card"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <div className="result-metric tech-font">{result.metric}</div>
-                  <div className="result-label">{result.label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          </div>
+          <ul className="pk-grid pk-grid--4" data-reveal data-reveal-stagger>
+            {project.results.map((result, i) => (
+              <li key={result.label}>
+                <div className="pk-tile pd-result">
+                  <div className="pd-metric" data-count>{result.metric}</div>
+                  <div className="pd-result-label">{result.label}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="project-section features-section">
-        <div className="section-container">
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Key Features</h2>
-            <div className="features-grid">
-              {project.features.map((feature, index) => {
-                const FeatureIcon = feature.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    className="feature-card brand-card"
-                    initial={{ y: 50, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ y: -10 }}
-                  >
-                    <FeatureIcon className="feature-icon" />
+      <section className="pk-section pk-section--sunk" aria-labelledby="pd-features">
+        <div className="pk-wrap">
+          <div className="pk-head pk-head--solo" data-reveal>
+            <h2 id="pd-features">Key Features</h2>
+          </div>
+          <ul className="pk-grid" data-reveal data-reveal-stagger>
+            {project.features.map((feature, i) => {
+              const FeatureIcon = feature.icon;
+              return (
+                <li key={feature.title}>
+                  <div className="pk-tile">
+                    <FeatureIcon className="pd-feature-icon" aria-hidden="true" />
                     <h3>{feature.title}</h3>
                     <p>{feature.description}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 
-      {/* Technologies */}
-      <section className="project-section tech-section">
-        <div className="section-container">
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Technology Stack</h2>
-            <div className="tech-grid">
-              {project.technologies.map((tech, index) => {
-                const TechIcon = tech.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    className="tech-card brand-card"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                  >
-                    <TechIcon className="tech-icon" />
-                    <div className="tech-info">
-                      <p className="tech-name">{tech.name}</p>
-                      <p className="tech-purpose">{tech.purpose}</p>
+      <section className="pk-section" aria-labelledby="pd-tech">
+        <div className="pk-wrap">
+          <div className="pk-head pk-head--solo" data-reveal>
+            <h2 id="pd-tech">Technology Stack</h2>
+          </div>
+          <ul className="pk-grid" data-reveal data-reveal-stagger>
+            {project.technologies.map((tech, i) => {
+              const TechIcon = tech.icon;
+              return (
+                <li key={tech.name}>
+                  <div className="pk-tile pd-tech">
+                    <TechIcon className="pd-tech-icon" aria-hidden="true" />
+                    <div>
+                      <strong>{tech.name}</strong>
+                      <span>{tech.purpose}</span>
                     </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 
-      {/* Key Takeaways */}
-      <section className="project-section takeaways-section">
-        <div className="section-container">
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Key Takeaways</h2>
-            <div className="takeaways-list">
-              {project.keyTakeaways.map((takeaway, index) => (
-                <motion.div
-                  key={index}
-                  className="takeaway-item"
-                  initial={{ x: -50, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <FaCheck className="takeaway-icon" />
-                  <p>{takeaway}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+      <section className="pk-section pk-section--sunk" aria-labelledby="pd-takeaways">
+        <div className="pk-wrap">
+          <div className="pk-head pk-head--solo" data-reveal>
+            <h2 id="pd-takeaways">Key Takeaways</h2>
+          </div>
+          <ul className="pk-list pd-takeaways" data-reveal data-reveal-stagger>
+            {project.keyTakeaways.map((takeaway, i) => (
+              <li key={takeaway}>
+                <FaCheck className="pd-takeaway-icon" aria-hidden="true" />
+                <p>{takeaway}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* Testimonial */}
       {project.testimonial && (
-        <section className="project-section testimonial-section">
-          <div className="section-container">
-            <motion.div
-              className="testimonial-box"
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <FaQuoteLeft className="quote-icon" />
-              <p className="testimonial-quote">{project.testimonial.quote}</p>
-              <div className="testimonial-author">
-                <p className="author-name">{project.testimonial.author}</p>
-                <p className="author-company">{project.testimonial.company}</p>
-              </div>
-            </motion.div>
+        <section className="pk-section" aria-label="Testimonial">
+          <div className="pk-wrap">
+            <figure className="pk-tile pd-quote" data-reveal>
+              <FaQuoteLeft className="pd-quote-icon" aria-hidden="true" />
+              <blockquote className="pd-quote-text">{project.testimonial.quote}</blockquote>
+              <figcaption className="pd-quote-author">
+                <p className="pd-quote-name">{project.testimonial.author}</p>
+                <p className="pd-quote-company">{project.testimonial.company}</p>
+              </figcaption>
+            </figure>
           </div>
         </section>
       )}
 
-      {/* Related Projects */}
       {relatedProjects.length > 0 && (
-        <section className="project-section related-projects-section">
-          <div className="section-container">
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2>Related Projects</h2>
-              <div className="related-projects-grid">
-                {relatedProjects.map((relatedProject, index) => {
-                  return (
-                    <motion.div
-                      key={relatedProject.id}
-                      className="related-project-card brand-card"
-                      initial={{ y: 50, opacity: 0 }}
-                      whileInView={{ y: 0, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      onClick={() => navigate(`/portfolio/${relatedProject.slug}`)}
-                      whileHover={{ y: -10 }}
-                    >
-                      <div className="related-project-image">
-                        <CoverArt category={relatedProject.category} seed={relatedProject.id} />
-                      </div>
-                      <div className="related-project-content">
-                        <span className="related-category">{relatedProject.categoryLabel}</span>
-                        <h3>{relatedProject.title}</h3>
-                        <p>{relatedProject.shortDescription}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
+        <section className={`pk-section${relatedSunk ? ' pk-section--sunk' : ''}`} aria-labelledby="pd-related">
+          <div className="pk-wrap">
+            <div className="pk-head pk-head--solo" data-reveal>
+              <h2 id="pd-related">Related Projects</h2>
+            </div>
+            <ul className="pk-grid" data-reveal data-reveal-stagger>
+              {relatedProjects.map((rp, i) => (
+                <li key={rp.id}>
+                  <Link to={`/portfolio/${rp.slug}`} className="pk-card pd-related brand-card">
+                    <span className="pd-related-art"><CoverArt category={rp.category} seed={rp.id} /></span>
+                    <span className="pd-related-body">
+                      <span className="pk-meta">{rp.categoryLabel}</span>
+                      <span className="pd-related-title">{rp.title}</span>
+                      <span className="pd-related-desc">{rp.shortDescription}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="project-section cta-section">
-        <div className="section-container">
-          <motion.div
-            className="cta-content"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>Have a Similar Project in Mind?</h2>
-            <p>Let's discuss how we can help bring your vision to life.</p>
-            <button onClick={() => navigate('/#contact')} className="cta-button primary large">
+      <section className="pk-cta">
+        <div className="pk-wrap">
+          <div className="pk-cta-card" data-reveal>
+            <div>
+              <h2>Have a Similar Project in Mind?</h2>
+              <p>Let's discuss how we can help bring your vision to life.</p>
+            </div>
+            <button type="button" onClick={() => navigate('/#contact')} className="pk-btn pk-btn--primary brand-btn-primary">
               Get In Touch
             </button>
-          </motion.div>
+          </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

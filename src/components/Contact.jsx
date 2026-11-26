@@ -98,15 +98,16 @@ const Contact = () => {
   return (
     <section id="contact" className="bp-section contact" aria-labelledby="contact-title">
       <div className="bp-container">
-        <div className="bp-head">
-          <h2 id="contact-title">Start with a discovery call</h2>
+        <div className="bp-head" data-reveal>
+        <span className="brand-eyebrow">Contact</span>
+          <h2 id="contact-title">Start with a <span className="brand-mark">discovery call</span></h2>
           <p>
             Tell us what you're building. We'll reply within one business day, sign an NDA
             if you need one, and send a written proposal within 48 hours of our call.
           </p>
         </div>
 
-        <div className="contact-content">
+        <div className="contact-content" data-reveal>
           <div className="contact-info">
             <h3 className="info-title">Other ways to reach us</h3>
 
@@ -220,6 +221,7 @@ const Contact = () => {
 
             <div className="form-buttons">
               <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                {isSubmitting && <span className="btn-spinner" aria-hidden="true" />}
                 {isSubmitting ? 'Sending…' : 'Send message'}
               </button>
               <button type="button" className="whatsapp-btn" onClick={handleWhatsApp}>

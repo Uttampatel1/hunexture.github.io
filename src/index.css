@@ -35,6 +35,26 @@
   --radius-lg: 28px;
   --radius-pill: 999px;
   --brand-glow: linear-gradient(90deg, #6366F1 0%, #2DE0A7 100%);
+  --radius-xs: 8px;       /* inputs, chips, small controls */
+
+  /* Spacing scale (4px base) — use these instead of ad-hoc px */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px;
+  --space-16: 64px; --space-20: 80px; --space-section: clamp(64px, 9vw, 112px);
+
+  /* Type scale (fluid) */
+  --fs-display: clamp(2.4rem, 5.2vw, 4rem);
+  --fs-h1: clamp(2.1rem, 4.2vw, 3.25rem);
+  --fs-h2: clamp(1.75rem, 3.2vw, 2.5rem);
+  --fs-h3: clamp(1.25rem, 1.8vw, 1.5rem);
+  --fs-lead: clamp(1.05rem, 1.3vw, 1.2rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-label: 0.75rem;    /* mono uppercase labels, letter-spacing 0.08em */
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --shadow-card: 0 1px 2px rgba(11, 16, 32, 0.04), 0 8px 24px rgba(11, 16, 32, 0.06);
+  --shadow-card-hover: 0 12px 32px rgba(11, 16, 32, 0.10);
 
   --font-display: 'Space Grotesk', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'Inter', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -130,8 +150,8 @@ h6 {
 
 /* Selection color */
 ::selection {
-  background-color: var(--electric-blue);
-  color: var(--dark-navy);
+  background-color: rgba(99, 102, 241, 0.22);
+  color: var(--ink);
 }
 
 /* Scrollbar styles */
@@ -426,7 +446,7 @@ html {
   font-family: var(--font-display);
   font-stretch: 105%;
   font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.1;
   color: var(--ink);
   margin: 0 0 16px;
@@ -478,7 +498,7 @@ html {
   font-family: var(--font-display);
   font-stretch: 105%;
   font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.1;
   color: var(--ink);
   margin: 0;

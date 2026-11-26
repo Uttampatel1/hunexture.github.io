@@ -1,24 +1,20 @@
 /* Hero artifact for AI detail pages. Ink for structure, signal for what moves. */
 .ax {
-  margin: 0;
+  margin: 0 0 0 auto;
   width: 100%;
   max-width: 520px;
-  margin-left: auto;
-  padding: 16px 20px 12px;
-  background-color: var(--paper-raised);
-  background-image:
-    linear-gradient(rgba(203, 214, 230, 0.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(203, 214, 230, 0.5) 1px, transparent 1px);
-  background-size: 20px 20px;
-  border: 1px solid var(--line-strong);
-  border-top: 4px solid var(--signal);
+  padding: var(--space-4) var(--space-6) var(--space-3);
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
-.ax-head { display: flex; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--line-strong); }
-.ax-ico { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; background: var(--signal); color: #fff; font-size: 0.9rem; animation: ax-tilt 4s ease-in-out infinite; }
-.ax-status { font: 600 0.84rem var(--font-annot); color: var(--ink); }
-.ax-live { margin-left: auto; width: 9px; height: 9px; border-radius: 50%; background: #16A34A; animation: a-blink 1.6s ease-in-out infinite; }
-.ax-svg { display: block; width: 100%; height: auto; overflow: visible; margin-top: 8px; }
-.ax-foot { display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--line-strong); font: 500 0.72rem var(--font-annot); color: var(--ink-muted); }
+.ax-head { display: flex; align-items: center; gap: var(--space-3); padding-bottom: var(--space-3); border-bottom: 1px solid var(--line); }
+.ax-ico { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: var(--radius-xs); background: var(--signal-tint); color: var(--signal-deep); font-size: 0.9rem; }
+.ax-status { font: 600 var(--fs-small) var(--font-annot); color: var(--ink); }
+.ax-live { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-deep); animation: a-blink 2.4s ease-in-out infinite; }
+.ax-svg { display: block; width: 100%; height: auto; overflow: visible; margin-top: var(--space-2); }
+.ax-foot { display: flex; justify-content: space-between; padding-top: var(--space-2); border-top: 1px solid var(--line); font: 500 var(--fs-label) var(--font-annot); color: var(--ink-muted); }
 
 /* Shapes */
 .a-line { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; animation: a-in 0.7s ease forwards; }
@@ -96,7 +92,6 @@
   60%, 70% { transform: translate(0, 104px); }
   78%, 100% { transform: translate(100px, 104px); }
 }
-@keyframes ax-tilt { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-8deg) scale(1.08); } }
 
 @media (max-width: 900px) { .ax { margin-left: 0; max-width: none; } }
 

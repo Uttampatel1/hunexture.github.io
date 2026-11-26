@@ -4,9 +4,10 @@ import { servicesData } from '../data/servicesData'
 import './Services.css'
 
 const Services = () => (
-  <section id="services" className="bp-section bp-section--sunk" aria-labelledby="services-title">
+  <section id="services" className="bp-section" aria-labelledby="services-title">
     <div className="bp-container">
-      <div className="bp-head">
+      <div className="bp-head" data-reveal>
+        <span className="brand-eyebrow">Services</span>
         <h2 id="services-title">What we build</h2>
         <p>
           Six disciplines, one team. Most projects combine two or three — for example an AI
@@ -14,8 +15,8 @@ const Services = () => (
         </p>
       </div>
 
-      <ul className="svc-schedule">
-        {servicesData.map(service => {
+      <ul className="svc-schedule" data-reveal data-reveal-stagger>
+        {servicesData.map((service) => {
           const Icon = service.icon
           return (
             <li key={service.slug} className="svc-row">

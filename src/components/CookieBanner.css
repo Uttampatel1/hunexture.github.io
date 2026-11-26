@@ -4,15 +4,15 @@
   left: 0;
   right: 0;
   z-index: 9999;
-  padding: 20px;
-  background: var(--card-bg);
-  border-top: 1px solid var(--electric-blue-20);
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
-  animation: slideUpCookie 0.4s ease;
+  padding: var(--space-4) var(--space-4) calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+  background: var(--paper-raised);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -8px 24px rgba(11, 16, 32, 0.08);
+  animation: slideUpCookie 0.4s var(--ease-out);
 }
 
 @keyframes slideUpCookie {
-  from { transform: translateY(100%); opacity: 0; }
+  from { transform: translateY(24px); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
 }
 
@@ -21,12 +21,12 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: var(--space-4);
   flex-wrap: wrap;
 }
 
 .cookie-icon {
-  font-size: 28px;
+  font-size: 1.75rem;
   flex-shrink: 0;
 }
 
@@ -36,53 +36,71 @@
 }
 
 .cookie-text p {
-  font-size: 14px;
-  color: var(--text-gray);
+  font-size: var(--fs-small);
+  color: var(--ink-muted);
   line-height: 1.6;
   margin: 0;
 }
 
 .cookie-link {
-  color: var(--electric-blue);
+  color: var(--signal-deep);
   text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s var(--ease-out);
+}
+
+.cookie-link:hover {
+  color: var(--signal);
 }
 
 .cookie-actions {
   display: flex;
-  gap: 12px;
+  gap: var(--space-3);
   flex-shrink: 0;
 }
 
 .cookie-btn {
-  padding: 10px 24px;
+  min-height: 44px;
+  padding: 0 var(--space-6);
   border-radius: var(--radius-pill);
-  font-size: 14px;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
+  transition: background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  border: 1.5px solid transparent;
   font-family: inherit;
+}
+
+.cookie-btn:active {
+  transform: scale(0.98);
+}
+
+.cookie-btn:focus-visible,
+.cookie-link:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
 }
 
 .cookie-decline {
   background: transparent;
-  color: var(--text-gray);
-  border-color: var(--electric-blue-30);
+  color: var(--ink);
+  border-color: var(--line-strong);
 }
 
 .cookie-decline:hover {
-  border-color: var(--electric-blue);
-  color: var(--text-white);
+  border-color: var(--signal);
+  color: var(--signal-deep);
 }
 
 .cookie-accept {
-  background: var(--electric-blue);
-  color: var(--dark-navy);
-  border-color: var(--electric-blue);
+  background: var(--signal);
+  color: #FFFFFF;
+  border-color: var(--signal);
 }
 
 .cookie-accept:hover {
-  opacity: 0.85;
+  background: var(--signal-deep);
+  border-color: var(--signal-deep);
 }
 
 @media (max-width: 600px) {
@@ -99,4 +117,9 @@
   .cookie-btn {
     flex: 1;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cookie-banner { animation: none; }
+  .cookie-btn:active { transform: none; }
 }

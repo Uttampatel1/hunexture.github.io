@@ -5,15 +5,17 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1.5px solid var(--ink);
-  border-bottom: 1px solid var(--line-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  overflow: hidden;
 }
 
 .wwu-card {
-  padding: 28px 24px 32px;
+  padding: var(--space-8) var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .wwu-card + .wwu-card {
@@ -27,46 +29,52 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border: 1.5px solid var(--signal);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xs);
+  background: var(--paper-raised);
   color: var(--signal);
-  font-size: 1.05rem;
+  font-size: var(--fs-body);
   flex-shrink: 0;
 }
 
 .wwu-title {
-  font-size: 1.15rem;
+  font-size: var(--fs-lead);
+  letter-spacing: -0.02em;
   color: var(--ink);
-  margin: 4px 0 0;
+  margin: var(--space-1) 0 0;
 }
 
 .wwu-desc {
   margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.65;
+  font-size: var(--fs-small);
+  line-height: 1.6;
   color: var(--ink-muted);
 }
 
 .wwu-security {
-  margin-top: 40px;
-  padding: 28px;
+  margin-top: var(--space-10);
+  padding: var(--space-8);
   display: flex;
-  gap: 20px;
+  gap: var(--space-6);
   align-items: flex-start;
-  background: var(--paper-raised);
-  border: 1px solid var(--line-strong);
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-left: 4px solid var(--signal);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
 }
 
 .wwu-security-title {
-  font-size: 1.15rem;
+  font-size: var(--fs-lead);
+  letter-spacing: -0.02em;
   color: var(--ink);
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-2);
 }
 
 .wwu-security-text {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: var(--fs-body);
+  line-height: 1.6;
   color: var(--ink-muted);
   max-width: 80ch;
 }
@@ -96,11 +104,11 @@
   }
 
   .wwu-card {
-    padding: 24px 0;
+    padding: var(--space-6);
   }
 
   .wwu-security {
     flex-direction: column;
-    padding: 22px;
+    padding: var(--space-6);
   }
 }

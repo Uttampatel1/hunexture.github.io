@@ -301,7 +301,7 @@ const SCENES = {
 const AIArtifact = ({ slug, Icon, name }) => {
   const [Scene, status] = SCENES[slug] || SCENES['ai-ml-overview']
   return (
-    <figure className="ax">
+    <figure className="ax" data-reveal="wipe">
       <figcaption className="ax-head">
         <span className="ax-ico" aria-hidden="true">{Icon && <Icon />}</span>
         <span className="ax-status">{status}</span>

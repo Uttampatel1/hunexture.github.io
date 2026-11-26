@@ -13,14 +13,7 @@ section {
   z-index: 1;
 }
 
-/* Container */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Advanced Animations */
+/* Legacy keyframes still referenced by detail pages */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
@@ -41,85 +34,6 @@ section {
   }
 }
 
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes rotateIn {
-  from {
-    transform: rotate(-180deg) scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: rotate(0deg) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes glowPulse {
-  0%, 100% {
-    box-shadow: 0 0 20px var(--electric-blue-30),
-                0 0 40px var(--electric-blue-20),
-                0 0 60px var(--electric-blue-10);
-  }
-  50% {
-    box-shadow: 0 0 30px var(--electric-blue-50),
-                0 0 60px var(--electric-blue-30),
-                0 0 90px var(--electric-blue-20);
-  }
-}
-
 @keyframes shimmer {
   0% {
     background-position: -1000px 0;
@@ -127,38 +41,6 @@ section {
   100% {
     background-position: 1000px 0;
   }
-}
-
-@keyframes textGlow {
-  0%, 100% {
-    text-shadow: 0 0 10px var(--electric-blue-50),
-                 0 0 20px var(--electric-blue-30),
-                 0 0 30px var(--electric-blue-20);
-  }
-  50% {
-    text-shadow: 0 0 20px var(--electric-blue-80),
-                 0 0 40px var(--electric-blue-50),
-                 0 0 60px var(--electric-blue-30);
-  }
-}
-
-@keyframes borderGlow {
-  0%, 100% {
-    border-color: var(--electric-blue-30);
-  }
-  50% {
-    border-color: var(--electric-blue-80);
-  }
-}
-
-/* Perspective container for 3D effects */
-.perspective-container {
-  perspective: 1000px;
-}
-
-/* 3D Transform utilities */
-.transform-3d {
-  transform-style: preserve-3d;
 }
 
 /* Smooth scroll behavior */
@@ -182,9 +64,6 @@ a, button {
     padding: 120px 50px;
   }
 
-  .container {
-    max-width: 1400px;
-  }
 }
 
 /* Desktop */
@@ -193,9 +72,6 @@ a, button {
     padding: 110px 40px;
   }
 
-  .container {
-    max-width: 1300px;
-  }
 }
 
 /* Laptop */
@@ -204,9 +80,6 @@ a, button {
     padding: 100px 30px;
   }
 
-  .container {
-    max-width: 1100px;
-  }
 }
 
 /* Tablet Landscape */
@@ -215,9 +88,6 @@ a, button {
     padding: 80px 30px;
   }
 
-  .container {
-    padding: 0 30px;
-  }
 }
 
 /* Tablet Portrait */
@@ -226,9 +96,6 @@ a, button {
     padding: 60px 25px;
   }
 
-  .container {
-    padding: 0 25px;
-  }
 }
 
 /* Mobile */
@@ -237,9 +104,6 @@ a, button {
     padding: 50px 20px;
   }
 
-  .container {
-    padding: 0 20px;
-  }
 }
 
 /* Small Mobile */
@@ -248,9 +112,6 @@ a, button {
     padding: 40px 15px;
   }
 
-  .container {
-    padding: 0 15px;
-  }
 }
 
 /* Reduced motion for accessibility */
@@ -274,4 +135,85 @@ section[class*="cta-section"],
 section.project-section,
 section.project-info-bar {
   max-width: none;
+}
+
+/* ─── Home section system ─────────────────────────────────────────
+   One rhythm for every home section: shared vertical padding, a quiet
+   alternation between --paper and --paper-raised, and a stacked header
+   (mono eyebrow, display title, muted lede). Specificity is raised with
+   `section.` so it wins over the legacy rules in index.css. */
+section.bp-section {
+  padding-block: var(--space-section);
+  padding-inline: 0;
+  border-bottom: 0;
+  background: var(--paper);
+  scroll-margin-top: 72px;
+}
+
+section.bp-section--alt {
+  background: var(--paper-raised);
+}
+
+/* adjacent bands separate by tone, plus one hairline */
+section.bp-section + section.bp-section {
+  border-top: 1px solid var(--line);
+}
+
+section.bp-section .bp-container {
+  max-width: 1200px;
+  padding-inline: var(--space-8);
+}
+
+section.bp-section .bp-head {
+  display: block;
+  max-width: 720px;
+  margin: 0 0 var(--space-12);
+}
+
+section.bp-section .bp-head .brand-eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  font-size: var(--fs-label);
+  font-weight: 500;
+}
+
+section.bp-section .bp-head h2 {
+  font-family: var(--font-display);
+  font-stretch: normal;
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 var(--space-4);
+}
+
+section.bp-section .bp-head p {
+  max-width: none;
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  section.bp-section .bp-container {
+    padding-inline: var(--space-4);
+  }
+
+  section.bp-section .bp-head {
+    margin-bottom: var(--space-8);
+  }
+}
+
+/* Shared keyboard focus ring for interactive controls on the home flow */
+.bp-btn:focus-visible,
+.pf-filter:focus-visible,
+.svc-link:focus-visible,
+.pf-sheet:focus-visible,
+.faq-question:focus-visible,
+.info-item:focus-visible,
+.social-link:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
 }

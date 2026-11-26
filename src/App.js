@@ -15,6 +15,10 @@ import EngagementModels from './components/EngagementModels'
 import CookieBanner from './components/CookieBanner'
 import WhatsAppFAB from './components/WhatsAppFAB'
 import RouteSeo from './components/RouteSeo'
+import RouteEffects from './components/RouteEffects'
+import ScrollProgress from './components/ScrollProgress'
+import BackToTop from './components/BackToTop'
+import './components/brand.css'
 import './App.css'
 
 // Route-level code splitting (home, navbar, footer stay eager)
@@ -64,10 +68,13 @@ const Layout = ({ children }) => {
   return (
     <div className="App">
       <RouteSeo />
+      <RouteEffects />
+      <ScrollProgress />
       {showNavbar && <Navbar />}
-      {children}
+      <div key={location.pathname} className="page-enter">{children}</div>
       {showFooter && <Footer />}
       <CookieBanner />
+      <BackToTop />
       {!isBlogPostPage && <WhatsAppFAB />}
     </div>
   )

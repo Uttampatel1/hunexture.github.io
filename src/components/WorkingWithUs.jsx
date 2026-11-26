@@ -11,9 +11,10 @@ const practiceIcons = {
 }
 
 const WorkingWithUs = () => (
-  <section id="working-with-us" className="bp-section" aria-labelledby="wwu-title">
+  <section id="working-with-us" className="bp-section bp-section--alt" aria-labelledby="wwu-title">
     <div className="bp-container">
-      <div className="bp-head">
+      <div className="bp-head" data-reveal>
+        <span className="brand-eyebrow">Process</span>
         <h2 id="wwu-title">How we work with you</h2>
         <p>
           The terms we put in writing before any code is written: confidentiality,
@@ -21,7 +22,7 @@ const WorkingWithUs = () => (
         </p>
       </div>
 
-      <ul className="wwu-grid">
+      <ul className="wwu-grid" data-reveal data-reveal-stagger>
         {trustPractices.map((practice) => {
           const Icon = practiceIcons[practice.key]
           return (
@@ -34,7 +35,7 @@ const WorkingWithUs = () => (
         })}
       </ul>
 
-      <div className="wwu-security">
+      <div className="wwu-security" data-reveal>
         <div className="wwu-security-icon" aria-hidden="true"><FaShieldAlt /></div>
         <div>
           <h3 className="wwu-security-title">Security and compliance</h3>

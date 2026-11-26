@@ -4,24 +4,37 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-6);
+}
+
+.em-grid > li {
+  display: flex;
 }
 
 .em-card {
-  padding: 28px;
+  width: 100%;
+  padding: var(--space-8);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-3);
   background: var(--paper-raised);
-  border: 1px solid var(--line-strong);
-  border-top: 4px solid var(--signal);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--signal);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+
+.em-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .em-diagram {
   display: block;
   width: 160px;
   height: 64px;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 
 .em-d-fill {
@@ -44,37 +57,38 @@
 }
 
 .em-name {
-  font-size: 1.35rem;
+  font-size: var(--fs-h3);
+  letter-spacing: -0.02em;
   color: var(--ink);
   margin: 0;
 }
 
 .em-best-for {
   margin: 0;
-  font-size: 1rem;
+  font-size: var(--fs-body);
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--ink);
 }
 
 .em-how {
   margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.65;
+  font-size: var(--fs-small);
+  line-height: 1.6;
   color: var(--ink-muted);
 }
 
 .em-pricing {
   margin: auto 0 0;
-  padding-top: 16px;
+  padding-top: var(--space-4);
   border-top: 1px solid var(--line);
   font-family: var(--font-annot);
-  font-size: 0.88rem;
+  font-size: var(--fs-small);
   color: var(--signal-deep);
 }
 
 .em-cta {
-  margin-top: 40px;
+  margin-top: var(--space-10);
 }
 
 @media (max-width: 1023px) {
@@ -82,4 +96,14 @@
     grid-template-columns: 1fr;
     max-width: 640px;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .em-card:hover { transform: none; }
+}
+
+.em-diagram { color: var(--signal); transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out); }
+.em-card:hover .em-diagram { transform: translateY(-2px); color: var(--signal); }
+@media (prefers-reduced-motion: reduce) {
+  .em-card:hover .em-diagram { transform: none; }
 }

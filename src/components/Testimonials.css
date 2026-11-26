@@ -1,33 +1,49 @@
+.outcomes-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
 .outcomes-table {
   width: 100%;
   border-collapse: collapse;
-  border-top: 1.5px solid var(--ink);
-  font-size: 0.98rem;
+  font-size: var(--fs-small);
 }
 
 .outcomes-table thead th {
   text-align: left;
   font-family: var(--font-annot);
   font-weight: 400;
-  font-size: 0.8rem;
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--ink-muted);
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--line-strong);
+  padding: var(--space-4);
+  background: var(--paper-sunk);
+  border-bottom: 1px solid var(--line);
 }
 
 .outcomes-table tbody th,
 .outcomes-table td {
   text-align: left;
   vertical-align: top;
-  padding: 20px 16px;
+  padding: var(--space-6) var(--space-4);
   border-bottom: 1px solid var(--line);
-  line-height: 1.55;
+  line-height: 1.6;
+}
+
+.outcomes-table tbody tr:last-child th,
+.outcomes-table tbody tr:last-child td {
+  border-bottom: 0;
 }
 
 .outcomes-table tbody th {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: var(--fs-body);
+  letter-spacing: -0.02em;
   color: var(--ink);
   width: 20%;
 }
@@ -61,18 +77,24 @@
   }
 
   .outcomes-table tr {
-    padding: 20px 0;
-    border-bottom: 1px solid var(--line-strong);
+    padding: var(--space-6) var(--space-4);
+    border-bottom: 1px solid var(--line);
   }
 
-  .outcomes-table tbody th {
+  .outcomes-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .outcomes-table tbody th,
+  .outcomes-table tbody tr:last-child th {
     width: 100%;
-    padding: 0 0 8px;
+    padding: 0 0 var(--space-2);
     border: 0;
   }
 
-  .outcomes-table td {
-    padding: 6px 0;
+  .outcomes-table td,
+  .outcomes-table tbody tr:last-child td {
+    padding: var(--space-2) 0;
     border: 0;
   }
 
@@ -80,8 +102,10 @@
     content: attr(data-label);
     display: block;
     font-family: var(--font-annot);
-    font-size: 0.78rem;
+    font-size: var(--fs-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--ink-muted);
-    margin-bottom: 2px;
+    margin-bottom: var(--space-1);
   }
 }

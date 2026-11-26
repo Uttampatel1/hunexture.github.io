@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FaEnvelope, FaGlobe, FaPhone, FaLinkedin } from 'react-icons/fa'
 import './LegalPages.css'
+import './brand.css'
 
 const BusinessProfile = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
   const identity = [
     { label: 'Business Name', value: 'Hunexture' },
     { label: 'Owner', value: 'Uttam Pipaliya' },
@@ -25,7 +22,7 @@ const BusinessProfile = () => {
   ]
 
   return (
-    <div className="legal-page">
+    <main className="legal-page">
       <div className="legal-container">
         <h1 className="legal-title">Business Profile</h1>
         <p className="legal-updated">
@@ -63,22 +60,22 @@ const BusinessProfile = () => {
             <h2>3. Contact</h2>
             <ul className="contact-info">
               <li>
-                <FaEnvelope style={{ marginRight: '8px', color: 'var(--electric-blue)' }} />
+                <FaEnvelope style={{ marginRight: '8px', color: 'var(--signal-deep)' }} />
                 <strong>Email:</strong>{' '}
-                <a href="mailto:info@hunexture.com">info@hunexture.com</a>
+                <a className="brand-link" href="mailto:info@hunexture.com">info@hunexture.com</a>
               </li>
               <li>
-                <FaGlobe style={{ marginRight: '8px', color: 'var(--electric-blue)' }} />
+                <FaGlobe style={{ marginRight: '8px', color: 'var(--signal-deep)' }} />
                 <strong>Website:</strong>{' '}
-                <a href="https://hunexture.com">https://hunexture.com</a>
+                <a className="brand-link" href="https://hunexture.com">https://hunexture.com</a>
               </li>
               <li>
-                <FaPhone style={{ marginRight: '8px', color: 'var(--electric-blue)' }} />
+                <FaPhone style={{ marginRight: '8px', color: 'var(--signal-deep)' }} />
                 <strong>Phone:</strong>{' '}
-                <a href="tel:+919067262552">+91 90672 62552</a>
+                <a className="brand-link" href="tel:+919067262552">+91 90672 62552</a>
               </li>
               <li>
-                <FaLinkedin style={{ marginRight: '8px', color: 'var(--electric-blue)' }} />
+                <FaLinkedin style={{ marginRight: '8px', color: 'var(--signal-deep)' }} />
                 <strong>LinkedIn:</strong>{' '}
                 <a
                   href="https://www.linkedin.com/company/hunexture/"
@@ -100,12 +97,12 @@ const BusinessProfile = () => {
             </p>
             <p>
               A record of completed work is available on the{' '}
-              <a href="/#portfolio">Portfolio</a> section of this site.
+              <a className="brand-link" href="/#portfolio">Portfolio</a> section of this site.
             </p>
           </section>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 

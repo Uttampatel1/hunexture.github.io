@@ -50,8 +50,8 @@
 
 .bp-hero-title {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.4rem, 5.2vw, 4rem);
+  font-weight: 700;
+  font-size: var(--fs-display);
   line-height: 1.12;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -90,7 +90,7 @@
 }
 
 .bp-hero-lede {
-  font-size: 1.15rem;
+  font-size: var(--fs-lead);
   line-height: 1.6;
   color: var(--ink-muted);
   max-width: 62ch;
@@ -113,12 +113,12 @@
   padding: 0 24px;
   border-radius: var(--radius-pill);
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: var(--fs-body);
   font-weight: 600;
   text-decoration: none;
   border: 1.5px solid var(--signal);
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 0.2s var(--ease-out), color 0.2s var(--ease-out), border-color 0.2s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
 }
 
 .bp-btn-primary {
@@ -148,6 +148,16 @@
   pointer-events: none;
 }
 
+.bp-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.bp-btn:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
 .bp-btn-primary:hover::after {
   transform: translateX(260%) skewX(-20deg);
   transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -163,8 +173,13 @@
   border-color: var(--signal);
 }
 
+.bp-btn-ghost:active {
+  background: var(--signal-tint);
+  transform: scale(0.98);
+}
+
 .bp-hero-stack {
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   color: var(--ink-muted);
   margin: 0;
 }
@@ -174,11 +189,11 @@
   margin: 0;
   position: relative;
   background: var(--paper-raised);
-  border: 1.5px solid var(--ink);
-  border-radius: 2px;
-  padding: 40px 32px 0;
-  /* inner sheet margin line */
-  box-shadow: inset 0 0 0 6px var(--paper-raised), inset 0 0 0 7px var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10) var(--space-8) 0;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
 }
 
 .bp-stages {
@@ -197,18 +212,19 @@
   flex-direction: column;
   gap: 6px;
   padding: 18px 18px 20px;
-  border: 1.5px solid var(--signal);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
   background:
     var(--brand-glow) top left / 0% 3px no-repeat,
     var(--paper-raised);
   animation: bp-stage-in 0.5s ease backwards;
   animation-delay: calc(0.15s + var(--i) * 0.18s);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-size 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), border-color 0.25s var(--ease-out), background-size 0.4s var(--ease-out);
 }
 
 .bp-stage:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(11, 16, 32, 0.08);
+  box-shadow: var(--shadow-card-hover);
   border-color: var(--signal);
   background-size: 100% 3px, auto;
 }
@@ -225,8 +241,8 @@
   background: repeating-linear-gradient(var(--flow-dir, 90deg), var(--accent) 0 6px, transparent 6px 10px);
   background-size: 20px 100%;
   transform-origin: left center;
-  animation: bp-line-in 0.35s ease backwards, bp-flow 1.2s linear infinite;
-  animation-delay: calc(0.3s + var(--i) * 0.18s), 0s;
+  animation: bp-line-in 0.35s ease backwards;
+  animation-delay: calc(0.3s + var(--i) * 0.18s);
 }
 
 /* arrowhead */
@@ -252,13 +268,14 @@
 .bp-stage-name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: var(--fs-h3);
+  letter-spacing: -0.02em;
   color: var(--ink);
 }
 
 .bp-stage-note {
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: var(--fs-small);
+  line-height: 1.6;
   color: var(--ink-muted);
 }
 
@@ -316,13 +333,14 @@
 .bp-titleblock {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: 28px -32px 0;
-  border-top: 1.5px solid var(--ink);
+  margin: 28px calc(var(--space-8) * -1) 0;
+  border-top: 1px solid var(--line);
+  background: var(--paper);
 }
 
 .bp-titleblock span {
   padding: 14px 20px;
-  font-size: 0.92rem;
+  font-size: var(--fs-small);
   color: var(--ink);
 }
 
@@ -343,16 +361,6 @@
   from { opacity: 0; transform: translateY(8px); }
 }
 
-@keyframes bp-flow {
-  from { background-position: 0 0; }
-  to { background-position: 20px 0; }
-}
-
-@keyframes bp-flow-v {
-  from { background-position: 0 0; }
-  to { background-position: 0 20px; }
-}
-
 @keyframes bp-line-in {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
@@ -365,6 +373,11 @@
   }
 
   .bp-stage:hover {
+    transform: none;
+  }
+
+  .bp-btn:hover,
+  .bp-btn:active {
     transform: none;
   }
 }
@@ -402,9 +415,6 @@
     gap: 40px;
   }
 
-  .bp-hero-lede {
-    font-size: 1.05rem;
-  }
 
   .bp-drawing {
     padding: 28px 20px 0;
@@ -428,7 +438,7 @@
     transform-origin: top center;
     --flow-dir: 180deg;
     background-size: 100% 20px;
-    animation-name: bp-line-in-v, bp-flow-v;
+    animation-name: bp-line-in-v;
   }
 
   .bp-stage:not(:last-child)::before,

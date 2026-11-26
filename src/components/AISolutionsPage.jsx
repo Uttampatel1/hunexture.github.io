@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
     FaBrain, FaRobot, FaComments, FaEye, FaMagic,
@@ -7,6 +7,7 @@ import {
 import { aiData } from '../data/aiData'
 import { formatStat, getStat } from '../data/companyData'
 import AIArtifact from './AIArtifact'
+import './PageKit.css'
 import './AIDetail.css'
 import './AISolutionsPage.css'
 import './brand.css'
@@ -177,8 +178,6 @@ const AISolutionsPage = () => {
     const navigate = useNavigate()
     const [openExp, setOpenExp] = useState(0)
 
-    useEffect(() => { window.scrollTo(0, 0) }, [])
-
     const goContact = () => {
         navigate('/')
         setTimeout(() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }), 200)
@@ -197,7 +196,7 @@ const AISolutionsPage = () => {
                 <div className="aid-hero-inner">
                     <div className="aid-hero-copy">
                         <nav className="aid-crumbs" aria-label="Breadcrumb">
-                            <Link to="/">Home</Link><span aria-hidden="true">/</span><span>AI solutions</span>
+                            <Link to="/" className="brand-link">Home</Link><span aria-hidden="true">/</span><span>AI solutions</span>
                         </nav>
                         <span className="aid-icon" aria-hidden="true"><FaBrain /></span>
                         <h1 id="aisp-title" className="aid-title brand-title brand-fade-up">AI solutions that go to <span className="brand-mark">production</span></h1>
@@ -207,24 +206,24 @@ const AISolutionsPage = () => {
                             forecasting demand and supporting decisions. Start with a small pilot, keep what works.
                         </p>
                         <div className="aid-actions">
-                            <button type="button" className="aid-btn aid-btn--solid" onClick={goContact}>Schedule a consultation <FaArrowRight style={{ marginLeft: 10 }} /></button>
+                            <button type="button" className="aid-btn aid-btn--solid brand-btn-primary" onClick={goContact}>Schedule a consultation <FaArrowRight /></button>
                             <a className="aid-btn" href="#services">Browse AI services</a>
                         </div>
                     </div>
                     <AIArtifact slug="ai-solutions" Icon={FaBrain} name="AI solutions" />
                 </div>
-                <ul className="aisp-stats">
+                <ul className="aisp-stats brand-fade-up brand-delay-3">
                     {stats.map(([v, l]) => <li key={l}><b>{v}</b><span>{l}</span></li>)}
                 </ul>
             </header>
 
             <section id="services" className="aid-section" aria-labelledby="aisp-services">
                 <div className="aid-wrap">
-                    <div className="aid-head">
+                    <div className="aid-head" data-reveal>
                         <h2 id="aisp-services">Our AI services</h2>
                         <p>Pick the area you need. Each page covers what we build, the tools we use and the risks we control.</p>
                     </div>
-                    <ul className="aisp-cards">
+                    <ul className="aisp-cards" data-reveal data-reveal-stagger>
                         {aiData.map((ai, i) => {
                             const Icon = ai.icon
                             return (
@@ -251,11 +250,11 @@ const AISolutionsPage = () => {
 
             <section className="aid-section aid-section--sunk" aria-labelledby="aisp-how">
                 <div className="aid-wrap">
-                    <div className="aid-head">
+                    <div className="aid-head" data-reveal>
                         <h2 id="aisp-how">How a project runs</h2>
                         <p>Four stages, each with a decision point so you never commit more than you have seen working.</p>
                     </div>
-                    <ol className="aisp-steps">
+                    <ol className="aisp-steps" data-reveal data-reveal-delay="1">
                         {steps.map((s, i) => (
                             <li key={s.name}>
                                 <span className="aisp-step-n" aria-hidden="true">{i + 1}</span>
@@ -270,18 +269,18 @@ const AISolutionsPage = () => {
 
             <section className="aid-section" aria-labelledby="aisp-exp">
                 <div className="aid-wrap">
-                    <div className="aid-head">
+                    <div className="aid-head" data-reveal>
                         <h2 id="aisp-exp">Where our expertise sits</h2>
                         <p>Open an area to see the use cases we deliver most often.</p>
                     </div>
-                    <div className="aid-offers">
+                    <div className="aid-offers" data-reveal data-reveal-delay="1">
                         {expertiseData.map((exp, i) => (
                             <div key={exp.id} className={`aid-offer${openExp === i ? ' is-open' : ''}`}>
                                 <h3>
                                     <button type="button" aria-expanded={openExp === i} onClick={() => setOpenExp(openExp === i ? -1 : i)}>
                                         <span className="aid-offer-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                                         <span className="aid-offer-t">{exp.title}</span>
-                                        <span className="aid-sign" aria-hidden="true" />
+                                        <span className="pk-chev" aria-hidden="true" />
                                     </button>
                                 </h3>
                                 <div className="aid-offer-body">
@@ -299,11 +298,11 @@ const AISolutionsPage = () => {
 
             <section className="aid-section aid-section--sunk" aria-labelledby="aisp-ind">
                 <div className="aid-wrap">
-                    <div className="aid-head">
+                    <div className="aid-head" data-reveal>
                         <h2 id="aisp-ind">Industries we apply AI in</h2>
                         <p>Examples from sectors where we deliver most often. Each links to the full industry page.</p>
                     </div>
-                    <ul className="aisp-ind">
+                    <ul className="aisp-ind" data-reveal data-reveal-stagger>
                         {industries.map((ind) => (
                             <li key={ind.slug}>
                                 <Link to={`/industries/${ind.slug}`}>
@@ -319,11 +318,11 @@ const AISolutionsPage = () => {
 
             <section className="aid-section" aria-labelledby="aisp-why">
                 <div className="aid-wrap">
-                    <div className="aid-head">
+                    <div className="aid-head" data-reveal>
                         <h2 id="aisp-why">Why teams choose Hunexture</h2>
                         <p>Practical engineering, honest scoping and support that continues after launch.</p>
                     </div>
-                    <ul className="aisp-why">
+                    <ul className="aisp-why" data-reveal data-reveal-stagger>
                         {whyChooseUs.map(([t, d], i) => (
                             <li key={t}>
                                 <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
@@ -344,7 +343,7 @@ const AISolutionsPage = () => {
                             to deliver results you can measure, for clients in India and the USA.
                         </p>
                     </div>
-                    <ul className="aisp-checks">
+                    <ul className="aisp-checks" data-reveal data-reveal-delay="1">
                         {outcomes.map((o) => <li key={o}><FaCheck aria-hidden="true" />{o}</li>)}
                     </ul>
                 </div>
@@ -352,11 +351,11 @@ const AISolutionsPage = () => {
 
             <section className="aid-section" aria-labelledby="aisp-tech">
                 <div className="aid-wrap">
-                    <div className="aid-head">
+                    <div className="aid-head" data-reveal>
                         <h2 id="aisp-tech">Technologies we use</h2>
                         <p>We choose by fit and cost. This is the typical toolbox, not a fixed list.</p>
                     </div>
-                    <ul className="aisp-tech">
+                    <ul className="aisp-tech" data-reveal data-reveal-stagger>
                         {tech.map(([name, file]) => (
                             <li key={name}><img src={`/images/tech-icons/${file}.svg`} alt="" loading="lazy" /><span>{name}</span></li>
                         ))}
@@ -364,13 +363,15 @@ const AISolutionsPage = () => {
                 </div>
             </section>
 
-            <section className="aid-cta">
-                <div className="aid-wrap aid-cta-inner">
-                    <div>
-                        <h2>Start with a two-week pilot</h2>
-                        <p>Bring one process and some sample data. You leave with a prototype and a clear go or no-go.</p>
+            <section className="pk-cta">
+                <div className="pk-wrap">
+                    <div className="pk-cta-card" data-reveal>
+                        <div>
+                            <h2>Start with a two-week pilot</h2>
+                            <p>Bring one process and some sample data. You leave with a prototype and a clear go or no-go.</p>
+                        </div>
+                        <button type="button" className="pk-btn pk-btn--primary brand-btn-primary" onClick={goContact}>Book a discovery call <FaRocket /></button>
                     </div>
-                    <button type="button" className="aid-btn aid-btn--light" onClick={goContact}>Book a discovery call <FaRocket style={{ marginLeft: 10 }} /></button>
                 </div>
             </section>
         </main>

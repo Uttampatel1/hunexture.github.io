@@ -88,3 +88,114 @@ h1.brand-title, h2.brand-title { line-height: 1.12; }
   .brand-card, .brand-card::before, .brand-btn-primary, .brand-btn-primary::after { transition: none; }
   .brand-card:hover, .brand-btn-primary:hover { transform: none; }
 }
+
+/* ── Page transition: each route fades up on mount ───────────────── */
+.page-enter { animation: brand-page-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes brand-page-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Scroll reveal (driven by RouteEffects.jsx) ──────────────────────
+   Add data-reveal to a section block / card; data-reveal-delay="1..4" staggers. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal-ready [data-reveal].is-revealed { opacity: 1; transform: none; will-change: auto; }
+.reveal-ready [data-reveal-delay="1"] { transition-delay: 0.08s; }
+.reveal-ready [data-reveal-delay="2"] { transition-delay: 0.16s; }
+.reveal-ready [data-reveal-delay="3"] { transition-delay: 0.24s; }
+.reveal-ready [data-reveal-delay="4"] { transition-delay: 0.32s; }
+
+/* ── Shared section header ───────────────────────────────────────── */
+.brand-section-head { max-width: 720px; margin: 0 0 var(--space-10); }
+.brand-section-head .brand-eyebrow { display: inline-block; margin-bottom: var(--space-3); }
+.brand-section-title { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 var(--space-4); }
+.brand-section-lede { font-size: var(--fs-lead); line-height: 1.6; color: var(--ink-muted); margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter { animation: none; }
+  .reveal-ready [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* ── Reveal variants, stagger, count, draw ───────────────────────── */
+.reveal-ready [data-reveal="scale"] { transform: scale(0.96); }
+.reveal-ready [data-reveal="fade"] { transform: none; }
+.reveal-ready [data-reveal="wipe"] {
+  opacity: 1; transform: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.9s var(--ease-out);
+  will-change: clip-path;
+}
+.reveal-ready [data-reveal="wipe"].is-revealed { clip-path: inset(0 0 0 0); will-change: auto; }
+.reveal-ready [data-reveal-stagger] > * {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.reveal-ready [data-reveal-stagger].is-revealed > * { opacity: 1; transform: none; }
+[data-count] { font-variant-numeric: tabular-nums; }
+.reveal-ready [data-draw] .draw-path, .reveal-ready .draw-path[data-draw] {
+  stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
+}
+.reveal-ready [data-draw].is-revealed .draw-path, .reveal-ready .draw-path[data-draw].is-revealed {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.4s var(--ease-out);
+  transition-delay: calc(var(--di, 0) * 60ms);
+}
+
+/* ── Card spotlight ──────────────────────────────────────────────── */
+@media (hover: hover) {
+  .brand-card::after, [data-spotlight]::after {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(99, 102, 241, 0.10), transparent 60%);
+    opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 1;
+  }
+  [data-spotlight] { position: relative; }
+  .brand-card:hover::after, [data-spotlight]:hover::after { opacity: 1; }
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .brand-card::after, [data-spotlight]::after { display: none; }
+}
+
+/* ── Scroll progress + back to top ───────────────────────────────── */
+.scroll-progress {
+  position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; height: 2px;
+  background: var(--brand-glow); transform: scaleX(0); transform-origin: left;
+  z-index: 1100; pointer-events: none; will-change: transform;
+}
+.scroll-progress[hidden] { display: none; }
+.back-to-top {
+  position: fixed; left: 20px; bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  width: 44px; height: 44px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--paper-raised); border: 1px solid var(--line); color: var(--signal);
+  box-shadow: var(--shadow-card); cursor: pointer; z-index: 900; padding: 0;
+  opacity: 0; transform: translateY(12px); visibility: hidden;
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out), visibility 0.3s, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.back-to-top.is-visible { opacity: 1; transform: none; visibility: visible; }
+.back-to-top.is-visible:hover { transform: translateY(-3px); border-color: var(--signal); box-shadow: var(--shadow-card-hover); }
+.back-to-top:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+@media print { .back-to-top, .scroll-progress { display: none !important; } }
+
+/* ── Global polish ───────────────────────────────────────────────── */
+[id] { scroll-margin-top: 88px; }
+::selection { background: rgba(99, 102, 241, 0.22); color: var(--ink); }
+.brand-focus:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 4px; }
+.brand-link {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat;
+  transition: background-size 0.3s var(--ease-out); text-decoration: none; padding-bottom: 2px;
+}
+.brand-link:hover, .brand-link:focus-visible { background-size: 100% 1.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-reveal-stagger] > * { opacity: 1; transform: none; transition: none; }
+  .reveal-ready [data-reveal="wipe"] { clip-path: none; transition: none; }
+  .reveal-ready [data-draw] .draw-path, .reveal-ready .draw-path[data-draw] { stroke-dasharray: none; stroke-dashoffset: 0; transition: none; }
+  .back-to-top, .scroll-progress { transition: none; }
+  .brand-link { transition: none; }
+}

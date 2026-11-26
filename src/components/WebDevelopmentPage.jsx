@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
     FaCode, FaRocket, FaCheck, FaChevronDown, FaServer, FaDatabase,
@@ -7,6 +7,7 @@ import {
 import { SiReact, SiNodedotjs, SiPython, SiTypescript, SiPostgresql, SiRedis, SiDocker, SiAmazonwebservices } from 'react-icons/si'
 import { getServiceBySlug } from '../data/servicesData'
 import { ServiceSchematic } from './ServiceSchematic'
+import './ServiceDetail.css'
 import './WebDevelopmentPage.css'
 import './brand.css'
 
@@ -17,30 +18,12 @@ const WebDevelopmentPage = () => {
     const [openFaq, setOpenFaq] = useState(null)
     const [activeTechTab, setActiveTechTab] = useState('frontend')
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            entries => entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('wd-visible')
-                    observer.unobserve(entry.target)
-                }
-            }),
-            { threshold: 0.1 }
-        )
-        document.querySelectorAll('.wd-reveal').forEach(el => observer.observe(el))
-        return () => observer.disconnect()
-    }, [])
-
     if (!service) {
         return (
-            <div className="wd-container">
-                <div className="wd-not-found">
-                    <h1 className="tech-font">Service Not Found</h1>
-                    <button onClick={() => navigate('/')} className="wd-btn-primary">
+            <div className="sd-container">
+                <div className="sd-not-found">
+                    <h1>Service Not Found</h1>
+                    <button onClick={() => navigate('/')} className="sd-btn-primary brand-btn-primary">
                         <FaArrowLeft /> Back to Home
                     </button>
                 </div>
@@ -93,40 +76,37 @@ const WebDevelopmentPage = () => {
     }
 
     return (
-        <div className="wd-page-wrapper">
+        <div className="sd-container">
             {/* ─── Hero Section ────────────────────────────────────────── */}
-            <section className="wd-hero">
-                <div className="wd-hero-grid" />
-                <div className="wd-hero-blob blob-indigo" />
-                <div className="wd-hero-blob blob-cyan" />
+            <section className="sd-hero">
                 
-                <div className="wd-hero-inner">
-                    <div className="wd-hero-grid-split">
+                <div className="sd-hero-inner">
+                    <div className="sd-hero-grid-split">
                         
                         {/* Left Column: Content */}
-                        <div className="wd-hero-content">
-                            <div className="wd-hero-badge tech-font">
+                        <div className="sd-hero-content-block">
+                            <div className="sd-hero-tag">
                                 <FaLaptopCode /> Enterprise Web Engineering
                             </div>
-                            <h1 className="wd-hero-title brand-title brand-fade-up">
+                            <h1 className="sd-hero-title brand-title brand-fade-up">
                                 Web Applications <br />
                                 Engineered to <span className="brand-mark">Scale</span>
                             </h1>
-                            <p className="wd-hero-desc brand-fade-up brand-delay-1">
+                            <p className="sd-hero-desc brand-fade-up brand-delay-1">
                                 We craft premium, high-performance web applications that load instantly, secure your data, and grow with your traffic. Built on modern React frameworks and microservice architectures.
                             </p>
 
-                            <div className="wd-feature-badges">
+                            <div className="sd-feature-badges">
                                 {service.features?.map((feat, i) => (
-                                    <span key={i} className="wd-badge tech-font">
-                                        <FaCheck className="wd-badge-check" /> {feat}
+                                    <span key={i} className="sd-badge">
+                                        <FaCheck className="sd-badge-icon" /> {feat}
                                     </span>
                                 ))}
                             </div>
 
-                            <div className="wd-hero-cta brand-fade-up brand-delay-2">
+                            <div className="sd-hero-cta brand-fade-up brand-delay-2">
                                 <button 
-                                    className="wd-btn-primary"
+                                    className="sd-btn-primary brand-btn-primary"
                                     onClick={() => {
                                         navigate('/')
                                         setTimeout(() => {
@@ -136,33 +116,33 @@ const WebDevelopmentPage = () => {
                                 >
                                     Launch Your Project <FaRocket />
                                 </button>
-                                <button className="wd-btn-secondary" onClick={() => navigate('/#portfolio')}>
+                                <button className="sd-btn-secondary" onClick={() => navigate('/#portfolio')}>
                                     Explore Portfolio
                                 </button>
                             </div>
                         </div>
 
                         {/* Right Column: schematic */}
-                        <div className="sch-panel"><ServiceSchematic slug={'web-development'} /></div>
+                        <div className="sch-panel" data-reveal="wipe"><ServiceSchematic slug={'web-development'} /></div>
 
                     </div>
 
                     {/* Stats Summary Bar */}
-                    <div className="wd-hero-stats">
-                        <div className="wd-hero-stat">
-                            <strong className="tech-font text-gradient">CI/CD</strong>
+                    <div className="sd-hero-stats">
+                        <div className="sd-hero-stat">
+                            <strong>CI/CD</strong>
                             <span>Automated, Reviewed Deploys</span>
                         </div>
-                        <div className="wd-hero-stat">
-                            <strong className="tech-font text-gradient">&lt;200ms</strong>
+                        <div className="sd-hero-stat">
+                            <strong>&lt;200ms</strong>
                             <span>Edge Node TTFB</span>
                         </div>
-                        <div className="wd-hero-stat">
-                            <strong className="tech-font text-gradient">100%</strong>
+                        <div className="sd-hero-stat">
+                            <strong>100%</strong>
                             <span>Responsive & Accessible</span>
                         </div>
-                        <div className="wd-hero-stat">
-                            <strong className="tech-font text-gradient">GDPR</strong>
+                        <div className="sd-hero-stat">
+                            <strong>GDPR</strong>
                             <span>Compliance Built-in</span>
                         </div>
                     </div>
@@ -171,24 +151,18 @@ const WebDevelopmentPage = () => {
 
             {/* ─── Key Benefits Section ─────────────────────────────────── */}
             {service.benefits?.length > 0 && (
-                <section className="wd-section wd-alt-bg wd-reveal">
-                    <div className="wd-inner">
-                        <div className="wd-section-header">
-                            <span className="wd-tag tech-font">Metrics That Matter</span>
-                            <h2 className="wd-section-title">Key Core Benefits</h2>
-                            <div className="wd-underline" />
-                            <p className="wd-section-desc">
-                                We design and build systems around performance indices that improve conversions and lower bounce rates.
-                            </p>
-                        </div>
+                <section className="sd-section sd-alt-bg">
+                    <div className="sd-inner">
+                        <div className="brand-section-head" data-reveal>
+<span className="brand-eyebrow">Metrics That Matter</span>
+<h2 className="brand-section-title">Key Core Benefits</h2>
+<p className="brand-section-lede">We design and build systems around performance indices that improve conversions and lower bounce rates.</p>
+</div>
 
-                        <div className="wd-benefits-grid">
+                        <div className="sd-benefits-grid" data-reveal data-reveal-stagger>
                             {service.benefits.map((benefit, i) => (
-                                <div key={i} className="wd-benefit-card brand-card" style={{ '--delay': `${i * 0.08}s` }}>
-                                    <div className="wd-benefit-icon-wrapper">
-                                        <FaCheck className="wd-benefit-check" />
-                                    </div>
-                                    <span className="wd-benefit-num tech-font">0{i + 1}</span>
+                                <div key={i} className="sd-benefit-card brand-card">
+                                    <span className="sd-benefit-num">0{i + 1}</span>
                                     <p>{benefit}</p>
                                 </div>
                             ))}
@@ -198,40 +172,41 @@ const WebDevelopmentPage = () => {
             )}
 
             {/* ─── Interactive Technology Matrix ────────────────────────── */}
-            <section className="wd-section wd-reveal">
-                <div className="wd-inner">
-                    <div className="wd-section-header">
-                        <span className="wd-tag tech-font">The Tech Matrix</span>
-                        <h2 className="wd-section-title">Modern Web Stack</h2>
-                        <div className="wd-underline" />
-                        <p className="wd-section-desc">
-                            We select highly resilient technology tools that maintain stability, compliance, and long-term modularity.
-                        </p>
-                    </div>
+            <section className="sd-section">
+                <div className="sd-inner">
+                    <div className="brand-section-head" data-reveal>
+<span className="brand-eyebrow">The Tech Matrix</span>
+<h2 className="brand-section-title">Modern Web Stack</h2>
+<p className="brand-section-lede">We select highly resilient technology tools that maintain stability, compliance, and long-term modularity.</p>
+</div>
 
-                    <div className="wd-tech-matrix-container">
+                    <div className="wd-matrix" data-reveal data-reveal-delay="1">
                         {/* Tab Headers */}
-                        <div className="wd-matrix-tabs">
-                            <button 
-                                className={`matrix-tab-btn ${activeTechTab === 'frontend' ? 'active' : ''}`}
+                        <div className="wd-matrix-tabs" role="tablist" aria-label="Technology areas">
+                            <button
+ type="button" role="tab" aria-selected={activeTechTab === 'frontend'}
+ className={`matrix-tab-btn ${activeTechTab === 'frontend' ? 'active' : ''}`}
                                 onClick={() => setActiveTechTab('frontend')}
                             >
                                 Frontend
                             </button>
-                            <button 
-                                className={`matrix-tab-btn ${activeTechTab === 'backend' ? 'active' : ''}`}
+                            <button
+ type="button" role="tab" aria-selected={activeTechTab === 'backend'}
+ className={`matrix-tab-btn ${activeTechTab === 'backend' ? 'active' : ''}`}
                                 onClick={() => setActiveTechTab('backend')}
                             >
                                 Backend
                             </button>
-                            <button 
-                                className={`matrix-tab-btn ${activeTechTab === 'database' ? 'active' : ''}`}
+                            <button
+ type="button" role="tab" aria-selected={activeTechTab === 'database'}
+ className={`matrix-tab-btn ${activeTechTab === 'database' ? 'active' : ''}`}
                                 onClick={() => setActiveTechTab('database')}
                             >
                                 Data Stores
                             </button>
-                            <button 
-                                className={`matrix-tab-btn ${activeTechTab === 'infrastructure' ? 'active' : ''}`}
+                            <button
+ type="button" role="tab" aria-selected={activeTechTab === 'infrastructure'}
+ className={`matrix-tab-btn ${activeTechTab === 'infrastructure' ? 'active' : ''}`}
                                 onClick={() => setActiveTechTab('infrastructure')}
                             >
                                 DevOps
@@ -239,7 +214,7 @@ const WebDevelopmentPage = () => {
                         </div>
 
                         {/* Tab Content Panel */}
-                        <div className="wd-matrix-content">
+                        <div className="wd-matrix-content" key={activeTechTab} role="tabpanel">
                             <div className="matrix-info">
                                 <h3>{techStack[activeTechTab].title}</h3>
                                 <p>{techStack[activeTechTab].desc}</p>
@@ -267,16 +242,16 @@ const WebDevelopmentPage = () => {
 
             {/* ─── Process + Case Applications (side by side) ───────────── */}
             {(service.process?.length > 0 || service.useCases?.length > 0) && (
-                <section className="wd-section wd-alt-bg wd-reveal">
-                    <div className="wd-inner wd-duo">
+                <section className="sd-section sd-alt-bg">
+                    <div className="sd-inner sd-duo">
                         {service.process?.length > 0 && (
-                            <div className="wd-duo-col">
-                                <span className="wd-tag tech-font">Development Pipeline</span>
-                                <h2 className="wd-section-title">Our Working Process</h2>
-                                <ol className="wd-steps">
+                            <div className="sd-duo-col" data-reveal>
+                                <span className="brand-eyebrow">Development Pipeline</span>
+<h2 className="brand-section-title">Our Working Process</h2>
+                                <ol className="sd-steps">
                                     {service.process.map((step) => (
-                                        <li key={step.step} className="wd-step-row">
-                                            <span className="wd-step-num tech-font" aria-hidden="true">{step.step}</span>
+                                        <li key={step.step} className="sd-step-row">
+                                            <span className="sd-step-num" aria-hidden="true">{step.step}</span>
                                             <div>
                                                 <h3>{step.title}</h3>
                                                 <p>{step.description}</p>
@@ -287,15 +262,15 @@ const WebDevelopmentPage = () => {
                             </div>
                         )}
                         {service.useCases?.length > 0 && (
-                            <div className="wd-duo-col">
-                                <span className="wd-tag tech-font">Proven Solutions</span>
-                                <h2 className="wd-section-title">Case Applications</h2>
-                                <ul className="wd-uc-list">
+                            <div className="sd-duo-col" data-reveal>
+                                <span className="brand-eyebrow">Proven Solutions</span>
+<h2 className="brand-section-title">Case Applications</h2>
+                                <ul className="sd-uc-list">
                                     {service.useCases.map((uc) => {
                                         const UCIcon = uc.icon || FaCode
                                         return (
-                                            <li key={uc.title} className="wd-uc-row">
-                                                <span className="wd-uc-icon" aria-hidden="true"><UCIcon /></span>
+                                            <li key={uc.title} className="sd-uc-row">
+                                                <span className="sd-uc-icon" aria-hidden="true"><UCIcon /></span>
                                                 <div>
                                                     <h3>{uc.title}</h3>
                                                     <p>{uc.description}</p>
@@ -312,30 +287,30 @@ const WebDevelopmentPage = () => {
 
             {/* ─── FAQ Section ─────────────────────────────────────────── */}
             {service.faq?.length > 0 && (
-                <section className="wd-section wd-reveal">
-                    <div className="wd-inner">
-                        <div className="wd-section-header">
-                            <span className="wd-tag tech-font">FAQ</span>
-                            <h2 className="wd-section-title">Frequently Asked Questions</h2>
-                            <div className="wd-underline" />
-                        </div>
+                <section className="sd-section">
+                    <div className="sd-inner">
+                        <div className="brand-section-head" data-reveal>
+<span className="brand-eyebrow">FAQ</span>
+<h2 className="brand-section-title">Frequently Asked Questions</h2>
+</div>
 
-                        <div className="wd-faq-list">
+                        <div className="sd-faq-list" data-reveal data-reveal-delay="1">
                             {service.faq.slice(0, 4).map((item, i) => (
                                 <div 
                                     key={i} 
-                                    className={`wd-faq-item ${openFaq === i ? 'open' : ''}`}
+                                    className={`sd-faq-item ${openFaq === i ? 'open' : ''}`}
                                 >
-                                    <button 
-                                        className="wd-faq-trigger"
+                                    <button
+                                        type="button"
+                                        className="sd-faq-q"
                                         onClick={() => setOpenFaq(prev => prev === i ? null : i)}
                                         aria-expanded={openFaq === i}
                                     >
                                         <span>{item.question}</span>
-                                        <FaChevronDown className="wd-faq-arrow" />
+                                        <FaChevronDown className="sd-faq-chevron" />
                                     </button>
-                                    <div className="wd-faq-answer">
-                                        <p>{item.answer}</p>
+                                    <div className="sd-faq-a">
+                                        <div><p>{item.answer}</p></div>
                                     </div>
                                 </div>
                             ))}
@@ -345,17 +320,16 @@ const WebDevelopmentPage = () => {
             )}
 
             {/* ─── Bottom Call To Action ───────────────────────────────── */}
-            <section className="wd-cta-section wd-reveal">
-                <div className="wd-cta-glow" />
-                <div className="wd-cta-inner">
-                    <span className="wd-tag tech-font">Let's Build</span>
+            <section className="sd-cta">
+                <div className="sd-cta-inner" data-reveal>
+                    <span className="brand-eyebrow">Let's Build</span>
                     <h2>Ready to Build Your Web Application?</h2>
                     <p>
                         Schedule a technical session with our software architect to plan your stack, architecture model, and release sprints.
                     </p>
-                    <div className="wd-cta-buttons">
+                    <div className="sd-cta-btns">
                         <button 
-                            className="wd-btn-primary"
+                            className="sd-btn-primary brand-btn-primary"
                             onClick={() => {
                                 navigate('/')
                                 setTimeout(() => {
@@ -365,7 +339,7 @@ const WebDevelopmentPage = () => {
                         >
                             Request Consultation <FaArrowRight />
                         </button>
-                        <button className="wd-btn-secondary" onClick={() => navigate('/#portfolio')}>
+                        <button className="sd-btn-secondary" onClick={() => navigate('/#portfolio')}>
                             Review Case Studies
                         </button>
                     </div>

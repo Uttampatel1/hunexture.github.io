@@ -1,27 +1,31 @@
 .pf-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 32px;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
 }
 
 .pf-filter {
-  min-height: 40px;
-  padding: 0 18px;
+  min-height: 44px;
+  padding: 0 var(--space-6);
   border: 1px solid var(--line-strong);
-  border-radius: 4px;
+  border-radius: var(--radius-pill);
   background: var(--paper-raised);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: var(--fs-small);
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
 }
 
 .pf-filter:hover {
   border-color: var(--signal);
-  color: var(--signal);
+  color: var(--signal-deep);
+}
+
+.pf-filter:active {
+  transform: scale(0.97);
 }
 
 .pf-filter.is-active {
@@ -36,28 +40,36 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-6);
 }
 
 .pf-grid > li {
   display: flex;
 }
 
-/* Each project is a drawing sheet */
+/* Each project is a card */
 .pf-sheet {
   display: flex;
   flex-direction: column;
   width: 100%;
   background: var(--paper-raised);
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
 }
 
 .pf-sheet:hover {
+  transform: translateY(-4px);
   border-color: var(--signal);
-  box-shadow: 0 0 0 1px var(--signal);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.pf-sheet:active {
+  transform: translateY(-2px);
 }
 
 .pf-image {
@@ -65,50 +77,53 @@
   display: block;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  border-bottom: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line);
 }
 
-.pf-image .ca { transition: transform 0.5s ease; }
+.pf-image .ca { transition: transform 0.5s var(--ease-out); }
 .pf-sheet:hover .pf-image .ca { transform: scale(1.04); }
 
 .pf-body {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 20px 22px 24px;
+  gap: var(--space-2);
+  padding: var(--space-6);
   flex: 1;
 }
 
 .pf-category {
   font-family: var(--font-annot);
-  font-size: 0.78rem;
-  color: var(--signal);
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--signal-deep);
 }
 
 .pf-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: var(--fs-lead);
+  letter-spacing: -0.02em;
   line-height: 1.25;
   color: var(--ink);
 }
 
 .pf-desc {
-  font-size: 0.95rem;
-  line-height: 1.55;
+  font-size: var(--fs-small);
+  line-height: 1.6;
   color: var(--ink-muted);
 }
 
 .pf-tags {
   margin-top: auto;
-  padding-top: 12px;
+  padding-top: var(--space-3);
   border-top: 1px solid var(--line);
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
   color: var(--ink-muted);
 }
 
 .pf-more {
-  margin-top: 32px;
+  margin-top: var(--space-8);
 }
 
 @media (max-width: 1023px) {
@@ -121,4 +136,11 @@
   .pf-grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-sheet:hover,
+  .pf-sheet:active { transform: none; }
+  .pf-sheet:hover .pf-image .ca { transform: none; }
+  .pf-filter:active { transform: none; }
 }

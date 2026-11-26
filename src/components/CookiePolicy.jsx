@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './LegalPages.css'
 
 const CookiePolicy = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
   return (
-    <div className="legal-page">
+    <main className="legal-page">
       <div className="legal-container">
         <h1 className="legal-title">Cookie Policy</h1>
         <p className="legal-updated">Last Updated: November 15, 2025</p>
@@ -271,7 +267,7 @@ const CookiePolicy = () => {
           </section>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 
