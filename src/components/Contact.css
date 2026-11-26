@@ -342,3 +342,18 @@
   .contact .btn-spinner { animation-duration: 2s; }
   .contact .form-success { animation: none; }
 }
+
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.field-error {
+  margin: -0.5rem 0 0.75rem;
+  font-size: 0.85rem;
+  color: #c0392b;
+}

@@ -68,3 +68,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Analytics & contact form
+
+Analytics are off by default and only load when a variable below is set **and** the visitor clicked "Accept All" in the cookie banner.
+
+- `REACT_APP_FORMSUBMIT_ID`: FormSubmit alias; the form posts to `https://formsubmit.co/ajax/<id>` instead of the raw email.
+- `REACT_APP_PLAUSIBLE_DOMAIN`: enables Plausible.
+- `REACT_APP_GA_ID`: enables GA4 (IP anonymised). Ignored if Plausible is set.
+
+See `.env.example`. For GitHub Actions deploys, add them under Settings > Secrets and variables > Actions > Variables, then reference them as `env:` on the build step in `.github/workflows/deploy.yml`, e.g. `REACT_APP_GA_ID: ${{ vars.REACT_APP_GA_ID }}`. They are baked in at build time.
+
+The contact form includes a honeypot field, a minimum 3s time-to-submit check, and client validation (valid email, message of at least 10 characters).

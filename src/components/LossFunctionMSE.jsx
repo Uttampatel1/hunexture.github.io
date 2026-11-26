@@ -1,12 +1,62 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { runViz } from './vizKit';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './LossFunctionMSE.css';
 
+const dataPoints = [
+    { x: -1, y: -0.8 },
+    { x: 0, y: 1.2 },
+    { x: 1, y: 3.1 },
+    { x: 2, y: 4.8 },
+    { x: 3, y: 7.2 }
+];
+
+const wMin = -1, wMax = 5;
+const bMin = -5, bMax = 5;
+
+// Calculate MSE
+const calculateMSE = (weight, bias) => {
+    let sumErrorSq = 0;
+    for (let p of dataPoints) {
+        const yPred = weight * p.x + bias;
+        const error = p.y - yPred;
+        sumErrorSq += error * error;
+    }
+    return sumErrorSq / dataPoints.length;
+};
+
+// Text Sprite Function
+const makeTextSprite = (message, parameters = {}) => {
+    const fontface = parameters.fontface || "Arial";
+    const fontsize = parameters.fontsize || 24;
+    const borderThickness = parameters.borderThickness || 4;
+
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    context.font = "Bold " + fontsize + "px " + fontface;
+
+    context.fillStyle = "#0B1020";
+    context.fillText(message, borderThickness, fontsize + borderThickness);
+
+    const texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+    const sprite = new THREE.Sprite(spriteMaterial);
+    sprite.scale.set(2, 1, 1);
+    return sprite;
+};
+
+// 2D Drawing Functions
+const toScreen = (x, y, width, height) => {
+    const minX = -2, maxX = 4;
+    const minY = -2, maxY = 8;
+    const sx = ((x - minX) / (maxX - minX)) * width;
+    const sy = height - ((y - minY) / (maxY - minY)) * height;
+    return { x: sx, y: sy };
+};
+
 const LossFunctionMSE = () => {
-    const navigate = useNavigate();
     const mount3DRef = useRef(null);
     const canvas2DRef = useRef(null);
     const sceneRef = useRef(null);
@@ -21,65 +71,7 @@ const LossFunctionMSE = () => {
     const [b, setB] = useState(0);
     const [loss, setLoss] = useState(0);
 
-    // Constants
-    const TRUE_W = 2.0;
-    const TRUE_B = 1.0;
-
-    const dataPoints = [
-        { x: -1, y: -0.8 },
-        { x: 0, y: 1.2 },
-        { x: 1, y: 3.1 },
-        { x: 2, y: 4.8 },
-        { x: 3, y: 7.2 }
-    ];
-
-    const wMin = -1, wMax = 5;
-    const bMin = -5, bMax = 5;
-
-    // Calculate MSE
-    const calculateMSE = (weight, bias) => {
-        let sumErrorSq = 0;
-        for (let p of dataPoints) {
-            const yPred = weight * p.x + bias;
-            const error = p.y - yPred;
-            sumErrorSq += error * error;
-        }
-        return sumErrorSq / dataPoints.length;
-    };
-
-    // Text Sprite Function
-    const makeTextSprite = (message, parameters = {}) => {
-        const fontface = parameters.fontface || "Arial";
-        const fontsize = parameters.fontsize || 24;
-        const borderThickness = parameters.borderThickness || 4;
-
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        context.font = "Bold " + fontsize + "px " + fontface;
-        const metrics = context.measureText(message);
-        const textWidth = metrics.width;
-
-        context.fillStyle = "#0B1020";
-        context.fillText(message, borderThickness, fontsize + borderThickness);
-
-        const texture = new THREE.Texture(canvas);
-        texture.needsUpdate = true;
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-        const sprite = new THREE.Sprite(spriteMaterial);
-        sprite.scale.set(2, 1, 1);
-        return sprite;
-    };
-
-    // 2D Drawing Functions
-    const toScreen = (x, y, width, height) => {
-        const minX = -2, maxX = 4;
-        const minY = -2, maxY = 8;
-        const sx = ((x - minX) / (maxX - minX)) * width;
-        const sy = height - ((y - minY) / (maxY - minY)) * height;
-        return { x: sx, y: sy };
-    };
-
-    const draw2D = () => {
+    const draw2D = useCallback(() => {
         const canvas = canvas2DRef.current;
         if (!canvas) return;
 
@@ -147,7 +139,11 @@ const LossFunctionMSE = () => {
             ctx.stroke();
         });
         ctx.setLineDash([]);
-    };
+    }, [w, b]);
+
+    // Latest draw fn for the one-time scene effect (avoids re-creating the scene)
+    const draw2DRef = useRef(draw2D);
+    useEffect(() => { draw2DRef.current = draw2D; }, [draw2D]);
 
     // Initialize 3D Scene
     useEffect(() => {
@@ -278,31 +274,15 @@ const LossFunctionMSE = () => {
         scene.add(dropLine);
         dropLineRef.current = dropLine;
 
-        // Animation Loop
-        const animate = () => {
-            requestAnimationFrame(animate);
-            controls.update();
-            if (markerRef.current) {
-                markerRef.current.scale.setScalar(1 + Math.sin(Date.now() * 0.005) * 0.05);
-            }
-            renderer.render(scene, camera);
-        };
-        animate();
 
-        // Handle Resize
-        const handleResize = () => {
-            if (!mount3DRef.current || !canvas2DRef.current) return;
-
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-
+        const resize2D = () => {
             const canvas = canvas2DRef.current;
+            if (!canvas) return;
             canvas.width = canvas.parentElement.clientWidth;
             canvas.height = canvas.parentElement.clientHeight;
-            draw2D();
+            draw2DRef.current();
         };
-        window.addEventListener('resize', handleResize);
+
 
         // Initial 2D canvas setup
         if (canvas2DRef.current) {
@@ -311,11 +291,11 @@ const LossFunctionMSE = () => {
         }
 
         // Cleanup
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            container.removeChild(renderer.domElement);
-            renderer.dispose();
-        };
+        return runViz({ container, renderer, camera, scene, controls, frame: () => {
+            if (markerRef.current) {
+                markerRef.current.scale.setScalar(1 + Math.sin(Date.now() * 0.005) * 0.05);
+            }
+            }, onResize: resize2D });
     }, []);
 
     // Update visualization when w or b changes
@@ -338,13 +318,10 @@ const LossFunctionMSE = () => {
 
         // Update 2D View
         draw2D();
-    }, [w, b]);
+    }, [w, b, draw2D]);
 
     return (
         <div className="loss-function-container">
-            <button onClick={() => navigate('/blog/linear-algebra')} className="back-button-loss">
-                <FaArrowLeft /> Back to Linear Algebra
-            </button>
 
             <div className="viz-split">
                 {/* 3D Loss Landscape */}

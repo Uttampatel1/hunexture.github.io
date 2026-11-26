@@ -2,10 +2,13 @@
 // Used at runtime (RouteSeo) and at build time (scripts/prerender.js) so the
 // static HTML that crawlers fetch matches what the app renders.
 import { SITE_URL, homeFaqs } from '../data/companyData'
+import { companySummary } from '../data/facts'
 import { servicesData } from '../data/servicesData'
 import { aiData } from '../data/aiData'
 import { industriesData } from '../data/industriesData'
 import { portfolioData } from '../data/portfolioData'
+import { labStaticPages, labDynamicPages } from '../data/labSeo'
+import { insightsStaticPages, insightsDynamicPages } from '../data/insightsSeo'
 
 export const BRAND = 'Hunexture'
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`
@@ -20,7 +23,7 @@ const clip = (text, max = 158) => {
 const staticPages = {
   '/': {
     title: 'Hunexture | AI-Powered Software, Web & App Development Company',
-    description: 'Hunexture is an Ahmedabad-based software company building custom AI & ML solutions, web and mobile apps, and cloud platforms for startups and enterprises worldwide.',
+    description: companySummary,
     h1: 'AI-powered software, web and app development',
     faqs: homeFaqs,
   },
@@ -48,6 +51,12 @@ const staticPages = {
     title: 'Business Profile | Hunexture',
     description: 'Company profile of Hunexture: who we are, what we do, how we work and how to contact us in Ahmedabad, Gujarat, India.',
     h1: 'Business profile',
+  },
+  '/about/facts': {
+    title: 'Hunexture — company facts',
+    description: 'A citable fact sheet: who Hunexture is, what it builds, the industries it serves, how it works, engagement models and how to contact the team in Ahmedabad, India.',
+    h1: 'Hunexture at a glance',
+    type: 'AboutPage',
   },
   '/privacy-policy': {
     title: 'Privacy Policy | Hunexture',
@@ -111,7 +120,7 @@ const dynamicPages = () => {
       title: `${p.title} | Case Study | ${BRAND}`,
       description: clip(p.shortDescription || p.description),
       h1: p.title,
-      body: compact([{ heading: 'Challenge', items: [p.challenge].filter(Boolean) }, { heading: 'Solution', items: [p.solution].filter(Boolean) }, section('Features', p.features), section('Results', (p.results || []).map((r) => `${r.metric} ${r.label}`))]),
+      body: compact([{ heading: 'Challenge', items: [p.challenge].filter(Boolean) }, { heading: 'Solution', items: [p.solution].filter(Boolean) }, section('Features', p.features)]),
       parent: { name: 'Portfolio', path: '/portfolio' },
       type: 'Article',
     }
@@ -121,7 +130,7 @@ const dynamicPages = () => {
 
 let cache
 export const getAllSeoPages = () => {
-  if (!cache) cache = { ...staticPages, ...dynamicPages() }
+  if (!cache) cache = { ...staticPages, ...labStaticPages, ...insightsStaticPages, ...dynamicPages(), ...labDynamicPages(), ...insightsDynamicPages() }
   return cache
 }
 
@@ -148,6 +157,7 @@ export const buildJsonLd = (seo) => {
       '@id': `${SITE_URL}/#website`,
       url: `${SITE_URL}/`,
       name: BRAND,
+      publisher: { '@id': `${SITE_URL}/#organization` },
     })
   } else {
     const crumbs = [{ name: 'Home', url: `${SITE_URL}/` }]
@@ -165,6 +175,14 @@ export const buildJsonLd = (seo) => {
         url: seo.url,
         provider: { '@type': 'Organization', name: BRAND, url: SITE_URL },
         areaServed: 'Worldwide',
+      })
+    } else if (seo.type === 'AboutPage') {
+      graph.push({
+        '@type': 'AboutPage',
+        name: seo.title,
+        description: seo.description,
+        url: seo.url,
+        about: { '@id': `${SITE_URL}/#organization` },
       })
     } else if (seo.type === 'Article') {
       graph.push({

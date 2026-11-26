@@ -10,6 +10,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
+import LabTeaser from './components/LabTeaser'
 import WorkingWithUs from './components/WorkingWithUs'
 import EngagementModels from './components/EngagementModels'
 import CookieBanner from './components/CookieBanner'
@@ -31,6 +32,11 @@ const WebDevelopmentPage = lazy(() => import('./components/WebDevelopmentPage'))
 const ServicesList = lazy(() => import('./components/ServicesList'))
 const IndustriesList = lazy(() => import('./components/IndustriesList'))
 const AIList = lazy(() => import('./components/AIList'))
+const LabList = lazy(() => import('./components/LabList'))
+const LabPost = lazy(() => import('./components/LabPost'))
+const InsightsList = lazy(() => import('./components/InsightsList'))
+const InsightPost = lazy(() => import('./components/InsightPost'))
+const FactsPage = lazy(() => import('./components/FactsPage'))
 const BusinessProfile = lazy(() => import('./components/BusinessProfile'))
 const PortfolioPage = lazy(() => import('./components/PortfolioPage'))
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
@@ -47,6 +53,7 @@ const HomePage = () => (
     <Services />
     <WorkingWithUs />
     <Portfolio />
+    <LabTeaser />
     <Testimonials />
     <EngagementModels />
     <FAQ />
@@ -54,28 +61,22 @@ const HomePage = () => (
   </main>
 )
 
-// Layout wrapper: hides navbar/footer on full-screen blog posts
+// Layout wrapper: shared chrome for every route
 const Layout = ({ children }) => {
   const location = useLocation()
 
-  // Check if it's a blog post page (has slug) vs blog list page
-  const pathParts = location.pathname.split('/').filter(Boolean)
-  const isBlogPostPage = pathParts[0] === 'blog' && pathParts.length === 3 // /blog/category/slug
-
-  const showNavbar = !isBlogPostPage
-  const showFooter = !isBlogPostPage
 
   return (
     <div className="App">
       <RouteSeo />
       <RouteEffects />
       <ScrollProgress />
-      {showNavbar && <Navbar />}
+      <Navbar />
       <div key={location.pathname} className="page-enter">{children}</div>
-      {showFooter && <Footer />}
+      <Footer />
       <CookieBanner />
       <BackToTop />
-      {!isBlogPostPage && <WhatsAppFAB />}
+      <WhatsAppFAB />
     </div>
   )
 }
@@ -102,11 +103,16 @@ function App() {
             <Route path="/industries/:slug" element={<IndustryDetail />} />
             <Route path="/ai" element={<AIList />} />
             <Route path="/ai/:slug" element={<AIDetail />} />
+            <Route path="/about/facts" element={<FactsPage />} />
             <Route path="/business-profile" element={<BusinessProfile />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
-            <Route path="/blog/*" element={<Navigate to="/" replace />} />
+            <Route path="/lab" element={<LabList />} />
+            <Route path="/lab/:slug" element={<LabPost />} />
+            <Route path="/insights" element={<InsightsList />} />
+            <Route path="/insights/:slug" element={<InsightPost />} />
+            <Route path="/blog/*" element={<Navigate to="/lab" replace />} />
           </Routes>
           </Suspense>
         </Layout>

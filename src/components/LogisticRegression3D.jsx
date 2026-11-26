@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft, FaMinus, FaPlus } from 'react-icons/fa';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 import * as THREE from 'three';
+import { runViz } from './vizKit';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './LogisticRegression3D.css';
 
+const sigmoid = (z) => {
+    return 1 / (1 + Math.exp(-z));
+};
+
 const LogisticRegression3D = () => {
-    const navigate = useNavigate();
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
     const cameraRef = useRef(null);
@@ -22,11 +25,7 @@ const LogisticRegression3D = () => {
     const [mode, setMode] = useState('sigmoid');
     const [collapsed, setCollapsed] = useState(false);
 
-    const sigmoid = (z) => {
-        return 1 / (1 + Math.exp(-z));
-    };
-
-    const updateSurfaceGeometry = () => {
+    const updateSurfaceGeometry = useCallback(() => {
         if (!geometryRef.current) return;
 
         const positions = geometryRef.current.attributes.position;
@@ -49,7 +48,7 @@ const LogisticRegression3D = () => {
 
         positions.needsUpdate = true;
         geometryRef.current.computeVertexNormals();
-    };
+    }, [w1, w2, b, mode]);
 
     useEffect(() => {
         if (!mountRef.current) return;
@@ -171,36 +170,14 @@ const LogisticRegression3D = () => {
         scene.add(thresholdPlane);
         thresholdPlaneRef.current = thresholdPlane;
 
-        // Animation loop
-        const animate = () => {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        };
-        animate();
 
-        // Resize handler
-        const handleResize = () => {
-            if (!mountRef.current) return;
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        };
-        window.addEventListener('resize', handleResize);
 
-        // Initial update
-        updateSurfaceGeometry();
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            container.removeChild(renderer.domElement);
-            renderer.dispose();
-        };
+        return runViz({ container, renderer, camera, scene, controls });
     }, []);
 
     useEffect(() => {
         updateSurfaceGeometry();
-    }, [w1, w2, b, mode]);
+    }, [updateSurfaceGeometry]);
 
     useEffect(() => {
         if (thresholdPlaneRef.current) {
@@ -228,9 +205,6 @@ const LogisticRegression3D = () => {
 
     return (
         <div className="logistic-regression-container">
-            <button onClick={() => navigate('/blog/linear-algebra')} className="back-button-lr">
-                <FaArrowLeft /> Back to Linear Algebra
-            </button>
 
             <div className={`ui-container-lr ${collapsed ? 'collapsed' : ''}`}>
                 <div className="ui-header-lr">

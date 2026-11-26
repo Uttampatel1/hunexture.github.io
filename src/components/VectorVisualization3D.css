@@ -1,41 +1,17 @@
-.vector-viz-container {
+.lab-stage .vector-viz-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: #F4F6FB;
     overflow: hidden;
 }
 
-.back-button-viz {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: var(--signal);
-    color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(11, 16, 32, 0.08);
-}
-
-.back-button-viz:hover {
-    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
-}
-
-.canvas-container {
+.lab-stage .canvas-container {
     width: 100%;
     height: 100%;
 }
 
-.panel {
+.lab-stage .panel {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -49,7 +25,7 @@
     backdrop-filter: blur(10px);
 }
 
-.panel h3 {
+.lab-stage .panel h3 {
     margin-top: 0;
     margin-bottom: 15px;
     border-bottom: 1px solid #DDE2EE;
@@ -57,20 +33,20 @@
     font-size: 1.3rem;
 }
 
-.input-group {
+.lab-stage .input-group {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.input-group label {
+.lab-stage .input-group label {
     font-weight: bold;
     margin-right: 10px;
     width: 30px;
 }
 
-.input-group input[type="number"] {
+.lab-stage .input-group input[type="number"] {
     background: #FFFFFF;
     border: 1px solid #DDE2EE;
     color: #0B1020;
@@ -81,25 +57,25 @@
     transition: all 0.3s ease;
 }
 
-.input-group input[type="number"]:focus {
+.lab-stage .input-group input[type="number"]:focus {
     outline: none;
     border-color: var(--signal);
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
 }
 
-.color-x {
+.lab-stage .color-x {
     color: #FF6B5B;
 }
 
-.color-y {
+.lab-stage .color-y {
     color: #4338CA;
 }
 
-.color-z {
+.lab-stage .color-z {
     color: #6366F1;
 }
 
-.update-btn {
+.lab-stage .update-btn {
     margin-top: 15px;
     width: 100%;
     padding: 10px;
@@ -113,12 +89,12 @@
     transition: all 0.3s ease;
 }
 
-.update-btn:hover {
+.lab-stage .update-btn:hover {
     background-color: #4338CA;
     box-shadow: 0 4px 8px rgba(99, 102, 241, 0.25);
 }
 
-.instructions {
+.lab-stage .instructions {
     margin-top: 15px;
     font-size: 0.85em;
     color: #0B1020;
@@ -128,42 +104,28 @@
 }
 
 /* Responsive Design */
+
 @media (max-width: 768px) {
-    .panel {
+.lab-stage .panel {
         max-width: 250px;
         padding: 15px;
     }
 
-    .back-button-viz {
-        top: 10px;
-        right: 10px;
-        padding: 10px 16px;
-        font-size: 14px;
-    }
-
-    .panel h3 {
+.lab-stage .panel h3 {
         font-size: 1.1rem;
     }
 
-    .input-group input[type="number"] {
+.lab-stage .input-group input[type="number"] {
         width: 70px;
         padding: 6px;
     }
 }
 
 @media (max-width: 480px) {
-    .panel {
+.lab-stage .panel {
         top: 5px;
         left: 5px;
         max-width: calc(100% - 10px);
         padding: 12px;
-    }
-
-    .back-button-viz {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin: 10px;
-        width: calc(100% - 20px);
     }
 }

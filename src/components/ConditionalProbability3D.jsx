@@ -1,12 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { runViz } from './vizKit';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './ConditionalProbability3D.css';
 
+const PARTICLE_COUNT = 3000;
+const CUBE_SIZE = 40;
+
+const COLOR_NEITHER = new THREE.Color(0xA3ABC2);
+const COLOR_A = new THREE.Color(0xFF6B5B);
+const COLOR_B = new THREE.Color(0x6366F1);
+const COLOR_INTERSECTION = new THREE.Color(0x2DE0A7);
+
 const ConditionalProbability3D = () => {
-    const navigate = useNavigate();
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
     const cameraRef = useRef(null);
@@ -20,14 +26,6 @@ const ConditionalProbability3D = () => {
 
     const [currentState, setCurrentState] = useState(0);
     const [counts, setCounts] = useState({ total: 0, A: 0, B: 0, A_and_B: 0 });
-
-    const PARTICLE_COUNT = 3000;
-    const CUBE_SIZE = 40;
-
-    const COLOR_NEITHER = new THREE.Color(0xA3ABC2);
-    const COLOR_A = new THREE.Color(0xFF6B5B);
-    const COLOR_B = new THREE.Color(0x6366F1);
-    const COLOR_INTERSECTION = new THREE.Color(0x2DE0A7);
 
     useEffect(() => {
         if (!mountRef.current) return;
@@ -179,31 +177,12 @@ const ConditionalProbability3D = () => {
         pDataRef.current = pData;
         setCounts({ total: countTotal, A: countA, B: countB, A_and_B: countAB });
 
-        // Animation loop
-        const animate = () => {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        };
-        animate();
 
-        // Resize handler
-        const handleResize = () => {
-            if (!mountRef.current) return;
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        };
-        window.addEventListener('resize', handleResize);
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            container.removeChild(renderer.domElement);
-            renderer.dispose();
-        };
+        return runViz({ container, renderer, camera, scene, controls });
     }, []);
 
-    const animateTransition = (targetColors, targetSizes) => {
+    const animateTransition = useCallback((targetColors, targetSizes) => {
         const duration = 60;
         let frame = 0;
 
@@ -242,9 +221,9 @@ const ConditionalProbability3D = () => {
             }
         };
         step();
-    };
+    }, []);
 
-    const updateVisualization = (state) => {
+    const updateVisualization = useCallback((state) => {
         if (!geometryRef.current || !controlsRef.current) return;
 
         const targetColors = [];
@@ -317,14 +296,16 @@ const ConditionalProbability3D = () => {
                     }
                 }
                 break;
+            default:
+                break;
         }
 
         animateTransition(targetColors, targetSizes);
-    };
+    }, [animateTransition]);
 
     useEffect(() => {
         updateVisualization(currentState);
-    }, [currentState]);
+    }, [currentState, updateVisualization]);
 
     const getExplanation = () => {
         switch (currentState) {
@@ -353,6 +334,8 @@ const ConditionalProbability3D = () => {
                     text: 'Within our new universe (B), we look for outcomes that are also A.\nThese are the Purple dots (Intersection A ∩ B).',
                     math: `P(A|B) = Count(A ∩ B) / Count(B)\nP(A|B) = ${counts.A_and_B} / ${counts.B}\nP(A|B) = ${prob}`
                 };
+            default:
+                return { title: '', text: '', math: '' };
         }
     };
 
@@ -360,9 +343,6 @@ const ConditionalProbability3D = () => {
 
     return (
         <div className="cond-prob-container">
-            <button onClick={() => navigate('/blog/linear-algebra')} className="back-button-cp">
-                <FaArrowLeft /> Back to Linear Algebra
-            </button>
 
             <div ref={mountRef} className="canvas-container-cp" />
 

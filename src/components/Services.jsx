@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { servicesData } from '../data/servicesData'
+import { servicesNav as servicesData } from '../data/navIndex'
 import './Services.css'
 
 const Services = () => (

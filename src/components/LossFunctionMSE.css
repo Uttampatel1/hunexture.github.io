@@ -1,7 +1,7 @@
-.loss-function-container {
+.lab-stage .loss-function-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: #F4F6FB;
     color: #0B1020;
     display: flex;
@@ -9,64 +9,41 @@
     overflow: hidden;
 }
 
-.back-button-loss {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: var(--signal);
-    color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(11, 16, 32, 0.08);
-}
-
-.back-button-loss:hover {
-    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
-}
-
 /* Split View Layout */
-.viz-split {
+
+.lab-stage .viz-split {
     display: flex;
     flex: 1;
     height: 60%;
     position: relative;
 }
 
-.view-3d {
+.lab-stage .view-3d {
     flex: 2;
     position: relative;
     background: #F4F6FB;
     overflow: hidden;
 }
 
-.canvas-3d {
+.lab-stage .canvas-3d {
     width: 100%;
     height: 100%;
 }
 
-.view-2d {
+.lab-stage .view-2d {
     flex: 1;
     position: relative;
     background: #FFFFFF;
     border-left: 1px solid #DDE2EE;
 }
 
-.canvas-2d {
+.lab-stage .canvas-2d {
     display: block;
     width: 100%;
     height: 100%;
 }
 
-.view-label {
+.lab-stage .view-label {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -79,7 +56,8 @@
 }
 
 /* Controls Area */
-.controls-loss {
+
+.lab-stage .controls-loss {
     height: auto;
     min-height: 200px;
     background: #FFFFFF;
@@ -90,11 +68,11 @@
     gap: 32px;
 }
 
-.controls-left {
+.lab-stage .controls-left {
     flex: 1;
 }
 
-.controls-right {
+.lab-stage .controls-right {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -102,45 +80,45 @@
     gap: 16px;
 }
 
-.controls-loss h1 {
+.lab-stage .controls-loss h1 {
     font-size: 1.25rem;
     font-weight: bold;
     color: #4338CA;
     margin-bottom: 0.5rem;
 }
 
-.controls-loss p {
+.lab-stage .controls-loss p {
     color: #6B7389;
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
 
-.slider-group-loss {
+.lab-stage .slider-group-loss {
     margin-bottom: 15px;
 }
 
-.slider-header {
+.lab-stage .slider-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
 }
 
-.slider-header label {
+.lab-stage .slider-header label {
     font-size: 0.9rem;
     color: #0B1020;
 }
 
-.val-w {
+.lab-stage .val-w {
     color: #4338CA;
     font-weight: bold;
 }
 
-.val-b {
+.lab-stage .val-b {
     color: #4338CA;
     font-weight: bold;
 }
 
-.slider-group-loss input[type="range"] {
+.lab-stage .slider-group-loss input[type="range"] {
     width: 100%;
     cursor: pointer;
     accent-color: #6366F1;
@@ -149,7 +127,7 @@
     background: #FFFFFF;
 }
 
-.slider-group-loss input[type="range"]::-webkit-slider-thumb {
+.lab-stage .slider-group-loss input[type="range"]::-webkit-slider-thumb {
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -157,7 +135,7 @@
     cursor: pointer;
 }
 
-.slider-group-loss input[type="range"]::-moz-range-thumb {
+.lab-stage .slider-group-loss input[type="range"]::-moz-range-thumb {
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -167,7 +145,8 @@
 }
 
 /* Stat Box */
-.stat-box {
+
+.lab-stage .stat-box {
     background: #FFFFFF;
     padding: 16px;
     border-radius: var(--radius-lg);
@@ -175,54 +154,56 @@
     border: 1px solid #DDE2EE;
 }
 
-.stat-value {
+.lab-stage .stat-value {
     font-size: 2rem;
     font-weight: bold;
     color: #FF6B5B;
 }
 
-.stat-label {
+.lab-stage .stat-label {
     font-size: 0.8rem;
     color: #0B1020;
     margin-top: 4px;
 }
 
 /* Instructions */
-.instructions-loss {
+
+.lab-stage .instructions-loss {
     font-size: 0.75rem;
     color: #6B7389;
 }
 
-.instructions-loss ul {
+.lab-stage .instructions-loss ul {
     list-style: disc;
     padding-left: 20px;
     margin: 0;
 }
 
-.instructions-loss li {
+.lab-stage .instructions-loss li {
     margin-bottom: 8px;
     line-height: 1.4;
 }
 
-.instructions-loss strong {
+.lab-stage .instructions-loss strong {
     color: #0B1020;
 }
 
 /* Responsive Design */
+
 @media (max-width: 1024px) {
-    .viz-split {
+.lab-stage .viz-split {
         flex-direction: column;
         height: 50%;
     }
 
-    .view-3d,
-    .view-2d {
+.lab-stage .view-3d,
+.lab-stage .view-2d {
         flex: 1;
         border-left: none;
         border-bottom: 1px solid #DDE2EE;
     }
 
-    .controls-loss {
+.lab-stage .controls-loss {
         flex-direction: column;
         gap: 16px;
         min-height: auto;
@@ -230,62 +211,47 @@
 }
 
 @media (max-width: 768px) {
-    .back-button-loss {
-        top: 10px;
-        right: 10px;
-        padding: 10px 16px;
-        font-size: 14px;
-    }
-
-    .controls-loss {
+.lab-stage .controls-loss {
         padding: 15px;
     }
 
-    .controls-loss h1 {
+.lab-stage .controls-loss h1 {
         font-size: 1.1rem;
     }
 
-    .controls-loss p {
+.lab-stage .controls-loss p {
         font-size: 0.85rem;
     }
 
-    .stat-value {
+.lab-stage .stat-value {
         font-size: 1.5rem;
     }
 
-    .view-label {
+.lab-stage .view-label {
         font-size: 0.7rem;
         padding: 3px 6px;
     }
 }
 
 @media (max-width: 480px) {
-    .viz-split {
+.lab-stage .viz-split {
         height: 40%;
     }
 
-    .controls-loss {
+.lab-stage .controls-loss {
         padding: 12px;
         min-height: auto;
     }
 
-    .back-button-loss {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin: 10px;
-        width: calc(100% - 20px);
-    }
-
-    .stat-box {
+.lab-stage .stat-box {
         padding: 12px;
     }
 
-    .stat-value {
+.lab-stage .stat-value {
         font-size: 1.25rem;
     }
 
-    .instructions-loss {
+.lab-stage .instructions-loss {
         font-size: 0.7rem;
     }
 }

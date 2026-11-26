@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { getSeoForPath, buildJsonLd } from '../seo/seoMeta'
+// seoMeta pulls in every data file, so load it on demand to keep it out of the main bundle.
+let seoPromise
+const loadSeo = () => (seoPromise ||= import('../seo/seoMeta'))
 
 const setMeta = (name, value, attr = 'name') => {
   let el = document.head.querySelector(`meta[${attr}="${name}"]`)
@@ -17,6 +19,9 @@ const RouteSeo = () => {
   const { pathname } = useLocation()
 
   useEffect(() => {
+    let cancelled = false
+    loadSeo().then(({ getSeoForPath, buildJsonLd }) => {
+    if (cancelled) return
     const seo = getSeoForPath(pathname)
     if (!seo) {
       setMeta('robots', 'noindex, follow')
@@ -47,6 +52,8 @@ const RouteSeo = () => {
       document.head.appendChild(ld)
     }
     ld.textContent = JSON.stringify(buildJsonLd(seo))
+    })
+    return () => { cancelled = true }
   }, [pathname])
 
   return null

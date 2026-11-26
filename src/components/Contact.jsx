@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaInstagram, FaWhatsapp } from 'react-icons/fa'
 import { contactDetails } from '../data/companyData'
+import { trackEvent } from '../utils/analytics'
 import './Contact.css'
+
+const FORM_ID = process.env.REACT_APP_FORMSUBMIT_ID
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +17,9 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const [errors, setErrors] = useState({})
+  const mountedAt = useRef(Date.now())
+  const honeyRef = useRef(null)
 
   const { whatsappNumber } = contactDetails
 
@@ -25,11 +32,26 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    const nextErrors = {}
+    if (!EMAIL_RE.test(formData.email.trim())) nextErrors.email = 'Please enter a valid email address.'
+    if (formData.message.trim().length < 10) nextErrors.message = 'Please enter a message of at least 10 characters.'
+    setErrors(nextErrors)
+    if (Object.keys(nextErrors).length) return
+
+    // Spam protection: honeypot filled or submitted implausibly fast -> pretend success
+    if ((honeyRef.current && honeyRef.current.value) || Date.now() - mountedAt.current < 3000) {
+      setSubmitSuccess(true)
+      setSubmitError('')
+      setFormData({ name: '', email: '', subject: '', message: '' })
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
       // Using FormSubmit.co - a free form backend service
-      const response = await fetch(`https://formsubmit.co/${contactDetails.email}`, {
+      const response = await fetch(`https://formsubmit.co/ajax/${FORM_ID || contactDetails.email}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,9 +68,15 @@ const Contact = () => {
         })
       })
 
-      if (response.ok) {
+      // formsubmit's AJAX endpoint can return 200 with { success: "false" }
+      // (e.g. form not activated yet), so check the body too.
+      const result = await response.json().catch(() => ({}))
+      const accepted = response.ok && String(result.success) !== 'false'
+
+      if (accepted) {
         setSubmitSuccess(true)
         setSubmitError('')
+        trackEvent('contact_submit')
         setFormData({ name: '', email: '', subject: '', message: '' })
       } else {
         throw new Error('Form submission failed')
@@ -64,6 +92,7 @@ const Contact = () => {
   const handleWhatsApp = () => {
     const text = `Hi! I'm ${formData.name || 'interested in your services'}.\n\nSubject: ${formData.subject || 'General Inquiry'}\n\nMessage: ${formData.message || 'I would like to know more about your services.'}`
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`
+    trackEvent('whatsapp_click')
     window.open(url, '_blank')
   }
 
@@ -163,7 +192,17 @@ const Contact = () => {
               </button>
             </div>
           ) : (
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form className="contact-form" onSubmit={handleSubmit} noValidate>
+            <input
+              type="text"
+              name="_honey"
+              ref={honeyRef}
+              className="hp-field"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              defaultValue=""
+            />
             <div className="form-group">
               <label htmlFor="name">Your name</label>
               <input
@@ -186,9 +225,13 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                aria-invalid={errors.email ? 'true' : undefined}
+                aria-describedby={errors.email ? 'email-error' : undefined}
                 placeholder="you@company.com"
               />
             </div>
+
+            {errors.email && <p className="field-error" id="email-error" role="alert">{errors.email}</p>}
 
             <div className="form-group">
               <label htmlFor="subject">Subject <span className="field-optional">(optional)</span></label>
@@ -210,10 +253,14 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 required
+                aria-invalid={errors.message ? 'true' : undefined}
+                aria-describedby={errors.message ? 'message-error' : undefined}
                 rows="6"
                 placeholder="Tell us about your project..."
               ></textarea>
             </div>
+
+            {errors.message && <p className="field-error" id="message-error" role="alert">{errors.message}</p>}
 
             {submitError && (
               <p className="form-error" role="alert">{submitError}</p>

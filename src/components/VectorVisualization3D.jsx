@@ -1,12 +1,36 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { runViz } from './vizKit';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './VectorVisualization3D.css';
 
+// Text Label Function
+const makeTextSprite = (message, parameters = {}) => {
+    const fontface = parameters.fontface || "Arial";
+    const fontsize = parameters.fontsize || 24;
+    const borderThickness = parameters.borderThickness || 4;
+    const backgroundColor = parameters.backgroundColor || { r: 255, g: 255, b: 255, a: 1.0 };
+
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    context.font = "Bold " + fontsize + "px " + fontface;
+
+    const metrics = context.measureText(message);
+    const textWidth = metrics.width;
+
+    context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+    context.fillStyle = "#0B1020";
+    context.fillText(message, borderThickness, fontsize + borderThickness);
+
+    const texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+    const sprite = new THREE.Sprite(spriteMaterial);
+    sprite.scale.set(textWidth / 3, fontsize / 1.5, 1.0);
+    return sprite;
+};
+
 const VectorVisualization3D = () => {
-    const navigate = useNavigate();
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
     const cameraRef = useRef(null);
@@ -21,34 +45,8 @@ const VectorVisualization3D = () => {
     const [vectorY, setVectorY] = useState(20);
     const [vectorZ, setVectorZ] = useState(30);
 
-    // Text Label Function
-    const makeTextSprite = (message, parameters = {}) => {
-        const fontface = parameters.fontface || "Arial";
-        const fontsize = parameters.fontsize || 24;
-        const borderThickness = parameters.borderThickness || 4;
-        const backgroundColor = parameters.backgroundColor || { r: 255, g: 255, b: 255, a: 1.0 };
-
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        context.font = "Bold " + fontsize + "px " + fontface;
-
-        const metrics = context.measureText(message);
-        const textWidth = metrics.width;
-
-        context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
-        context.fillStyle = "#0B1020";
-        context.fillText(message, borderThickness, fontsize + borderThickness);
-
-        const texture = new THREE.Texture(canvas);
-        texture.needsUpdate = true;
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-        const sprite = new THREE.Sprite(spriteMaterial);
-        sprite.scale.set(textWidth / 3, fontsize / 1.5, 1.0);
-        return sprite;
-    };
-
     // Update Vector Function
-    const updateVector = (x, y, z) => {
+    const updateVector = useCallback((x, y, z) => {
         const scene = sceneRef.current;
         if (!scene) return;
 
@@ -73,8 +71,8 @@ const VectorVisualization3D = () => {
         scene.add(arrowHelperRef.current);
 
         // Remove old projection lines
-        if (lineFloorRef.current) scene.remove(lineFloorRef.current);
-        if (lineVertRef.current) scene.remove(lineVertRef.current);
+        if (lineFloorRef.current) { scene.remove(lineFloorRef.current); lineFloorRef.current.geometry.dispose(); }
+        if (lineVertRef.current) { scene.remove(lineVertRef.current); lineVertRef.current.geometry.dispose(); }
 
         // Floor Line
         const materialLine = new THREE.LineBasicMaterial({
@@ -103,7 +101,7 @@ const VectorVisualization3D = () => {
         scene.add(lineVertRef.current);
 
         // Remove old labels
-        labelsRef.current.forEach(l => scene.remove(l));
+        labelsRef.current.forEach(l => { scene.remove(l); l.material.map?.dispose(); l.material.dispose(); });
         labelsRef.current = [];
 
         // Add new labels
@@ -119,7 +117,7 @@ const VectorVisualization3D = () => {
         if (Math.abs(x) > 1) addLabel(`X: ${x}`, new THREE.Vector3(x / 2, 2, 0), { r: 100, g: 0, b: 0, a: 0.6 });
         if (Math.abs(z) > 1) addLabel(`Z: ${z}`, new THREE.Vector3(0, 2, z / 2), { r: 0, g: 0, b: 100, a: 0.6 });
         if (Math.abs(y) > 1) addLabel(`Y: ${y}`, new THREE.Vector3(x, y / 2, z), { r: 0, g: 100, b: 0, a: 0.6 });
-    };
+    }, []);
 
     useEffect(() => {
         if (!mountRef.current) return;
@@ -166,37 +164,16 @@ const VectorVisualization3D = () => {
         dirLight.position.set(50, 50, 50);
         scene.add(dirLight);
 
-        // Initial vector
-        updateVector(vectorX, vectorY, vectorZ);
 
-        // Animation Loop
-        const animate = () => {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        };
-        animate();
 
-        // Handle resize
-        const handleResize = () => {
-            if (!mountRef.current) return;
-            camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
-        };
-        window.addEventListener('resize', handleResize);
 
         // Cleanup
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            mountRef.current?.removeChild(renderer.domElement);
-            renderer.dispose();
-        };
+        return runViz({ container: mountRef.current, renderer, camera, scene, controls });
     }, []);
 
     useEffect(() => {
         updateVector(vectorX, vectorY, vectorZ);
-    }, [vectorX, vectorY, vectorZ]);
+    }, [updateVector, vectorX, vectorY, vectorZ]);
 
     const handleUpdate = () => {
         updateVector(vectorX, vectorY, vectorZ);
@@ -204,9 +181,6 @@ const VectorVisualization3D = () => {
 
     return (
         <div className="vector-viz-container">
-            <button onClick={() => navigate('/blog/linear-algebra')} className="back-button-viz">
-                <FaArrowLeft /> Back to Linear Algebra
-            </button>
 
             <div className="panel">
                 <h3>Vector Config</h3>

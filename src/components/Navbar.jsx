@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { FaChevronDown } from 'react-icons/fa'
 import Logo from './Logo'
-import { industriesData } from '../data/industriesData'
-import { aiData } from '../data/aiData'
+import { industriesNav as industriesData } from '../data/navIndex'
+import { aiNav as aiData } from '../data/navIndex'
 import { companyStats, formatStat, getStat } from '../data/companyData'
 import './Navbar.css'
 
@@ -100,6 +100,8 @@ const Navbar = () => {
   const isActive = (name) => {
     if (name === 'industries') return path.startsWith('/industries')
     if (name === 'ai') return path.startsWith('/ai')
+    if (name === 'lab') return path.startsWith('/lab')
+    if (name === 'insights') return path.startsWith('/insights')
     if (name === 'portfolio') return path.startsWith('/portfolio')
     return path === '/' && activeSection === name
   }
@@ -315,6 +317,26 @@ const Navbar = () => {
             </div>
           </div>
 
+
+          {/* Lab */}
+          <a
+            href="/lab"
+            className={linkClass('lab')}
+            {...activeProps('lab')}
+            onClick={(e) => { e.preventDefault(); closeAll(); navigate('/lab') }}
+          >
+            Lab
+          </a>
+
+          {/* Insights (mobile menu only: desktop nav is already full) */}
+          <a
+            href="/insights"
+            className={linkClass('insights', 'nav-link--mobile-only')}
+            {...activeProps('insights')}
+            onClick={(e) => { e.preventDefault(); closeAll(); navigate('/insights') }}
+          >
+            Insights
+          </a>
 
           {/* Portfolio */}
           <a

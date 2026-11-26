@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { portfolioData } from '../data/portfolioData'
+import { portfolioNav as portfolioData } from '../data/navIndex'
 import CoverArt from './CoverArt'
 import './Portfolio.css'
 

@@ -1,44 +1,21 @@
-.logistic-regression-container {
+.lab-stage .logistic-regression-container {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background-color: #F4F6FB;
     color: #0B1020;
     font-family: var(--font-body);
     overflow: hidden;
 }
 
-.back-button-lr {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: var(--signal);
-    color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(11, 16, 32, 0.08);
-}
-
-.back-button-lr:hover {
-    background: #4338CA; box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
-}
-
-.canvas-container-lr {
+.lab-stage .canvas-container-lr {
     width: 100%;
     height: 100%;
 }
 
 /* UI Container */
-.ui-container-lr {
+
+.lab-stage .ui-container-lr {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -53,18 +30,18 @@
     z-index: 100;
 }
 
-.ui-container-lr.collapsed {
+.lab-stage .ui-container-lr.collapsed {
     width: auto;
     padding-bottom: 10px;
 }
 
-.ui-container-lr.collapsed .ui-header-lr {
+.lab-stage .ui-container-lr.collapsed .ui-header-lr {
     margin-bottom: 0;
     border-bottom: none;
     padding-bottom: 0;
 }
 
-.ui-header-lr {
+.lab-stage .ui-header-lr {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -73,13 +50,13 @@
     margin-bottom: 15px;
 }
 
-.ui-header-lr h2 {
+.lab-stage .ui-header-lr h2 {
     margin: 0;
     font-size: 1.2rem;
     color: #4338CA;
 }
 
-.toggle-ui-lr {
+.lab-stage .toggle-ui-lr {
     background: transparent;
     border: none;
     color: #4338CA;
@@ -96,12 +73,12 @@
     transition: all 0.2s;
 }
 
-.toggle-ui-lr:hover {
+.lab-stage .toggle-ui-lr:hover {
     background: #E9EDF6;
     color: #0B1020;
 }
 
-.ui-content-lr h3 {
+.lab-stage .ui-content-lr h3 {
     font-size: 0.9rem;
     color: #6B7389;
     margin-top: 15px;
@@ -110,37 +87,38 @@
     letter-spacing: 1px;
 }
 
-.control-group-lr {
+.lab-stage .control-group-lr {
     margin-bottom: 15px;
 }
 
-.control-group-lr label {
+.lab-stage .control-group-lr label {
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
     margin-bottom: 5px;
 }
 
-.value-display-lr {
+.lab-stage .value-display-lr {
     color: #4338CA;
     font-weight: bold;
     font-family: var(--font-annot);
 }
 
-.control-group-lr input[type="range"] {
+.lab-stage .control-group-lr input[type="range"] {
     width: 100%;
     cursor: pointer;
     accent-color: #6366F1;
 }
 
 /* Button Group */
-.btn-group-lr {
+
+.lab-stage .btn-group-lr {
     display: flex;
     gap: 10px;
     margin-top: 15px;
 }
 
-.btn-group-lr button {
+.lab-stage .btn-group-lr button {
     flex: 1;
     padding: 8px;
     background: #FFFFFF;
@@ -152,11 +130,11 @@
     font-size: 0.85rem;
 }
 
-.btn-group-lr button:hover {
+.lab-stage .btn-group-lr button:hover {
     background: #E9EDF6;
 }
 
-.btn-group-lr button.active {
+.lab-stage .btn-group-lr button.active {
     background: #6366F1;
     border-color: #6366F1;
     color: #FFFFFF;
@@ -164,7 +142,8 @@
 }
 
 /* Legend */
-.legend-lr {
+
+.lab-stage .legend-lr {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -172,31 +151,32 @@
     font-size: 0.8rem;
 }
 
-.legend-lr div {
+.lab-stage .legend-lr div {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.dot-lr {
+.lab-stage .dot-lr {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     display: inline-block;
 }
 
-.dot-red {
+.lab-stage .dot-red {
     background: #6366F1;
     box-shadow: none;
 }
 
-.dot-blue {
+.lab-stage .dot-blue {
     background: #2DE0A7;
     box-shadow: none;
 }
 
 /* Tooltip */
-.tooltip-lr {
+
+.lab-stage .tooltip-lr {
     position: absolute;
     bottom: 20px;
     left: 20px;
@@ -211,25 +191,19 @@
     z-index: 50;
 }
 
-.tooltip-lr strong {
+.lab-stage .tooltip-lr strong {
     color: #4338CA;
 }
 
 /* Responsive */
+
 @media (max-width: 768px) {
-    .ui-container-lr {
+.lab-stage .ui-container-lr {
         width: 280px;
         padding: 15px;
     }
 
-    .back-button-lr {
-        top: 10px;
-        left: 10px;
-        padding: 10px 16px;
-        font-size: 14px;
-    }
-
-    .tooltip-lr {
+.lab-stage .tooltip-lr {
         bottom: 10px;
         left: 10px;
         max-width: calc(100% - 20px);
@@ -238,22 +212,14 @@
 }
 
 @media (max-width: 480px) {
-    .ui-container-lr {
+.lab-stage .ui-container-lr {
         top: auto;
         bottom: 10px;
         right: 10px;
         width: calc(100% - 20px);
     }
 
-    .back-button-lr {
-        position: relative;
-        top: auto;
-        left: auto;
-        margin: 10px;
-        width: calc(100% - 20px);
-    }
-
-    .tooltip-lr {
+.lab-stage .tooltip-lr {
         position: relative;
         bottom: auto;
         left: auto;

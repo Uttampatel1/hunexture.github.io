@@ -1,12 +1,50 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { runViz } from './vizKit';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './DotProduct3D.css';
 
+// Text Label Function
+const makeTextSprite = (message, parameters = {}) => {
+    const fontface = parameters.fontface || "Arial";
+    const fontsize = parameters.fontsize || 24;
+    const borderThickness = parameters.borderThickness || 4;
+    const backgroundColor = parameters.backgroundColor || { r: 255, g: 255, b: 255, a: 1.0 };
+
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    context.font = "Bold " + fontsize + "px " + fontface;
+    const metrics = context.measureText(message);
+    const textWidth = metrics.width;
+
+    context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+    context.fillStyle = "#0B1020";
+    context.fillText(message, borderThickness, fontsize + borderThickness);
+
+    const texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+    const sprite = new THREE.Sprite(spriteMaterial);
+    sprite.scale.set(textWidth / 3, fontsize / 1.5, 1.0);
+    return sprite;
+};
+
+const createArrow = (x, y, z, color) => {
+    const origin = new THREE.Vector3(0, 0, 0);
+    const dest = new THREE.Vector3(x, y, z);
+    const length = dest.length();
+    const direction = length > 0 ? dest.clone().normalize() : new THREE.Vector3(0, 1, 0);
+    return new THREE.ArrowHelper(
+        direction,
+        origin,
+        length,
+        color,
+        Math.min(length * 0.2, 10),
+        Math.min(length * 0.1, 5)
+    );
+};
+
 const DotProduct3D = () => {
-    const navigate = useNavigate();
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
     const cameraRef = useRef(null);
@@ -31,48 +69,8 @@ const DotProduct3D = () => {
     const [angle, setAngle] = useState(0);
     const [meaning, setMeaning] = useState({ text: '', color: '#6B7389' });
 
-    // Text Label Function
-    const makeTextSprite = (message, parameters = {}) => {
-        const fontface = parameters.fontface || "Arial";
-        const fontsize = parameters.fontsize || 24;
-        const borderThickness = parameters.borderThickness || 4;
-        const backgroundColor = parameters.backgroundColor || { r: 255, g: 255, b: 255, a: 1.0 };
-
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        context.font = "Bold " + fontsize + "px " + fontface;
-        const metrics = context.measureText(message);
-        const textWidth = metrics.width;
-
-        context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
-        context.fillStyle = "#0B1020";
-        context.fillText(message, borderThickness, fontsize + borderThickness);
-
-        const texture = new THREE.Texture(canvas);
-        texture.needsUpdate = true;
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-        const sprite = new THREE.Sprite(spriteMaterial);
-        sprite.scale.set(textWidth / 3, fontsize / 1.5, 1.0);
-        return sprite;
-    };
-
-    const createArrow = (x, y, z, color) => {
-        const origin = new THREE.Vector3(0, 0, 0);
-        const dest = new THREE.Vector3(x, y, z);
-        const length = dest.length();
-        const direction = length > 0 ? dest.clone().normalize() : new THREE.Vector3(0, 1, 0);
-        return new THREE.ArrowHelper(
-            direction,
-            origin,
-            length,
-            color,
-            Math.min(length * 0.2, 10),
-            Math.min(length * 0.1, 5)
-        );
-    };
-
     // Update Vector Function
-    const updateVector = () => {
+    const updateVector = useCallback(() => {
         const scene = sceneRef.current;
         if (!scene) return;
 
@@ -124,7 +122,7 @@ const DotProduct3D = () => {
         labelB.position.copy(vecB).multiplyScalar(1.1);
         scene.add(labelB);
         labelsRef.current.push(labelB);
-    };
+    }, [ax, ay, az, bx, by, bz]);
 
     useEffect(() => {
         if (!mountRef.current) return;
@@ -171,43 +169,16 @@ const DotProduct3D = () => {
         dirLight.position.set(50, 50, 50);
         scene.add(dirLight);
 
-        // Initial vector
-        updateVector();
-
-        // Animation Loop
-        const animate = () => {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        };
-        animate();
-
-        // Handle resize
-        const handleResize = () => {
-            if (!mountRef.current) return;
-            camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
-        };
-        window.addEventListener('resize', handleResize);
-
         // Cleanup
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            mountRef.current?.removeChild(renderer.domElement);
-            renderer.dispose();
-        };
+        return runViz({ container: mountRef.current, renderer, camera, scene, controls });
     }, []);
 
     useEffect(() => {
         updateVector();
-    }, [ax, ay, az, bx, by, bz]);
+    }, [updateVector]);
 
     return (
         <div className="dot-product-container">
-            <button onClick={() => navigate('/blog/linear-algebra')} className="back-button-dot">
-                <FaArrowLeft /> Back to Linear Algebra
-            </button>
 
             <div className="panel-dot">
                 <h3>Dot Product Visualizer</h3>

@@ -39,7 +39,7 @@ export const blogData = {
                 slug: 'loss-function-mse',
                 description: 'Understand Mean Squared Error through interactive 3D loss landscape and 2D regression visualization. Adjust parameters to minimize the error.',
                 date: '2026-01-04',
-                category: 'Linear Algebra',
+                category: 'Machine Learning',
                 tags: ['loss function', 'MSE', 'machine learning', 'optimization'],
                 component: 'LossFunctionMSE'
             },
@@ -49,7 +49,7 @@ export const blogData = {
                 slug: 'gradient-descent',
                 description: 'Watch gradient descent in action! See how the algorithm automatically finds the minimum of the loss function by following the gradient downhill.',
                 date: '2026-01-04',
-                category: 'Linear Algebra',
+                category: 'Machine Learning',
                 tags: ['gradient descent', 'optimization', 'machine learning', 'animation'],
                 component: 'GradientDescentVisualizer'
             },
@@ -59,7 +59,7 @@ export const blogData = {
                 slug: 'gradient-descent-3d',
                 description: 'Advanced gradient descent visualization showing the critical importance of data normalization. Toggle between normalized and unnormalized data to see the dramatic effects!',
                 date: '2026-01-04',
-                category: 'Linear Algebra',
+                category: 'Machine Learning',
                 tags: ['gradient descent', 'normalization', 'data scaling', 'machine learning'],
                 component: 'GradientDescent3D'
             },
@@ -69,7 +69,7 @@ export const blogData = {
                 slug: 'conditional-probability-3d',
                 description: 'Understand conditional probability P(A|B) through an interactive 3D particle system. Step through the logic of restricting sample spaces.',
                 date: '2026-01-04',
-                category: 'Linear Algebra',
+                category: 'Probability',
                 tags: ['conditional probability', 'probability', 'statistics', '3d visualization'],
                 component: 'ConditionalProbability3D'
             },
@@ -79,7 +79,7 @@ export const blogData = {
                 slug: 'logistic-regression-3d',
                 description: 'Explore logistic regression in 3D! See how the sigmoid function creates a decision boundary. Compare linear vs sigmoid modes and understand why logistic regression works for classification.',
                 date: '2026-01-04',
-                category: 'Linear Algebra',
+                category: 'Machine Learning',
                 tags: ['logistic regression', 'sigmoid', 'classification', 'machine learning'],
                 component: 'LogisticRegression3D'
             }
@@ -87,22 +87,25 @@ export const blogData = {
     }
 };
 
+const slugify = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+// Flat list of Lab posts, each tagged with its category slug.
 export const getAllBlogPosts = () => {
-    const allPosts = [];
-    Object.keys(blogData).forEach(category => {
-        blogData[category].posts.forEach(post => {
-            allPosts.push({ ...post, categorySlug: category });
-        });
+    const all = [];
+    Object.keys(blogData).forEach((key) => {
+        blogData[key].posts.forEach((post) => all.push({ ...post, categorySlug: slugify(post.category) }));
     });
-    return allPosts;
+    return all;
 };
 
-export const getBlogPostBySlug = (categorySlug, postSlug) => {
-    const category = blogData[categorySlug];
-    if (!category) return null;
-    return category.posts.find(post => post.slug === postSlug);
+export const getLabPost = (slug) => getAllBlogPosts().find((p) => p.slug === slug) || null;
+
+export const getLabCategories = () => {
+    const posts = getAllBlogPosts();
+    const seen = new Map();
+    posts.forEach((p) => seen.set(p.categorySlug, { slug: p.categorySlug, name: p.category, count: (seen.get(p.categorySlug)?.count || 0) + 1 }));
+    return [...seen.values()];
 };
 
-export const getBlogCategory = (categorySlug) => {
-    return blogData[categorySlug] || null;
-};
+export const getBlogPostBySlug = (categorySlug, postSlug) => getLabPost(postSlug);
+export const getBlogCategory = (categorySlug) => blogData[categorySlug] || null;

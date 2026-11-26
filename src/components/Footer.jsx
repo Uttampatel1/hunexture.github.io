@@ -56,6 +56,8 @@ const Footer = () => {
       { name: 'Portfolio', href: 'portfolio' },
       { name: 'Industries', href: 'industries' },
       { name: 'AI & Machine Learning', href: 'ai' },
+      { name: 'Lab', href: 'lab' },
+      { name: 'Insights', href: 'insights' },
       { name: 'Contact', href: '#contact' }
     ],
     services: [
@@ -68,6 +70,7 @@ const Footer = () => {
     ],
     legal: [
       { name: 'Business Profile', href: 'business-profile' },
+      { name: 'Company facts', href: 'about/facts' },
       { name: 'Privacy Policy', href: 'privacy-policy' },
       { name: 'Terms of Service', href: 'terms-of-service' },
       { name: 'Cookie Policy', href: 'cookie-policy' },

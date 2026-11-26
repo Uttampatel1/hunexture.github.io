@@ -1,41 +1,17 @@
-.matrix-transform-container {
+.lab-stage .matrix-transform-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: #F4F6FB;
     overflow: hidden;
 }
 
-.back-button-matrix {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: var(--signal);
-    color: #FFFFFF;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(11, 16, 32, 0.08);
-}
-
-.back-button-matrix:hover {
-    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
-}
-
-.canvas-container-matrix {
+.lab-stage .canvas-container-matrix {
     width: 100%;
     height: 100%;
 }
 
-.panel-matrix {
+.lab-stage .panel-matrix {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -46,14 +22,14 @@
     max-width: 340px;
     min-width: 260px;
     box-shadow: 0 4px 6px rgba(11, 16, 32, 0.08);
-    max-height: 90vh;
+    max-height: calc(100% - 20px);
     overflow-y: auto;
     z-index: 100;
     backdrop-filter: blur(10px);
     transition: height 0.3s ease;
 }
 
-.header-row {
+.lab-stage .header-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -62,13 +38,13 @@
     margin-bottom: 10px;
 }
 
-.header-row h3 {
+.lab-stage .header-row h3 {
     margin: 0;
     font-size: 1.1em;
     user-select: none;
 }
 
-.min-btn {
+.lab-stage .min-btn {
     background: #FFFFFF;
     border: 1px solid #DDE2EE;
     color: #0B1020;
@@ -84,16 +60,16 @@
     transition: all 0.2s;
 }
 
-.min-btn:hover {
+.lab-stage .min-btn:hover {
     background: #E9EDF6;
     border-color: #DDE2EE;
 }
 
-.min-btn:active {
+.lab-stage .min-btn:active {
     background: #E9EDF6;
 }
 
-.section-title-matrix {
+.lab-stage .section-title-matrix {
     font-size: 0.9em;
     font-weight: bold;
     margin-bottom: 5px;
@@ -102,15 +78,15 @@
     margin-top: 10px;
 }
 
-.text-yellow {
+.lab-stage .text-yellow {
     color: #4338CA;
 }
 
-.text-cyan {
+.lab-stage .text-cyan {
     color: #047857;
 }
 
-.input-group-matrix {
+.lab-stage .input-group-matrix {
     margin-bottom: 5px;
     display: flex;
     align-items: center;
@@ -118,12 +94,12 @@
     gap: 5px;
 }
 
-.input-group-matrix label {
+.lab-stage .input-group-matrix label {
     font-weight: bold;
     font-size: 0.9em;
 }
 
-.input-group-matrix input[type="number"] {
+.lab-stage .input-group-matrix input[type="number"] {
     background: #FFFFFF;
     border: 1px solid #DDE2EE;
     color: #0B1020;
@@ -135,33 +111,34 @@
     transition: all 0.3s ease;
 }
 
-.input-group-matrix input[type="number"]:focus {
+.lab-stage .input-group-matrix input[type="number"]:focus {
     outline: none;
     border-color: var(--signal);
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
 }
 
-.color-x {
+.lab-stage .color-x {
     color: #FF6B5B;
 }
 
-.color-y {
+.lab-stage .color-y {
     color: #4338CA;
 }
 
-.color-z {
+.lab-stage .color-z {
     color: #6366F1;
 }
 
 /* Matrix Styling */
-.matrix-container {
+
+.lab-stage .matrix-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px 0;
 }
 
-.matrix-bracket {
+.lab-stage .matrix-bracket {
     font-size: 3em;
     font-weight: lighter;
     color: #6B7389;
@@ -169,18 +146,18 @@
     user-select: none;
 }
 
-.matrix-grid {
+.lab-stage .matrix-grid {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.matrix-row-input {
+.lab-stage .matrix-row-input {
     display: flex;
     gap: 5px;
 }
 
-.matrix-input {
+.lab-stage .matrix-input {
     background: #FFFFFF !important;
     border: 1px solid #DDE2EE !important;
     color: #0B1020 !important;
@@ -192,21 +169,22 @@
     transition: all 0.3s ease !important;
 }
 
-.matrix-input:focus {
+.lab-stage .matrix-input:focus {
     outline: none !important;
     border-color: var(--signal) !important;
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25) !important;
 }
 
 /* Preset Buttons */
-.btn-group-matrix {
+
+.lab-stage .btn-group-matrix {
     display: flex;
     gap: 5px;
     margin-top: 10px;
     flex-wrap: wrap;
 }
 
-.preset-btn-matrix {
+.lab-stage .preset-btn-matrix {
     flex: 1;
     padding: 6px;
     background-color: #0B1020;
@@ -219,16 +197,17 @@
     min-width: 70px;
 }
 
-.preset-btn-matrix:hover {
+.lab-stage .preset-btn-matrix:hover {
     background-color: #E9EDF6;
 }
 
-.preset-btn-matrix:active {
+.lab-stage .preset-btn-matrix:active {
     transform: translateY(0);
 }
 
 /* Results */
-.results-matrix {
+
+.lab-stage .results-matrix {
     background: #FFFFFF;
     padding: 10px;
     border-radius: var(--radius-lg);
@@ -236,22 +215,22 @@
     border: 1px solid #DDE2EE;
 }
 
-.result-row-matrix {
+.lab-stage .result-row-matrix {
     margin-bottom: 5px;
     font-size: 0.95em;
     display: flex;
     justify-content: space-between;
 }
 
-.result-val-matrix {
+.lab-stage .result-val-matrix {
     font-weight: bold;
 }
 
-.highlight {
+.lab-stage .highlight {
     color: #4338CA;
 }
 
-.update-btn-matrix {
+.lab-stage .update-btn-matrix {
     margin-top: 15px;
     width: 100%;
     padding: 8px;
@@ -265,12 +244,12 @@
     transition: all 0.3s ease;
 }
 
-.update-btn-matrix:hover {
+.lab-stage .update-btn-matrix:hover {
     background-color: #4338CA;
     box-shadow: 0 4px 8px rgba(99, 102, 241, 0.25);
 }
 
-.instructions-matrix {
+.lab-stage .instructions-matrix {
     margin-top: 15px;
     font-size: 0.8em;
     color: #0B1020;
@@ -280,56 +259,42 @@
 }
 
 /* Responsive Design */
+
 @media (max-width: 768px) {
-    .panel-matrix {
+.lab-stage .panel-matrix {
         max-width: 300px;
         min-width: 240px;
         padding: 12px;
     }
 
-    .back-button-matrix {
-        top: 10px;
-        right: 10px;
-        padding: 10px 16px;
-        font-size: 14px;
-    }
-
-    .matrix-input {
+.lab-stage .matrix-input {
         width: 50px !important;
     }
 
-    .input-group-matrix input[type="number"] {
+.lab-stage .input-group-matrix input[type="number"] {
         width: 45px;
     }
 }
 
 @media (max-width: 480px) {
-    .panel-matrix {
+.lab-stage .panel-matrix {
         top: 5px;
         left: 5px;
         max-width: calc(100% - 10px);
         padding: 10px;
-        max-height: 85vh;
+        max-height: calc(100% - 10px);
     }
 
-    .back-button-matrix {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin: 10px;
-        width: calc(100% - 20px);
-    }
-
-    .matrix-bracket {
+.lab-stage .matrix-bracket {
         font-size: 2.5em;
     }
 
-    .matrix-input {
+.lab-stage .matrix-input {
         width: 45px !important;
         padding: 3px !important;
     }
 
-    .preset-btn-matrix {
+.lab-stage .preset-btn-matrix {
         font-size: 0.75em;
         padding: 5px;
         min-width: 60px;

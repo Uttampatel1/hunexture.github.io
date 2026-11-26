@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { initAnalytics } from '../utils/analytics'
 import './CookieBanner.css'
 
 const CONSENT_KEY = 'hunexture-cookie-consent'
@@ -15,6 +16,7 @@ const CookieBanner = () => {
 
   const handleAccept = () => {
     localStorage.setItem(CONSENT_KEY, 'accepted')
+    initAnalytics()
     setVisible(false)
   }
 

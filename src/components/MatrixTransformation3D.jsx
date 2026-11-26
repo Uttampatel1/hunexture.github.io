@@ -1,12 +1,49 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft, FaMinus, FaPlus } from 'react-icons/fa';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 import * as THREE from 'three';
+import { runViz } from './vizKit';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './MatrixTransformation3D.css';
 
+// Text Label Function
+const makeTextSprite = (message, parameters = {}) => {
+    const fontface = parameters.fontface || "Arial";
+    const fontsize = parameters.fontsize || 24;
+    const borderThickness = parameters.borderThickness || 4;
+
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    context.font = "Bold " + fontsize + "px " + fontface;
+    const metrics = context.measureText(message);
+    const textWidth = metrics.width;
+
+    context.fillStyle = "#0B1020";
+    context.fillText(message, borderThickness, fontsize + borderThickness);
+
+    const texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+    const sprite = new THREE.Sprite(spriteMaterial);
+    sprite.scale.set(textWidth / 3, fontsize / 1.5, 1.0);
+    return sprite;
+};
+
+const createArrow = (x, y, z, color) => {
+    const origin = new THREE.Vector3(0, 0, 0);
+    const dest = new THREE.Vector3(x, y, z);
+    const length = dest.length();
+    const direction = length > 0 ? dest.clone().normalize() : new THREE.Vector3(0, 1, 0);
+    return new THREE.ArrowHelper(
+        direction,
+        origin,
+        length,
+        color,
+        Math.min(length * 0.2, 10),
+        Math.min(length * 0.1, 5)
+    );
+};
+
 const MatrixTransformation3D = () => {
-    const navigate = useNavigate();
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
     const cameraRef = useRef(null);
@@ -40,47 +77,8 @@ const MatrixTransformation3D = () => {
     const [resY, setResY] = useState(0);
     const [resZ, setResZ] = useState(0);
 
-    // Text Label Function
-    const makeTextSprite = (message, parameters = {}) => {
-        const fontface = parameters.fontface || "Arial";
-        const fontsize = parameters.fontsize || 24;
-        const borderThickness = parameters.borderThickness || 4;
-        const backgroundColor = parameters.backgroundColor || { r: 255, g: 255, b: 255, a: 1.0 };
-
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        context.font = "Bold " + fontsize + "px " + fontface;
-        const metrics = context.measureText(message);
-        const textWidth = metrics.width;
-
-        context.fillStyle = "#0B1020";
-        context.fillText(message, borderThickness, fontsize + borderThickness);
-
-        const texture = new THREE.Texture(canvas);
-        texture.needsUpdate = true;
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-        const sprite = new THREE.Sprite(spriteMaterial);
-        sprite.scale.set(textWidth / 3, fontsize / 1.5, 1.0);
-        return sprite;
-    };
-
-    const createArrow = (x, y, z, color) => {
-        const origin = new THREE.Vector3(0, 0, 0);
-        const dest = new THREE.Vector3(x, y, z);
-        const length = dest.length();
-        const direction = length > 0 ? dest.clone().normalize() : new THREE.Vector3(0, 1, 0);
-        return new THREE.ArrowHelper(
-            direction,
-            origin,
-            length,
-            color,
-            Math.min(length * 0.2, 10),
-            Math.min(length * 0.1, 5)
-        );
-    };
-
     // Update Visualization
-    const updateVisualization = () => {
+    const updateVisualization = useCallback(() => {
         const scene = sceneRef.current;
         if (!scene) return;
 
@@ -116,7 +114,7 @@ const MatrixTransformation3D = () => {
         labelOut.position.set(outputX, outputY, outputZ).multiplyScalar(1.1);
         scene.add(labelOut);
         labelsRef.current.push(labelOut);
-    };
+    }, [vx, vy, vz, m00, m01, m02, m10, m11, m12, m20, m21, m22]);
 
     // Preset Functions
     const setIdentity = () => {
@@ -188,43 +186,18 @@ const MatrixTransformation3D = () => {
         dirLight.position.set(50, 50, 50);
         scene.add(dirLight);
 
-        // Initial visualization
-        updateVisualization();
 
-        // Animation Loop
-        const animate = () => {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        };
-        animate();
-
-        // Handle resize
-        const handleResize = () => {
-            if (!mountRef.current) return;
-            camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
-        };
-        window.addEventListener('resize', handleResize);
 
         // Cleanup
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            mountRef.current?.removeChild(renderer.domElement);
-            renderer.dispose();
-        };
+        return runViz({ container: mountRef.current, renderer, camera, scene, controls });
     }, []);
 
     useEffect(() => {
         updateVisualization();
-    }, [vx, vy, vz, m00, m01, m02, m10, m11, m12, m20, m21, m22]);
+    }, [updateVisualization]);
 
     return (
         <div className="matrix-transform-container">
-            <button onClick={() => navigate('/blog/linear-algebra')} className="back-button-matrix">
-                <FaArrowLeft /> Back to Linear Algebra
-            </button>
 
             <div className="panel-matrix">
                 <div className="header-row">

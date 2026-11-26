@@ -1,12 +1,159 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
 import * as THREE from 'three';
+import { runViz, observeViz } from './vizKit';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './GradientDescent3D.css';
 
+const maxSteps = 100;
+const initialW = 0.0;
+const initialB = -2.0;
+const frameInterval = 50;
+
+// Base Data
+const BASE_X = [1, 2, 3, 4, 5];
+const BASE_Y = [2, 4, 6, 8, 10];
+
+const getData = (isUnnormalized) => {
+    const scale = isUnnormalized ? 3 : 1;
+    const X = BASE_X.map(x => x * scale);
+    const Y = BASE_Y.map(y => y * scale);
+    return { X, Y };
+};
+
+const calculateMSE = (w, b, isUnnormalized) => {
+    const { X, Y } = getData(isUnnormalized);
+    let errorSum = 0;
+    const n = X.length;
+    for (let i = 0; i < n; i++) {
+        const prediction = w * X[i] + b;
+        errorSum += (Y[i] - prediction) ** 2;
+    }
+    return errorSum / n;
+};
+
+const stepGradient = (w, b, lr, isUnnormalized) => {
+    const { X, Y } = getData(isUnnormalized);
+    let dw = 0;
+    let db = 0;
+    const n = X.length;
+    for (let i = 0; i < n; i++) {
+        const prediction = w * X[i] + b;
+        const error = Y[i] - prediction;
+        dw += -2 * X[i] * error;
+        db += -2 * error;
+    }
+    return {
+        newW: w - (lr * dw) / n,
+        newB: b - (lr * db) / n,
+    };
+};
+
+const computeHistory = (learningRate, isUnnormalized) => {
+    let w = initialW;
+    let b = initialB;
+    const newHistory = [];
+
+    newHistory.push({ w, b, cost: calculateMSE(w, b, isUnnormalized) });
+
+    for (let i = 0; i < maxSteps; i++) {
+        const update = stepGradient(w, b, learningRate, isUnnormalized);
+        w = update.newW;
+        b = update.newB;
+        newHistory.push({ w, b, cost: calculateMSE(w, b, isUnnormalized) });
+    }
+
+    return newHistory;
+};
+
+const buildLossSurface = (isUnnormalized) => {
+    const wRange = { min: -1, max: 5, steps: 40 };
+    const bRange = { min: -3, max: 3, steps: 40 };
+
+    const positions = [];
+    const colors = [];
+    const indices = [];
+
+    const visualScale = isUnnormalized ? 0.015 : 0.1;
+
+    for (let i = 0; i <= wRange.steps; i++) {
+        for (let j = 0; j <= bRange.steps; j++) {
+            const w = wRange.min + (i / wRange.steps) * (wRange.max - wRange.min);
+            const b = bRange.min + (j / bRange.steps) * (bRange.max - bRange.min);
+            const cost = calculateMSE(w, b, isUnnormalized);
+            const visualY = Math.min(cost * visualScale, 8);
+
+            positions.push(w, visualY, b);
+
+            const colorScale = isUnnormalized ? 0.002 : 0.02;
+            const color = new THREE.Color(0x6366F1).lerp(new THREE.Color(0xFF6B5B), Math.min(cost * colorScale / 0.6, 1));
+            colors.push(color.r, color.g, color.b);
+        }
+    }
+
+    const rowSize = bRange.steps + 1;
+    for (let i = 0; i < wRange.steps; i++) {
+        for (let j = 0; j < bRange.steps; j++) {
+            const a = i * rowSize + j;
+            const b = i * rowSize + j + 1;
+            const c = (i + 1) * rowSize + j;
+            const d = (i + 1) * rowSize + j + 1;
+            indices.push(a, b, d);
+            indices.push(a, d, c);
+        }
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    geometry.setIndex(indices);
+    geometry.computeVertexNormals();
+
+    const material = new THREE.MeshStandardMaterial({
+        vertexColors: true,
+        side: THREE.DoubleSide,
+        flatShading: true,
+        transparent: true,
+        opacity: 0.8
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+
+    const wireGeo = new THREE.WireframeGeometry(geometry);
+    const wireMat = new THREE.LineBasicMaterial({ color: 0x0B1020, transparent: true, opacity: 0.12 });
+    const wireMesh = new THREE.LineSegments(wireGeo, wireMat);
+    mesh.add(wireMesh);
+
+    return mesh;
+};
+
+const createAxis = (start, end, colorHex) => {
+    const pStart = new THREE.Vector3(...start);
+    const pEnd = new THREE.Vector3(...end);
+    const direction = new THREE.Vector3().subVectors(pEnd, pStart);
+    const length = direction.length();
+    const pos = new THREE.Vector3().addVectors(pStart, pEnd).multiplyScalar(0.5);
+
+    const group = new THREE.Group();
+    group.position.copy(pos);
+    group.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize());
+
+    const cylinder = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.02, 0.02, length, 8),
+        new THREE.MeshBasicMaterial({ color: colorHex })
+    );
+    group.add(cylinder);
+
+    const cone = new THREE.Mesh(
+        new THREE.ConeGeometry(0.08, 0.2, 12),
+        new THREE.MeshBasicMaterial({ color: colorHex })
+    );
+    cone.position.y = length / 2;
+    group.add(cone);
+
+    return group;
+};
+
 const GradientDescent3D = () => {
-    const navigate = useNavigate();
     const mount3DRef = useRef(null);
     const sceneRef = useRef(null);
     const cameraRef = useRef(null);
@@ -15,8 +162,6 @@ const GradientDescent3D = () => {
     const agentMeshRef = useRef(null);
     const trailMeshRef = useRef(null);
     const lossSurfaceRef = useRef(null);
-    const animationFrameRef = useRef(null);
-    const lastTimeRef = useRef(0);
 
     // State
     const [learningRate, setLearningRate] = useState(0.01);
@@ -24,162 +169,6 @@ const GradientDescent3D = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const [history, setHistory] = useState([]);
     const [isUnnormalized, setIsUnnormalized] = useState(false);
-
-    const maxSteps = 100;
-    const initialW = 0.0;
-    const initialB = -2.0;
-    const frameInterval = 50;
-
-    // Base Data
-    const BASE_X = [1, 2, 3, 4, 5];
-    const BASE_Y = [2, 4, 6, 8, 10];
-
-    const getData = () => {
-        const scale = isUnnormalized ? 3 : 1;
-        const X = BASE_X.map(x => x * scale);
-        const Y = BASE_Y.map(y => y * scale);
-        return { X, Y };
-    };
-
-    const calculateMSE = (w, b) => {
-        const { X, Y } = getData();
-        let errorSum = 0;
-        const n = X.length;
-        for (let i = 0; i < n; i++) {
-            const prediction = w * X[i] + b;
-            errorSum += (Y[i] - prediction) ** 2;
-        }
-        return errorSum / n;
-    };
-
-    const stepGradient = (w, b, lr) => {
-        const { X, Y } = getData();
-        let dw = 0;
-        let db = 0;
-        const n = X.length;
-        for (let i = 0; i < n; i++) {
-            const prediction = w * X[i] + b;
-            const error = Y[i] - prediction;
-            dw += -2 * X[i] * error;
-            db += -2 * error;
-        }
-        return {
-            newW: w - (lr * dw) / n,
-            newB: b - (lr * db) / n,
-        };
-    };
-
-    const calculateHistory = () => {
-        let w = initialW;
-        let b = initialB;
-        const newHistory = [];
-
-        newHistory.push({ w, b, cost: calculateMSE(w, b) });
-
-        for (let i = 0; i < maxSteps; i++) {
-            const update = stepGradient(w, b, learningRate);
-            w = update.newW;
-            b = update.newB;
-            newHistory.push({ w, b, cost: calculateMSE(w, b) });
-        }
-
-        setHistory(newHistory);
-    };
-
-    const createLossSurface = (scene) => {
-        if (lossSurfaceRef.current) {
-            scene.remove(lossSurfaceRef.current);
-            lossSurfaceRef.current.geometry.dispose();
-            lossSurfaceRef.current.material.dispose();
-        }
-
-        const wRange = { min: -1, max: 5, steps: 40 };
-        const bRange = { min: -3, max: 3, steps: 40 };
-
-        const positions = [];
-        const colors = [];
-        const indices = [];
-
-        const visualScale = isUnnormalized ? 0.015 : 0.1;
-
-        for (let i = 0; i <= wRange.steps; i++) {
-            for (let j = 0; j <= bRange.steps; j++) {
-                const w = wRange.min + (i / wRange.steps) * (wRange.max - wRange.min);
-                const b = bRange.min + (j / bRange.steps) * (bRange.max - bRange.min);
-                const cost = calculateMSE(w, b);
-                const visualY = Math.min(cost * visualScale, 8);
-
-                positions.push(w, visualY, b);
-
-                const colorScale = isUnnormalized ? 0.002 : 0.02;
-                const color = new THREE.Color(0x6366F1).lerp(new THREE.Color(0xFF6B5B), Math.min(cost * colorScale / 0.6, 1));
-                colors.push(color.r, color.g, color.b);
-            }
-        }
-
-        const rowSize = bRange.steps + 1;
-        for (let i = 0; i < wRange.steps; i++) {
-            for (let j = 0; j < bRange.steps; j++) {
-                const a = i * rowSize + j;
-                const b = i * rowSize + j + 1;
-                const c = (i + 1) * rowSize + j;
-                const d = (i + 1) * rowSize + j + 1;
-                indices.push(a, b, d);
-                indices.push(a, d, c);
-            }
-        }
-
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-        geometry.setIndex(indices);
-        geometry.computeVertexNormals();
-
-        const material = new THREE.MeshStandardMaterial({
-            vertexColors: true,
-            side: THREE.DoubleSide,
-            flatShading: true,
-            transparent: true,
-            opacity: 0.8
-        });
-
-        const mesh = new THREE.Mesh(geometry, material);
-
-        const wireGeo = new THREE.WireframeGeometry(geometry);
-        const wireMat = new THREE.LineBasicMaterial({ color: 0x0B1020, transparent: true, opacity: 0.12 });
-        const wireMesh = new THREE.LineSegments(wireGeo, wireMat);
-        mesh.add(wireMesh);
-
-        scene.add(mesh);
-        lossSurfaceRef.current = mesh;
-    };
-
-    const createAxis = (start, end, colorHex) => {
-        const pStart = new THREE.Vector3(...start);
-        const pEnd = new THREE.Vector3(...end);
-        const direction = new THREE.Vector3().subVectors(pEnd, pStart);
-        const length = direction.length();
-        const pos = new THREE.Vector3().addVectors(pStart, pEnd).multiplyScalar(0.5);
-
-        const group = new THREE.Group();
-        group.position.copy(pos);
-        group.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize());
-
-        const cylinder = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.02, 0.02, length, 8),
-            new THREE.MeshBasicMaterial({ color: colorHex })
-        );
-        group.add(cylinder);
-
-        const cone = new THREE.Mesh(
-            new THREE.ConeGeometry(0.08, 0.2, 12),
-            new THREE.MeshBasicMaterial({ color: colorHex })
-        );
-        cone.position.y = length / 2;
-        group.add(cone);
-
-        return group;
-    };
 
     // Initialize 3D Scene
     useEffect(() => {
@@ -247,28 +236,8 @@ const GradientDescent3D = () => {
         scene.add(trailMesh);
         trailMeshRef.current = trailMesh;
 
-        // Initial setup
-        calculateHistory();
-        createLossSurface(scene);
-
-        // Handle resize
-        const handleResize = () => {
-            if (!mount3DRef.current) return;
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        };
-        window.addEventListener('resize', handleResize);
-
-        // Cleanup
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            if (animationFrameRef.current) {
-                cancelAnimationFrame(animationFrameRef.current);
-            }
-            container.removeChild(renderer.domElement);
-            renderer.dispose();
-        };
+        // History + loss surface are built by the parameter effect below.
+        return runViz({ container, renderer, camera, scene, controls });
     }, []);
 
     // Update visuals when step changes
@@ -304,44 +273,40 @@ const GradientDescent3D = () => {
 
     // Recalculate when parameters change
     useEffect(() => {
-        calculateHistory();
+        setHistory(computeHistory(learningRate, isUnnormalized));
         setCurrentStep(0);
         setIsPlaying(false);
 
-        if (sceneRef.current) {
-            createLossSurface(sceneRef.current);
+        const scene = sceneRef.current;
+        if (scene) {
+            if (lossSurfaceRef.current) {
+                scene.remove(lossSurfaceRef.current);
+                lossSurfaceRef.current.geometry.dispose();
+                lossSurfaceRef.current.material.dispose();
+            }
+            const mesh = buildLossSurface(isUnnormalized);
+            scene.add(mesh);
+            lossSurfaceRef.current = mesh;
         }
     }, [learningRate, isUnnormalized]);
 
-    // Animation loop
+    // Training ticker: only runs while playing and pauses while offscreen / tab hidden.
+    // (Rendering is handled by runViz in the scene effect, which also pauses offscreen.)
     useEffect(() => {
-        const gameLoop = (timestamp) => {
-            if (isPlaying) {
-                if (timestamp - lastTimeRef.current > frameInterval) {
-                    if (currentStep < maxSteps) {
-                        setCurrentStep(prev => prev + 1);
-                    } else {
-                        setIsPlaying(false);
-                    }
-                    lastTimeRef.current = timestamp;
-                }
-            }
-
-            if (controlsRef.current) controlsRef.current.update();
-            if (rendererRef.current && sceneRef.current && cameraRef.current) {
-                rendererRef.current.render(sceneRef.current, cameraRef.current);
-            }
-
-            animationFrameRef.current = requestAnimationFrame(gameLoop);
-        };
-
-        animationFrameRef.current = requestAnimationFrame(gameLoop);
-
+        if (!isPlaying || !mount3DRef.current) return undefined;
+        const viz = observeViz(mount3DRef.current);
+        const id = setInterval(() => {
+            if (!viz.isVisible()) return;
+            setCurrentStep(prev => Math.min(prev + 1, maxSteps));
+        }, frameInterval);
         return () => {
-            if (animationFrameRef.current) {
-                cancelAnimationFrame(animationFrameRef.current);
-            }
+            clearInterval(id);
+            viz.dispose();
         };
+    }, [isPlaying]);
+
+    useEffect(() => {
+        if (isPlaying && currentStep >= maxSteps) setIsPlaying(false);
     }, [isPlaying, currentStep]);
 
     const handlePlayPause = () => {
@@ -362,7 +327,7 @@ const GradientDescent3D = () => {
     // 2D Chart rendering
     const render2DChart = () => {
         const dataScale = isUnnormalized ? 3 : 1;
-        const { X, Y } = getData();
+        const { X, Y } = getData(isUnnormalized);
         const xMax = 6 * dataScale;
 
         const xScale = (val) => 20 + (val / xMax) * 240;
@@ -395,9 +360,6 @@ const GradientDescent3D = () => {
 
     return (
         <div className="gd3d-container">
-            <button onClick={() => navigate('/blog/linear-algebra')} className="back-button-gd3d">
-                <FaArrowLeft /> Back to Linear Algebra
-            </button>
 
             <div className="canvas-container-gd3d">
                 <div className="overlay-gd3d">

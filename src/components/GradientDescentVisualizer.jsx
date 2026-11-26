@@ -1,12 +1,79 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { runViz } from './vizKit';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './GradientDescentVisualizer.css';
 
+const INITIAL_W = -1;
+const INITIAL_B = 4;
+// Constants
+const dataPoints = [
+    { x: -1, y: -0.8 },
+    { x: 0, y: 1.2 },
+    { x: 1, y: 3.1 },
+    { x: 2, y: 4.8 },
+    { x: 3, y: 7.2 }
+];
+
+const wMin = -1, wMax = 5;
+const bMin = -5, bMax = 5;
+const MAX_PATH_POINTS = 1000;
+
+// Calculate MSE
+const calculateMSE = (weight, bias) => {
+    let sumErrorSq = 0;
+    for (let p of dataPoints) {
+        const yPred = weight * p.x + bias;
+        const error = p.y - yPred;
+        sumErrorSq += error * error;
+    }
+    return sumErrorSq / dataPoints.length;
+};
+
+// Calculate Gradients
+const calculateGradients = (weight, bias) => {
+    let dw = 0;
+    let db = 0;
+    const N = dataPoints.length;
+
+    for (let p of dataPoints) {
+        const yPred = weight * p.x + bias;
+        const error = p.y - yPred;
+        dw += -2 * error * p.x;
+        db += -2 * error;
+    }
+
+    return { dw: dw / N, db: db / N };
+};
+
+// Text Sprite Function
+const makeTextSprite = (message, x, y, z) => {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    context.font = "Bold 24px Arial";
+
+    context.fillStyle = "#0B1020";
+    context.fillText(message, 0, 24);
+
+    const texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+    const sprite = new THREE.Sprite(spriteMaterial);
+    sprite.scale.set(4, 2, 1);
+    sprite.position.set(x, y, z);
+    return sprite;
+};
+
+// 2D Drawing Functions
+const toScreen = (x, y, width, height) => {
+    const minX = -2, maxX = 4;
+    const minY = -2, maxY = 8;
+    const sx = ((x - minX) / (maxX - minX)) * width;
+    const sy = height - ((y - minY) / (maxY - minY)) * height;
+    return { x: sx, y: sy };
+};
+
 const GradientDescentVisualizer = () => {
-    const navigate = useNavigate();
     const mount3DRef = useRef(null);
     const canvas2DRef = useRef(null);
     const sceneRef = useRef(null);
@@ -18,83 +85,15 @@ const GradientDescentVisualizer = () => {
     const animationRef = useRef(null);
 
     // State
-    const [w, setW] = useState(-1);
-    const [b, setB] = useState(4);
+    const [w, setW] = useState(INITIAL_W);
+    const [b, setB] = useState(INITIAL_B);
     const [loss, setLoss] = useState(0);
     const [lr, setLr] = useState(0.01);
     const [isDescending, setIsDescending] = useState(false);
     const [steps, setSteps] = useState(0);
     const [history, setHistory] = useState([]);
 
-    // Constants
-    const dataPoints = [
-        { x: -1, y: -0.8 },
-        { x: 0, y: 1.2 },
-        { x: 1, y: 3.1 },
-        { x: 2, y: 4.8 },
-        { x: 3, y: 7.2 }
-    ];
-
-    const wMin = -1, wMax = 5;
-    const bMin = -5, bMax = 5;
-    const MAX_PATH_POINTS = 1000;
-
-    // Calculate MSE
-    const calculateMSE = (weight, bias) => {
-        let sumErrorSq = 0;
-        for (let p of dataPoints) {
-            const yPred = weight * p.x + bias;
-            const error = p.y - yPred;
-            sumErrorSq += error * error;
-        }
-        return sumErrorSq / dataPoints.length;
-    };
-
-    // Calculate Gradients
-    const calculateGradients = (weight, bias) => {
-        let dw = 0;
-        let db = 0;
-        const N = dataPoints.length;
-
-        for (let p of dataPoints) {
-            const yPred = weight * p.x + bias;
-            const error = p.y - yPred;
-            dw += -2 * error * p.x;
-            db += -2 * error;
-        }
-
-        return { dw: dw / N, db: db / N };
-    };
-
-    // Text Sprite Function
-    const makeTextSprite = (message, x, y, z) => {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        context.font = "Bold 24px Arial";
-        const metrics = context.measureText(message);
-
-        context.fillStyle = "#0B1020";
-        context.fillText(message, 0, 24);
-
-        const texture = new THREE.Texture(canvas);
-        texture.needsUpdate = true;
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-        const sprite = new THREE.Sprite(spriteMaterial);
-        sprite.scale.set(4, 2, 1);
-        sprite.position.set(x, y, z);
-        return sprite;
-    };
-
-    // 2D Drawing Functions
-    const toScreen = (x, y, width, height) => {
-        const minX = -2, maxX = 4;
-        const minY = -2, maxY = 8;
-        const sx = ((x - minX) / (maxX - minX)) * width;
-        const sy = height - ((y - minY) / (maxY - minY)) * height;
-        return { x: sx, y: sy };
-    };
-
-    const draw2D = () => {
+    const draw2D = useCallback(() => {
         const canvas = canvas2DRef.current;
         if (!canvas) return;
 
@@ -140,7 +139,11 @@ const GradientDescentVisualizer = () => {
             ctx.beginPath(); ctx.moveTo(actualPos.x, actualPos.y); ctx.lineTo(predictedPos.x, predictedPos.y); ctx.stroke();
         });
         ctx.setLineDash([]);
-    };
+    }, [w, b]);
+
+    // Latest draw fn for the one-time scene effect (avoids re-creating the scene)
+    const draw2DRef = useRef(draw2D);
+    useEffect(() => { draw2DRef.current = draw2D; }, [draw2D]);
 
     // Initialize 3D Scene
     useEffect(() => {
@@ -252,28 +255,15 @@ const GradientDescentVisualizer = () => {
         scene.add(pathLine);
         pathLineRef.current = pathLine;
 
-        // Animation Loop
-        const animate = () => {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        };
-        animate();
 
-        // Handle Resize
-        const handleResize = () => {
-            if (!mount3DRef.current || !canvas2DRef.current) return;
-
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-
+        const resize2D = () => {
             const canvas = canvas2DRef.current;
+            if (!canvas) return;
             canvas.width = canvas.parentElement.clientWidth;
             canvas.height = canvas.parentElement.clientHeight;
-            draw2D();
+            draw2DRef.current();
         };
-        window.addEventListener('resize', handleResize);
+
 
         // Initial 2D canvas setup
         if (canvas2DRef.current) {
@@ -282,16 +272,12 @@ const GradientDescentVisualizer = () => {
         }
 
         // Initial loss calculation
-        const initialLoss = calculateMSE(w, b);
+        const initialLoss = calculateMSE(INITIAL_W, INITIAL_B);
         setLoss(initialLoss);
-        setHistory([{ w, b, loss: initialLoss }]);
+        setHistory([{ w: INITIAL_W, b: INITIAL_B, loss: initialLoss }]);
 
         // Cleanup
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            container.removeChild(renderer.domElement);
-            renderer.dispose();
-        };
+        return runViz({ container, renderer, camera, scene, controls, onResize: resize2D });
     }, []);
 
     // Update visuals when state changes
@@ -314,10 +300,10 @@ const GradientDescentVisualizer = () => {
         }
 
         draw2D();
-    }, [w, b, loss, history]);
+    }, [w, b, loss, history, draw2D]);
 
     // Gradient Descent Step
-    const stepGradientDescent = () => {
+    const stepGradientDescent = useCallback(() => {
         const grads = calculateGradients(w, b);
 
         const newW = w - (lr * grads.dw);
@@ -338,7 +324,7 @@ const GradientDescentVisualizer = () => {
         }
 
         return true;
-    };
+    }, [w, b, lr]);
 
     // Animation loop for gradient descent
     useEffect(() => {
@@ -356,7 +342,7 @@ const GradientDescentVisualizer = () => {
                 clearTimeout(animationRef.current);
             }
         };
-    }, [isDescending, w, b, lr]);
+    }, [isDescending, stepGradientDescent]);
 
     // Handlers
     const handleManualChange = (newW, newB) => {
@@ -389,9 +375,6 @@ const GradientDescentVisualizer = () => {
 
     return (
         <div className="gradient-descent-container">
-            <button onClick={() => navigate('/blog/linear-algebra')} className="back-button-gd">
-                <FaArrowLeft /> Back to Linear Algebra
-            </button>
 
             <div className="viz-split-gd">
                 <div className="view-3d-gd">
