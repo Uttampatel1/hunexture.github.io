@@ -52,7 +52,7 @@
   font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(2.4rem, 5.2vw, 4rem);
-  line-height: 1.04;
+  line-height: 1.12;
   letter-spacing: -0.02em;
   color: var(--ink);
   margin: 0 0 20px;
@@ -65,16 +65,17 @@
   border-radius: var(--radius-sm);
   background-image: linear-gradient(var(--accent), var(--accent));
   background-repeat: no-repeat;
-  background-position: left center;
-  background-size: 100% 100%;
+  /* shorter block, sat low, so it never covers descenders on the line above */
+  background-position: left 85%;
+  background-size: 100% 78%;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   animation: hl-mark-sweep 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s backwards;
 }
 
 @keyframes hl-mark-sweep {
-  from { background-size: 0% 100%; }
-  to { background-size: 100% 100%; }
+  from { background-size: 0% 78%; }
+  to { background-size: 100% 78%; }
 }
 
 /* staggered entrance */
