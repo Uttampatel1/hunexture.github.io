@@ -1,6 +1,6 @@
 # WhatsApp automation for Indian businesses: what to automate first
 
-> WhatsApp is where your customers already are. Here is a simple order for automating it, starting with the easy wins.
+> A simple order for automating WhatsApp, from instant replies to reminders, and the Meta rules you need to follow along the way.
 
 Canonical URL: https://hunexture.com/insights/whatsapp-automation-what-to-automate-first/
 
@@ -8,21 +8,33 @@ By Team Hunexture. Automation. Published 26 November 2026. 4 minute read. Exampl
 
 ## Why WhatsApp first
 
-In India, people message a business before they call or email. They ask price, timing, availability and order status. Many of these questions repeat all day.
+In India, many people message a business before they call or email. They ask price, timing, availability and order status. Many of these questions repeat all day.
 
-That is good news. Repeated questions are the best thing to automate. But doing everything at once usually goes wrong. Here is the order we suggest.
+Repeated questions are the best thing to automate. But doing everything at once usually goes wrong. Here is the order we suggest.
 
-## 1. Instant replies and business hours
+## Know the WhatsApp rules first
 
-Start small. Set up a greeting, a short menu and an away message for after-hours. The customer knows you got the message and what happens next.
+Business automation should run on the official WhatsApp Business Platform (Cloud API), which comes through Meta or an approved provider. Automating a personal or regular app number is risky and can get the number blocked.
 
-This takes little effort and removes the "no one replied" problem on day one.
+Three rules shape everything. When a customer messages you, you can reply freely for 24 hours. After that window, or if you want to message first, you must use a message template that Meta has approved. And you must have the customer's opt-in before sending business-initiated messages.
+
+- Use a number dedicated to the business.
+- Ask customers before sending reminders or offers.
+- Let people say "stop" and respect it.
+- Expect a short setup period for business verification and template approval.
+- Meta may charge for some message types, so check current rates before you plan volumes.
+
+## 1. Instant replies and a greeting
+
+Start small. Set up a greeting, a short menu and an after-hours message. The customer knows you got the message and what happens next.
+
+This takes little effort. It also removes the "no one replied" problem early.
 
 ## 2. Answers to common questions
 
-Write down the ten questions your team answers most. Prices, location, timings, delivery areas, payment options, return rules.
+Write down the ten questions your team answers most. Prices, location, timings, delivery areas, payment options including UPI, return rules.
 
-Turn these into ready answers. A chatbot can pick the right one, even if the customer writes in Hinglish, Hindi, Gujarati or English with spelling mistakes.
+Turn these into ready answers. A chatbot can pick the right one, even if the customer writes in Hinglish, Hindi, Gujarati or English with spelling mistakes. Test this with real chats, because it will not be perfect.
 
 - Use your own real answers, not generic text.
 - Keep each answer short enough to read on a phone.
@@ -36,15 +48,15 @@ The goal is not to remove people. It is to get a clean, complete request so your
 
 ## 4. Reminders and follow-ups
 
-Once bookings and orders are flowing, add reminders. Appointment tomorrow. Payment pending. Order shipped. These save missed visits and many small phone calls.
+Once bookings and orders are flowing, add reminders. Appointment tomorrow. Payment pending. Order shipped. These can cut missed visits and many small phone calls.
 
-Use approved message templates and take customer consent. WhatsApp has rules for business messages, and following them protects your number.
+These are business-initiated messages. They need an approved template and the customer's opt-in, as covered above.
 
 ## 5. Connect it to your tools
 
-Only after the basics work, connect WhatsApp to your sheet, CRM or billing tool. Then a new lead can appear in your system without anyone copying and pasting.
+Only after the basics work, connect WhatsApp to your sheet, CRM or billing tool. Then a new lead can appear in your system without anyone copying and pasting. It can also help produce GST invoices from confirmed orders.
 
-This is where automation saves the most hours, but it needs the earlier steps to be stable first.
+This is where automation can save the most hours, but it needs the earlier steps to be stable first.
 
 ## What not to automate first
 
@@ -54,17 +66,6 @@ Some chats should stay human, at least at the start.
 - Custom quotes and price negotiation.
 - Anything involving money disputes or health advice.
 - Messages to people who never agreed to hear from you.
-
-## Getting WhatsApp set up properly
-
-Automation on a personal WhatsApp number is risky. Business automation should run on the WhatsApp Business Platform, with an approved business profile.
-
-This gives you templates for reminders, clear opt-in, and a number that is less likely to be blocked. It also needs a short setup period, so plan for that.
-
-- Use a number dedicated to the business.
-- Ask customers before sending reminders or offers.
-- Let people say "stop" and respect it.
-- Keep a real person available during business hours.
 
 ## How to know it is working
 
@@ -76,6 +77,6 @@ For example, a coaching centre could track how many admission questions the bot 
 
 ## What we'd do
 
-We would read your last month of chats with you and list the top repeated questions. Then we would build steps 1 and 2 in a few weeks, with a clear hand-off to your team.
+We would read your last month of chats with you and list the top repeated questions. We would also set up the official WhatsApp Business Platform properly, with opt-in and templates. Then we would build steps 1 and 2 with a clear hand-off to your team.
 
 After that we measure what customers actually do, fix gaps, and add bookings and reminders. Small steps, checked each time. If a step does not help, we stop and tell you.
