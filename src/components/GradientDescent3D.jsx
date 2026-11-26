@@ -242,7 +242,7 @@ const GradientDescent3D = () => {
         trailGeometry.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));
         const trailMesh = new THREE.Line(
             trailGeometry,
-            new THREE.LineBasicMaterial({ color: 0x2DE0A7 })
+            new THREE.LineBasicMaterial({ color: 0x047857 })
         );
         scene.add(trailMesh);
         trailMeshRef.current = trailMesh;
@@ -382,7 +382,7 @@ const GradientDescent3D = () => {
                     y1={yScale(current.b)}
                     x2={xScale(xMax)}
                     y2={yScale(current.w * xMax + current.b)}
-                    stroke="#2DE0A7"
+                    stroke="#047857"
                     strokeWidth="2"
                     strokeDasharray="4"
                 />
@@ -405,9 +405,9 @@ const GradientDescent3D = () => {
                     <p>Visualizing how the machine "learns" weights (w) and bias (b) by minimizing Error.</p>
                     <div className="goal-text">Goal: Find the bottom of the valley.</div>
                     <div className="legend-gd3d">
-                        <span style={{ color: '#FF6B5B' }}>Coral: Weight (x)</span>
-                        <span style={{ color: '#6366F1' }}>Indigo: Bias (z)</span>
-                        <span style={{ color: '#4338CA' }}>Deep indigo: Loss (y)</span>
+                        <span style={{ color: '#FF6B5B' }}>Weight (x)</span>
+                        <span style={{ color: '#6366F1' }}>Bias (z)</span>
+                        <span style={{ color: '#4338CA' }}>Loss (y)</span>
                     </div>
                     {isUnnormalized && (
                         <div className="warning-box-gd3d">

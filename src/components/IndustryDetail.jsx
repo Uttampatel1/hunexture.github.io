@@ -5,6 +5,9 @@ import { industryMeta } from '../data/insights'
 import { industryExtra } from '../data/industryExtra'
 import IndustryArtifact from './IndustryArtifact'
 import './IndustryDetail.css'
+import BrandTitle from './BrandMark'
+import './brand.css'
+
 
 const IndustryDetail = () => {
   const { slug } = useParams()
@@ -46,12 +49,12 @@ const IndustryDetail = () => {
               <Link to="/industries">Industries</Link><span aria-hidden="true">/</span><span>{industry.name}</span>
             </nav>
             <span className="idt-icon" aria-hidden="true"><Icon /></span>
-            <h1 id="idt-title" className="idt-title">{industry.name} software built around your requirements</h1>
-            <p className="idt-lede">{extra.intro}</p>
+            <h1 id="idt-title" className="idt-title brand-title brand-fade-up"><BrandTitle text={`${industry.name} software built around your requirements`} /></h1>
+            <p className="idt-lede brand-fade-up brand-delay-1">{extra.intro}</p>
             <ul className="idt-regs" aria-label="Standards we design for">
               {meta.regs.map((r) => <li key={r}>{r}</li>)}
             </ul>
-            <div className="idt-actions">
+            <div className="idt-actions brand-fade-up brand-delay-2">
               <button type="button" className="idt-btn idt-btn--solid" onClick={goContact}>Talk to us about {industry.name.toLowerCase()}</button>
               <a className="idt-btn" href="#build">See what we build</a>
             </div>

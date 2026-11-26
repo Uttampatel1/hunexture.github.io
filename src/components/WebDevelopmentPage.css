@@ -1540,3 +1540,27 @@
 .wd-step-row h3, .wd-uc-row h3 { margin: 0 0 4px; font-size: 1.05rem; color: var(--ink); }
 .wd-step-row p, .wd-uc-row p { margin: 0; font-size: 0.95rem; line-height: 1.55; color: var(--ink-muted); }
 @media (max-width: 900px) { .wd-duo { grid-template-columns: 1fr; } }
+
+/* ── On-brand dark visualizer (Neural Night) ───────────────── */
+.wd-page-wrapper .wd-viz-container, .wd-viz-container {
+  background: #0B1020;
+  --electric-cyan: #818CF8;
+  --electric-indigo: #818CF8;
+  --electric-green: #2DE0A7;
+  --text-white: #FFFFFF;
+  --text-gray: #B8C0D6;
+  --ink: #FFFFFF;
+  --ink-muted: #B8C0D6;
+  color: #FFFFFF;
+}
+.wd-viz-header { background: #141B33; }
+.viz-stat-card { background: #141B33; }
+.viz-dot.red, .viz-dot.yellow, .viz-dot.green { background: #B8C0D6; opacity: 0.5; }
+.viz-dot.green { background: #2DE0A7; opacity: 1; }
+.score-red, .score-orange, .score-yellow, .speed-red, .speed-orange, .speed-yellow { color: #B8C0D6; }
+.score-cyan, .speed-cyan { color: #818CF8; }
+.score-green, .speed-green { color: #2DE0A7; }
+.fill-red, .fill-orange, .fill-yellow { background: #B8C0D6; box-shadow: none; }
+.fill-cyan { background: #818CF8; box-shadow: 0 0 8px rgba(129, 140, 248, 0.5); }
+.fill-green { background: #2DE0A7; box-shadow: 0 0 8px rgba(45, 224, 167, 0.5); }
+.wd-hero-badge { color: var(--signal-deep); }

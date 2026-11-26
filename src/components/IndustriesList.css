@@ -117,3 +117,4 @@
   .il-map-tile, .il-node, .il-node::after, .il-panel { animation: none; }
   .il-card { transition: none; }
 }
+.il-kicker, .il-card-group { color: var(--signal-deep); text-transform: uppercase; letter-spacing: 0.08em; }

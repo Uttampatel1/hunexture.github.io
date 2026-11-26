@@ -56,8 +56,8 @@ const LogisticRegression3D = () => {
 
         const container = mountRef.current;
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x050510);
-        scene.fog = new THREE.FogExp2(0x050510, 0.03);
+        scene.background = new THREE.Color(0xF4F6FB);
+        scene.fog = new THREE.FogExp2(0xF4F6FB, 0.03);
         sceneRef.current = scene;
 
         const camera = new THREE.PerspectiveCamera(
@@ -81,7 +81,7 @@ const LogisticRegression3D = () => {
         controlsRef.current = controls;
 
         // Lighting
-        const ambientLight = new THREE.AmbientLight(0x404040, 2);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
         scene.add(ambientLight);
 
         const dirLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -90,10 +90,10 @@ const LogisticRegression3D = () => {
         scene.add(dirLight);
 
         // Grid helpers
-        const gridHelper0 = new THREE.GridHelper(10, 10, 0x333333, 0x111111);
+        const gridHelper0 = new THREE.GridHelper(10, 10, 0xDDE2EE, 0xDDE2EE);
         scene.add(gridHelper0);
 
-        const gridHelper1 = new THREE.GridHelper(10, 10, 0x333333, 0x111111);
+        const gridHelper1 = new THREE.GridHelper(10, 10, 0xDDE2EE, 0xDDE2EE);
         gridHelper1.position.y = 1;
         scene.add(gridHelper1);
 
@@ -105,8 +105,8 @@ const LogisticRegression3D = () => {
         scene.add(pointsGroup);
 
         const sphereGeo = new THREE.SphereGeometry(0.15, 16, 16);
-        const redMat = new THREE.MeshStandardMaterial({ color: 0xff4b4b, roughness: 0.3, metalness: 0.7 });
-        const blueMat = new THREE.MeshStandardMaterial({ color: 0x4b4bff, roughness: 0.3, metalness: 0.7 });
+        const redMat = new THREE.MeshStandardMaterial({ color: 0x6366F1, roughness: 0.3, metalness: 0.1 });
+        const blueMat = new THREE.MeshStandardMaterial({ color: 0x2DE0A7, roughness: 0.3, metalness: 0.1 });
 
         // Class 0 (Red) - Bottom left
         for (let i = 0; i < 20; i++) {
@@ -134,7 +134,7 @@ const LogisticRegression3D = () => {
         geometry.rotateX(-Math.PI / 2);
 
         const surfaceMat = new THREE.MeshPhongMaterial({
-            color: 0x00f260,
+            color: 0x2DE0A7,
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.4,
@@ -146,7 +146,7 @@ const LogisticRegression3D = () => {
         scene.add(surfaceMesh);
 
         const wireframeMat = new THREE.MeshBasicMaterial({
-            color: 0x00ff88,
+            color: 0x047857,
             wireframe: true,
             transparent: true,
             opacity: 0.1
@@ -160,7 +160,7 @@ const LogisticRegression3D = () => {
         const thresholdGeo = new THREE.PlaneGeometry(10, 10);
         thresholdGeo.rotateX(-Math.PI / 2);
         const thresholdMat = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
+            color: 0x6366F1,
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.15,

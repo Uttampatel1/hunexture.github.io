@@ -4,6 +4,8 @@ import { portfolioData } from '../data/portfolioData'
 import { portfolioProcess, portfolioTech } from '../data/insights'
 import CoverArt from './CoverArt'
 import './PortfolioPage.css'
+import './brand.css'
+
 
 const FILTERS = [
   { id: 'all', label: 'All projects' },
@@ -40,13 +42,13 @@ const PortfolioPage = () => {
         <div className="pfp-hero-inner">
           <div className="pfp-hero-copy">
             <p className="pfp-kicker">Portfolio</p>
-            <h1 id="pfp-title" className="pfp-title">Projects built the way we would build yours</h1>
-            <p className="pfp-lede">
+            <h1 id="pfp-title" className="pfp-title brand-title brand-fade-up">Projects built the way we would build <span className="brand-mark">yours</span></h1>
+            <p className="pfp-lede brand-fade-up brand-delay-1">
               Concept and sample builds across AI, web, mobile, cloud and marketing. Each one shows the problem,
               the architecture and the decisions behind it. Metrics are illustrative; client case studies are
               published only with written permission.
             </p>
-            <dl className="pfp-facts">
+            <dl className="pfp-facts brand-fade-up brand-delay-2">
               <div><dt>{portfolioData.length}</dt><dd>sample builds</dd></div>
               <div><dt>{Object.keys(counts).length - 1}</dt><dd>disciplines</dd></div>
               <div><dt>2 weeks</dt><dd>sprint length</dd></div>
@@ -79,7 +81,7 @@ const PortfolioPage = () => {
           </div>
 
           {featured && (
-            <Link to={`/portfolio/${featured.slug}`} className="pfp-feature">
+            <Link to={`/portfolio/${featured.slug}`} className="pfp-feature brand-card">
               <span className="pfp-feature-art"><CoverArt category={featured.category} seed={featured.id} /></span>
               <span className="pfp-feature-body">
                 <span className="pfp-tag">Featured · {featured.categoryLabel}</span>
@@ -98,12 +100,15 @@ const PortfolioPage = () => {
           <ul className="pfp-grid">
             {rest.map((p) => (
               <li key={p.id}>
-                <Link to={`/portfolio/${p.slug}`} className="pfp-card">
+                <Link to={`/portfolio/${p.slug}`} className="pfp-card brand-card">
                   <span className="pfp-card-art"><CoverArt category={p.category} seed={p.id} /></span>
                   <span className="pfp-card-body">
                     <span className="pfp-tag">{p.categoryLabel}</span>
                     <span className="pfp-card-title">{p.title}</span>
                     <span className="pfp-card-desc">{p.shortDescription}</span>
+                    {p.results?.[0] && (
+                      <span className="pfp-card-stat"><span className="brand-stat-chip"><b>{p.results[0].metric}</b>{p.results[0].label}</span></span>
+                    )}
                     <span className="pfp-card-meta">{p.tags.slice(0, 4).join(' · ')}</span>
                   </span>
                 </Link>

@@ -8,6 +8,8 @@ import { SiReact, SiNodedotjs, SiPython, SiTypescript, SiPostgresql, SiRedis, Si
 import { getServiceBySlug } from '../data/servicesData'
 import { ServiceSchematic } from './ServiceSchematic'
 import './WebDevelopmentPage.css'
+import './brand.css'
+
 
 const WebDevelopmentPage = () => {
     const navigate = useNavigate()
@@ -106,11 +108,11 @@ const WebDevelopmentPage = () => {
                             <div className="wd-hero-badge tech-font">
                                 <FaLaptopCode /> Enterprise Web Engineering
                             </div>
-                            <h1 className="wd-hero-title">
+                            <h1 className="wd-hero-title brand-title brand-fade-up">
                                 Web Applications <br />
-                                <span className="text-gradient">Engineered to Scale</span>
+                                Engineered to <span className="brand-mark">Scale</span>
                             </h1>
-                            <p className="wd-hero-desc">
+                            <p className="wd-hero-desc brand-fade-up brand-delay-1">
                                 We craft premium, high-performance web applications that load instantly, secure your data, and grow with your traffic. Built on modern React frameworks and microservice architectures.
                             </p>
 
@@ -122,7 +124,7 @@ const WebDevelopmentPage = () => {
                                 ))}
                             </div>
 
-                            <div className="wd-hero-cta">
+                            <div className="wd-hero-cta brand-fade-up brand-delay-2">
                                 <button 
                                     className="wd-btn-primary"
                                     onClick={() => {
@@ -182,7 +184,7 @@ const WebDevelopmentPage = () => {
 
                         <div className="wd-benefits-grid">
                             {service.benefits.map((benefit, i) => (
-                                <div key={i} className="wd-benefit-card" style={{ '--delay': `${i * 0.08}s` }}>
+                                <div key={i} className="wd-benefit-card brand-card" style={{ '--delay': `${i * 0.08}s` }}>
                                     <div className="wd-benefit-icon-wrapper">
                                         <FaCheck className="wd-benefit-check" />
                                     </div>

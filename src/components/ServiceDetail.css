@@ -1188,3 +1188,36 @@
 .sd-step-row h3, .sd-uc-row h3 { margin: 0 0 4px; font-size: 1.05rem; color: var(--ink); }
 .sd-step-row p, .sd-uc-row p { margin: 0; font-size: 0.95rem; line-height: 1.55; color: var(--ink-muted); }
 @media (max-width: 900px) { .sd-duo { grid-template-columns: 1fr; } }
+
+/* ── On-brand dark device screens (Neural Night) ───────────── */
+.web-terminal,
+.phone-container,
+.phone-screen {
+  --text-white: #FFFFFF;
+  --text-gray: #B8C0D6;
+  --ink: #FFFFFF;
+  --ink-muted: #B8C0D6;
+  --sd-color: #818CF8;
+  --sd-gradient: #818CF8;
+  --navy-blue: #0B1020;
+  color: #FFFFFF;
+}
+.phone-container { background: #0B1020; border-color: #141B33; }
+.phone-screen { background: #0B1020; }
+.phone-card, .phone-stat-row { background: #141B33; border-color: rgba(129, 140, 248, 0.25); }
+.phone-header, .phone-navbar { background: #141B33; border-color: rgba(184, 192, 214, 0.15); }
+.phone-chart { background: #141B33; }
+.phone-toggle.active { background: #2DE0A7; }
+.phone-toggle.active::after { background: #0B1020; }
+.phone-screen .phone-nav-item.active { color: #2DE0A7; }
+.phone-action-btn { background: #818CF8; color: #0B1020; }
+.web-terminal { background: #0B1020; color: #2DE0A7; border-top: 1px solid #141B33; }
+.web-code-editor { background: #141B33; }
+.line-content { color: #818CF8; }
+.code-cursor { color: #2DE0A7; }
+@keyframes blink { from, to { color: transparent } 50% { color: #2DE0A7 } }
+
+/* labels and badges */
+.sd-hero-tag, .sd-tag { color: var(--signal-deep); }
+.sd-benefit-num { color: var(--accent-deep) !important; }
+.sd-btn-primary { position: relative; overflow: hidden; }

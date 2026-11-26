@@ -5,6 +5,9 @@ import { aiExtra } from '../data/aiExtra'
 import { aiGovernance } from '../data/insights'
 import AIArtifact from './AIArtifact'
 import './AIDetail.css'
+import BrandTitle from './BrandMark'
+import './brand.css'
+
 
 const AIDetail = () => {
   const { slug } = useParams()
@@ -44,10 +47,10 @@ const AIDetail = () => {
               <Link to="/ai">AI</Link><span aria-hidden="true">/</span><span>{ai.name}</span>
             </nav>
             <span className="aid-icon" aria-hidden="true"><Icon /></span>
-            <h1 id="aid-title" className="aid-title">{ai.name}</h1>
-            <p className="aid-headline">{ai.headline}</p>
-            <p className="aid-lede">{ai.description}</p>
-            <div className="aid-actions">
+            <h1 id="aid-title" className="aid-title brand-title brand-fade-up"><BrandTitle text={ai.name} /></h1>
+            <p className="aid-headline brand-fade-up brand-delay-1">{ai.headline}</p>
+            <p className="aid-lede brand-fade-up brand-delay-2">{ai.description}</p>
+            <div className="aid-actions brand-fade-up brand-delay-3">
               <button type="button" className="aid-btn aid-btn--solid" onClick={goContact}>Plan a pilot</button>
               <a className="aid-btn" href="#offers">See what we offer</a>
             </div>

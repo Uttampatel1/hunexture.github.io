@@ -509,11 +509,11 @@ html {
   }
 }
 
-/* Section palettes: each area of the site gets its own signal colour.
-   Everything that reads var(--signal) recolours automatically. */
-.theme-ai  { --signal: #6D28D9; --signal-deep: #4C1D95; --signal-tint: #EDE5FB; --accent-color: #6D28D9; }
-.theme-ind { --signal: #0F766E; --signal-deep: #134E4A; --signal-tint: #D8F1ED; --accent-color: #0F766E; }
-.theme-pf  { --signal: #C2410C; --signal-deep: #7C2D12; --signal-tint: #FCE6D8; --accent-color: #C2410C; }
+/* Section palettes: on-brand only (ink, indigo, mint). Sections stay subtly
+   distinct through how much mint sits in the tint, never through new hues. */
+.theme-ai  { --signal: #6366F1; --signal-deep: #4338CA; --signal-tint: #E8E9FD; --accent-color: #6366F1; }
+.theme-ind { --signal: #6366F1; --signal-deep: #4338CA; --signal-tint: #D5F9EC; --accent-color: #6366F1; }
+.theme-pf  { --signal: #6366F1; --signal-deep: #4338CA; --signal-tint: #E8E9FD; --accent-color: #4338CA; }
 
 /* Mint highlight animations: reduced motion shows the finished state */
 @media (prefers-reduced-motion: reduce) {

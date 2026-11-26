@@ -102,7 +102,7 @@ const MatrixTransformation3D = () => {
 
         // Draw Arrows
         arrowInputRef.current = createArrow(vx, vy, vz, 0x6366F1); // Yellow
-        arrowOutputRef.current = createArrow(outputX, outputY, outputZ, 0x2DE0A7); // Cyan
+        arrowOutputRef.current = createArrow(outputX, outputY, outputZ, 0x047857); // Cyan
         scene.add(arrowInputRef.current);
         scene.add(arrowOutputRef.current);
 

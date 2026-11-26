@@ -145,3 +145,4 @@
   .aid-path li, .aid-path-dot { animation: none !important; }
   .aid-offer-body, .aid-faq-a, .aid-related a { transition: none; }
 }
+.aid-crumbs, .aid-eyebrow { color: var(--signal-deep); }

@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - source  # Trigger deployment when pushing to source branch
+      - main  # Every push to main builds and publishes the site
   workflow_dispatch:  # Allow manual trigger from GitHub Actions tab
 
 permissions:
@@ -16,13 +16,11 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
-        with:
-          ref: source
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -30,13 +28,15 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          CI: false  # don't fail the deploy on lint warnings
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          publish_branch: main
+          publish_branch: gh-pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Deploy: ${{ github.event.head_commit.message }}'

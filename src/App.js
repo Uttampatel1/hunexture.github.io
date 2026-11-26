@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
@@ -8,20 +8,6 @@ import Services from './components/Services'
 import Portfolio from './components/Portfolio'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import ServiceDetail from './components/ServiceDetail'
-import ProjectDetail from './components/ProjectDetail'
-import IndustryDetail from './components/IndustryDetail'
-import AIDetail from './components/AIDetail'
-import AISolutionsPage from './components/AISolutionsPage'
-import WebDevelopmentPage from './components/WebDevelopmentPage'
-import ServicesList from './components/ServicesList'
-import IndustriesList from './components/IndustriesList'
-import AIList from './components/AIList'
-import BusinessProfile from './components/BusinessProfile'
-import PortfolioPage from './components/PortfolioPage'
-import PrivacyPolicy from './components/PrivacyPolicy'
-import TermsOfService from './components/TermsOfService'
-import CookiePolicy from './components/CookiePolicy'
 import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
 import WorkingWithUs from './components/WorkingWithUs'
@@ -30,6 +16,24 @@ import CookieBanner from './components/CookieBanner'
 import WhatsAppFAB from './components/WhatsAppFAB'
 import RouteSeo from './components/RouteSeo'
 import './App.css'
+
+// Route-level code splitting (home, navbar, footer stay eager)
+const ServiceDetail = lazy(() => import('./components/ServiceDetail'))
+const ProjectDetail = lazy(() => import('./components/ProjectDetail'))
+const IndustryDetail = lazy(() => import('./components/IndustryDetail'))
+const AIDetail = lazy(() => import('./components/AIDetail'))
+const AISolutionsPage = lazy(() => import('./components/AISolutionsPage'))
+const WebDevelopmentPage = lazy(() => import('./components/WebDevelopmentPage'))
+const ServicesList = lazy(() => import('./components/ServicesList'))
+const IndustriesList = lazy(() => import('./components/IndustriesList'))
+const AIList = lazy(() => import('./components/AIList'))
+const BusinessProfile = lazy(() => import('./components/BusinessProfile'))
+const PortfolioPage = lazy(() => import('./components/PortfolioPage'))
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'))
+const TermsOfService = lazy(() => import('./components/TermsOfService'))
+const CookiePolicy = lazy(() => import('./components/CookiePolicy'))
+
+const RouteFallback = () => <div aria-busy="true" style={{ minHeight: '70vh' }} />
 
 // Home page component
 const HomePage = () => (
@@ -74,6 +78,7 @@ function App() {
     <ThemeProvider>
       <Router>
         <Layout>
+          <Suspense fallback={<RouteFallback />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesList />} />
@@ -96,6 +101,7 @@ function App() {
             <Route path="/cookie-policy" element={<CookiePolicy />} />
             <Route path="/blog/*" element={<Navigate to="/" replace />} />
           </Routes>
+          </Suspense>
         </Layout>
       </Router>
     </ThemeProvider>

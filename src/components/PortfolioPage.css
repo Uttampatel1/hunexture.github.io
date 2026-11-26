@@ -120,3 +120,7 @@
   .pfp-marquee-track { animation: none; flex-wrap: wrap; width: auto; padding: 0 32px; }
   .pfp-card, .pfp-feature-art .ca, .pfp-card-art .ca { transition: none; }
 }
+
+.pfp-tag, .pfp-kicker { color: var(--signal-deep); text-transform: uppercase; letter-spacing: 0.08em; }
+.pfp-chip-n { color: var(--accent-deep); }
+.pfp-card-stat { margin-top: 4px; }

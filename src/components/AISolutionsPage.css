@@ -71,3 +71,4 @@
 @media (prefers-reduced-motion: reduce) {
   .aisp-card, .aisp-ind a, .aisp-card-go svg { transition: none; }
 }
+.aisp-card-n { color: var(--accent-deep); }

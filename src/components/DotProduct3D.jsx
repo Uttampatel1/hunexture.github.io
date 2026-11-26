@@ -88,7 +88,7 @@ const DotProduct3D = () => {
 
         // Draw Arrows
         arrowARef.current = createArrow(ax, ay, az, 0x6366F1); // Yellow
-        arrowBRef.current = createArrow(bx, by, bz, 0x2DE0A7); // Cyan
+        arrowBRef.current = createArrow(bx, by, bz, 0x047857); // Cyan
         scene.add(arrowARef.current);
         scene.add(arrowBRef.current);
 

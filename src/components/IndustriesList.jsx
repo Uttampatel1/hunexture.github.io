@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { industriesData } from '../data/industriesData'
 import { industryMeta, industryClusters, industryDemand } from '../data/insights'
 import './IndustriesList.css'
+import './brand.css'
+
 
 const CLUSTER_LABEL = Object.fromEntries(industryClusters.map((c) => [c.id, c.label]))
 
@@ -38,12 +40,12 @@ const IndustriesList = () => {
         <div className="il-hero-inner">
           <div className="il-hero-copy">
             <p className="il-kicker">Industries</p>
-            <h1 id="il-title" className="il-title">Software shaped by the rules of your sector</h1>
-            <p className="il-lede">
+            <h1 id="il-title" className="il-title brand-title brand-fade-up">Software shaped by the rules of your <span className="brand-mark">sector</span></h1>
+            <p className="il-lede brand-fade-up brand-delay-1">
               Healthcare needs consent trails, finance needs ledgers that reconcile, retail needs stock that is
               right on every channel. We start from those requirements, not from a template.
             </p>
-            <dl className="il-facts">
+            <dl className="il-facts brand-fade-up brand-delay-2">
               <div><dt>{industriesData.length}</dt><dd>sectors</dd></div>
               <div><dt>{new Set(Object.values(industryMeta).flatMap((m) => m.regs)).size}</dt><dd>standards mapped</dd></div>
               <div><dt>4</dt><dd>sector groups</dd></div>
@@ -97,7 +99,7 @@ const IndustriesList = () => {
               const meta = industryMeta[ind.slug]
               return (
                 <li key={ind.slug}>
-                  <Link to={`/industries/${ind.slug}`} className="il-card">
+                  <Link to={`/industries/${ind.slug}`} className="il-card brand-card">
                     <span className="il-card-top">
                       <span className="il-icon" aria-hidden="true"><Icon /></span>
                       <span className="il-card-group">{CLUSTER_LABEL[meta?.cluster]}</span>

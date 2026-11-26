@@ -5,6 +5,9 @@ import { getServiceBySlug } from '../data/servicesData'
 import { textTone } from '../utils/color'
 import { ServiceSchematic } from './ServiceSchematic'
 import './ServiceDetail.css'
+import BrandTitle from './BrandMark'
+import './brand.css'
+
 
 // One accent for every service, matching the Home page. Per-service rainbow gradients are gone.
 const BLUEPRINT_ACCENT = { primary: '#6366F1', gradient: '#4338CA' }
@@ -84,8 +87,8 @@ const ServiceDetail = ({ serviceSlug }) => {
               </div>
 
               <div className="sd-hero-tag tech-font">{service.shortDescription}</div>
-              <h1 className="sd-hero-title">{service.title}</h1>
-              <p className="sd-hero-desc">{service.description}</p>
+              <h1 className="sd-hero-title brand-title brand-fade-up"><BrandTitle text={service.title} /></h1>
+              <p className="sd-hero-desc brand-fade-up brand-delay-1">{service.description}</p>
 
               <div className="sd-feature-badges">
                 {service.features?.map((f, i) => (
@@ -95,7 +98,7 @@ const ServiceDetail = ({ serviceSlug }) => {
                 ))}
               </div>
 
-              <div className="sd-hero-cta">
+              <div className="sd-hero-cta brand-fade-up brand-delay-2">
                 <button
                   className="sd-btn-primary"
                   onClick={() => {
@@ -148,7 +151,7 @@ const ServiceDetail = ({ serviceSlug }) => {
 
             <div className="sd-benefits-grid">
               {service.benefits.map((benefit, i) => (
-                <div key={i} className="sd-benefit-card" style={{ '--delay': `${i * 0.08}s` }}>
+                <div key={i} className="sd-benefit-card brand-card" style={{ '--delay': `${i * 0.08}s` }}>
                   <div
                     className="sd-benefit-check"
                     style={{ background: `${colors.primary}20`, border: `1px solid ${colors.primary}50` }}

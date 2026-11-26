@@ -134,3 +134,5 @@
   .al-fig-packet { display: none; }
   .al-card, .al-layer, .al-faq-a { transition: none; }
 }
+.al-kicker, .al-card-count { color: var(--signal-deep); text-transform: uppercase; letter-spacing: 0.08em; }
+.al-card-n, .al-card-num { color: var(--accent-deep); }

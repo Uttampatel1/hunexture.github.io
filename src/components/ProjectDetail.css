@@ -843,3 +843,22 @@
   border-color: rgba(255, 255, 255, 0.4);
 }
 .project-hero .project-hero-icon { color: #fff; }
+
+/* ── Results stat row (Neural Night) ───────────────────────── */
+.results-grid { gap: 1.25rem; }
+.results-section .result-card { cursor: default; padding: 2rem 1.5rem; text-align: left; }
+.results-section .result-metric {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  color: var(--ink);
+  background: linear-gradient(var(--accent), var(--accent)) no-repeat left bottom / 100% 6px;
+  padding-bottom: 6px;
+  margin-bottom: 0.75rem;
+}
+.results-section .result-label { font-size: 0.95rem; color: var(--ink-muted); }
+.info-label, .project-category-badge { letter-spacing: 0.08em; }
+.info-label { color: var(--signal-deep); text-transform: uppercase; }
+.project-hero .project-hero-content h1 { line-height: 1.12; }

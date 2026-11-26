@@ -9,6 +9,8 @@ import { formatStat, getStat } from '../data/companyData'
 import AIArtifact from './AIArtifact'
 import './AIDetail.css'
 import './AISolutionsPage.css'
+import './brand.css'
+
 
 const expertiseData = [
     {
@@ -198,9 +200,9 @@ const AISolutionsPage = () => {
                             <Link to="/">Home</Link><span aria-hidden="true">/</span><span>AI solutions</span>
                         </nav>
                         <span className="aid-icon" aria-hidden="true"><FaBrain /></span>
-                        <h1 id="aisp-title" className="aid-title">AI solutions that go to production</h1>
-                        <p className="aid-headline">Artificial intelligence company in India and the USA</p>
-                        <p className="aid-lede">
+                        <h1 id="aisp-title" className="aid-title brand-title brand-fade-up">AI solutions that go to <span className="brand-mark">production</span></h1>
+                        <p className="aid-headline brand-fade-up brand-delay-1">Artificial intelligence company in India and the USA</p>
+                        <p className="aid-lede brand-fade-up brand-delay-2">
                             We help you apply AI where it pays back: automating routine work, reading documents and images,
                             forecasting demand and supporting decisions. Start with a small pilot, keep what works.
                         </p>
@@ -227,7 +229,7 @@ const AISolutionsPage = () => {
                             const Icon = ai.icon
                             return (
                                 <li key={ai.slug}>
-                                    <Link to={`/ai/${ai.slug}`} className="aisp-card">
+                                    <Link to={`/ai/${ai.slug}`} className="aisp-card brand-card">
                                         <span className="aisp-card-top">
                                             <span className="aisp-card-ico" aria-hidden="true"><Icon /></span>
                                             <span className="aisp-card-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>

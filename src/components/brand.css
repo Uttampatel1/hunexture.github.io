@@ -1,0 +1,90 @@
+/* Shared Neural Night brand patterns (mirrors Hero.css treatment) */
+
+/* Mint highlight block behind ONE headline word, left-to-right sweep */
+.brand-mark {
+  color: var(--ink);
+  padding: 0 0.12em;
+  border-radius: var(--radius-sm);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: left 85%;
+  background-size: 100% 78%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  animation: brand-mark-sweep 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s backwards;
+}
+@keyframes brand-mark-sweep {
+  from { background-size: 0% 78%; }
+  to { background-size: 100% 78%; }
+}
+
+/* headline leading so the mark never clips the line above */
+h1.brand-title, h2.brand-title { line-height: 1.12; }
+
+/* staggered entrance */
+.brand-fade-up { animation: brand-fade-up 0.6s ease both; }
+.brand-delay-1 { animation-delay: 0.08s; }
+.brand-delay-2 { animation-delay: 0.16s; }
+.brand-delay-3 { animation-delay: 0.24s; }
+.brand-delay-4 { animation-delay: 0.32s; }
+@keyframes brand-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* card: lift + indigo border + growing brand-glow top bar */
+.brand-card { position: relative; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+.brand-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--brand-glow);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+.brand-card:hover, .brand-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--signal);
+  box-shadow: 0 14px 30px rgba(99, 102, 241, 0.16);
+}
+.brand-card:hover::before, .brand-card:focus-visible::before { transform: scaleX(1); }
+
+/* primary pill button: lift + sheen */
+.brand-btn-primary { position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
+.brand-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(99, 102, 241, 0.35); }
+.brand-btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 60%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: translateX(-120%) skewX(-20deg);
+  pointer-events: none;
+}
+.brand-btn-primary:hover::after {
+  transform: translateX(260%) skewX(-20deg);
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* labels and numeric badges */
+.brand-eyebrow { font-family: var(--font-annot); text-transform: uppercase; letter-spacing: 0.08em; color: var(--signal-deep); }
+.brand-badge-num { font-family: var(--font-annot); color: var(--accent-deep); }
+
+/* proof stats */
+.brand-stat-chip {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  padding: 3px 10px; border-radius: var(--radius-pill);
+  background: var(--accent-tint); color: var(--ink);
+  font-size: 0.78rem; font-weight: 600;
+}
+.brand-stat-chip b { font-family: var(--font-display); color: var(--accent-deep); font-weight: 800; }
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-mark, .brand-fade-up { animation: none; }
+  .brand-card, .brand-card::before, .brand-btn-primary, .brand-btn-primary::after { transition: none; }
+  .brand-card:hover, .brand-btn-primary:hover { transform: none; }
+}

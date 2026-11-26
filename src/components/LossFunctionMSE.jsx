@@ -124,7 +124,7 @@ const LossFunctionMSE = () => {
         const p1 = toScreen(startX, startY, width, height);
         const p2 = toScreen(endX, endY, width, height);
 
-        ctx.strokeStyle = '#2DE0A7';
+        ctx.strokeStyle = '#047857';
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
@@ -270,7 +270,7 @@ const LossFunctionMSE = () => {
             new THREE.Vector3(0, -10, 0)
         ]);
         const lineMat = new THREE.LineBasicMaterial({
-            color: 0x2DE0A7,
+            color: 0x047857,
             transparent: true,
             opacity: 0.5
         });

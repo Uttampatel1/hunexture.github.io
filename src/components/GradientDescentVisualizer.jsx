@@ -125,7 +125,7 @@ const GradientDescentVisualizer = () => {
         const p1 = toScreen(startX, startY, width, height);
         const p2 = toScreen(endX, endY, width, height);
 
-        ctx.strokeStyle = '#2DE0A7';
+        ctx.strokeStyle = '#047857';
         ctx.lineWidth = 3;
         ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
 

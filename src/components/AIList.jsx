@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { aiData } from '../data/aiData'
 import { aiTrends, aiStackLayers, aiProcess, aiGovernance, aiFaq } from '../data/insights'
 import './AIList.css'
+import './brand.css'
+
 
 /* Hero artifact: how a question travels through a retrieval-based assistant. */
 const PipelineFigure = () => (
@@ -75,12 +77,12 @@ const AIList = () => {
         <div className="al-hero-inner">
           <div className="al-hero-copy">
             <p className="al-kicker">AI engineering</p>
-            <h1 id="al-title" className="al-title">AI that works on your data and stays under your control</h1>
-            <p className="al-lede">
+            <h1 id="al-title" className="al-title brand-title brand-fade-up">AI that works on your data and stays under your <span className="brand-mark">control</span></h1>
+            <p className="al-lede brand-fade-up brand-delay-1">
               Agents, retrieval, vision and forecasting, built with test sets, access control and cost limits from
               the first week. We pick the smallest model that meets your quality bar.
             </p>
-            <div className="al-actions">
+            <div className="al-actions brand-fade-up brand-delay-2">
               <button type="button" className="al-btn al-btn--solid" onClick={goContact}>Plan an AI pilot</button>
               <a href="#solutions" className="al-btn">See what we build</a>
             </div>
@@ -117,7 +119,7 @@ const AIList = () => {
               const Icon = ai.icon
               return (
                 <li key={ai.id}>
-                  <Link to={`/ai/${ai.slug}`} className="al-card">
+                  <Link to={`/ai/${ai.slug}`} className="al-card brand-card">
                     <span className="al-card-top">
                       <span className="al-icon" aria-hidden="true"><Icon /></span>
                       <span className="al-card-count">{ai.whatWeOffer?.length || 0} offers</span>

@@ -5,6 +5,9 @@ import { FaArrowLeft, FaCheck, FaExternalLinkAlt, FaGithub, FaClock, FaUsers, Fa
 import { getProjectBySlug, getRelatedProjects } from '../data/portfolioData';
 import CoverArt from './CoverArt';
 import './ProjectDetail.css';
+import BrandTitle from './BrandMark'
+import './brand.css'
+
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -67,11 +70,12 @@ const ProjectDetail = () => {
             </motion.span>
 
             <motion.h1
+              className="brand-title"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              {project.title}
+              <BrandTitle text={project.title} />
             </motion.h1>
 
             <motion.p
@@ -221,7 +225,7 @@ const ProjectDetail = () => {
                 return (
                   <motion.div
                     key={index}
-                    className="feature-card"
+                    className="feature-card brand-card"
                     initial={{ y: 50, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true }}
@@ -255,7 +259,7 @@ const ProjectDetail = () => {
                 return (
                   <motion.div
                     key={index}
-                    className="tech-card"
+                    className="tech-card brand-card"
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
@@ -342,7 +346,7 @@ const ProjectDetail = () => {
                   return (
                     <motion.div
                       key={relatedProject.id}
-                      className="related-project-card"
+                      className="related-project-card brand-card"
                       initial={{ y: 50, opacity: 0 }}
                       whileInView={{ y: 0, opacity: 1 }}
                       viewport={{ once: true }}

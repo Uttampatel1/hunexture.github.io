@@ -17,6 +17,7 @@ const Navbar = () => {
   const closeTimer = useRef(null)
   const navigate = useNavigate()
   const location = useLocation()
+  const [activeSection, setActiveSection] = useState(null)
 
   useEffect(() => () => clearTimeout(closeTimer.current), [])
 
@@ -67,6 +68,42 @@ const Navbar = () => {
       }, 100)
     }
   }, [location])
+
+  // Scroll-spy on the home route: mark the nav link whose section is in view
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setActiveSection(null)
+      return undefined
+    }
+    if (typeof IntersectionObserver === 'undefined') return undefined
+    const ids = ['about', 'services', 'contact']
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+          else setActiveSection((cur) => (cur === entry.target.id ? null : cur))
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    )
+    ids.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [location.pathname])
+
+  const path = location.pathname
+  const isActive = (name) => {
+    if (name === 'industries') return path.startsWith('/industries')
+    if (name === 'ai') return path.startsWith('/ai')
+    if (name === 'portfolio') return path.startsWith('/portfolio')
+    return path === '/' && activeSection === name
+  }
+  const activeProps = (name) =>
+    isActive(name) ? { 'aria-current': 'true' } : {}
+  const linkClass = (name, extra = '') =>
+    `nav-link${extra ? ' ' + extra : ''}${isActive(name) ? ' active' : ''}`
 
   const handleIndustryClick = (slug) => {
     closeAll()
@@ -120,7 +157,8 @@ const Navbar = () => {
           {/* About */}
           <a
             href="#about"
-            className="nav-link"
+            className={linkClass('about')}
+            {...activeProps('about')}
             onClick={(e) => handleNavClick(e, '#about')}
           >
             About
@@ -129,7 +167,8 @@ const Navbar = () => {
           {/* Services */}
           <a
             href="#services"
-            className="nav-link"
+            className={linkClass('services')}
+            {...activeProps('services')}
             onClick={(e) => handleNavClick(e, '#services')}
           >
             Services
@@ -142,7 +181,8 @@ const Navbar = () => {
             onMouseLeave={hoverClose}
           >
             <button
-              className="nav-link dropdown-trigger"
+              className={linkClass('industries', 'dropdown-trigger')}
+              {...activeProps('industries')}
               onClick={() => tapToggle('industries')}
               aria-expanded={openMenu === 'industries'}
             >
@@ -209,7 +249,8 @@ const Navbar = () => {
             onMouseLeave={hoverClose}
           >
             <button
-              className="nav-link dropdown-trigger"
+              className={linkClass('ai', 'dropdown-trigger')}
+              {...activeProps('ai')}
               onClick={() => tapToggle('ai')}
               aria-expanded={openMenu === 'ai'}
             >
@@ -266,7 +307,8 @@ const Navbar = () => {
           {/* Portfolio */}
           <a
             href="/portfolio"
-            className="nav-link"
+            className={linkClass('portfolio')}
+            {...activeProps('portfolio')}
             onClick={(e) => { e.preventDefault(); navigate('/portfolio') }}
           >
             Portfolio
@@ -275,7 +317,8 @@ const Navbar = () => {
           {/* Contact */}
           <a
             href="#contact"
-            className="nav-link"
+            className={linkClass('contact')}
+            {...activeProps('contact')}
             onClick={(e) => handleNavClick(e, '#contact')}
           >
             Contact
