@@ -30,6 +30,25 @@ jobs:
         run: npm run build
         env:
           CI: false  # don't fail the deploy on lint warnings
+          # Set these under Settings → Secrets and variables → Actions → Variables.
+          # Empty = feature stays off (see .env.example).
+          REACT_APP_FORMSUBMIT_ID: ${{ vars.REACT_APP_FORMSUBMIT_ID }}
+          REACT_APP_PLAUSIBLE_DOMAIN: ${{ vars.REACT_APP_PLAUSIBLE_DOMAIN }}
+          REACT_APP_GA_ID: ${{ vars.REACT_APP_GA_ID }}
+
+      # Social preview: render public/og-image.svg to the 1200x630 PNG that
+      # og:image points at. Non-fatal: if anything fails, the committed PNG stays.
+      - name: Render social preview image
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin fontconfig
+          mkdir -p ~/.fonts
+          curl -fsSL -o ~/.fonts/SpaceGrotesk.ttf "https://github.com/google/fonts/raw/main/ofl/spacegrotesk/SpaceGrotesk%5Bwght%5D.ttf"
+          curl -fsSL -o ~/.fonts/Inter.ttf "https://github.com/google/fonts/raw/main/ofl/inter/Inter%5Bopsz,wght%5D.ttf"
+          fc-cache -f >/dev/null
+          rsvg-convert -w 1200 -h 630 public/og-image.svg -o /tmp/og-image.png
+          test -s /tmp/og-image.png && cp /tmp/og-image.png build/og-image.png
+          ls -l build/og-image.png
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

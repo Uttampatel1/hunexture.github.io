@@ -15,53 +15,66 @@ export const articles = [
         heading: 'Start with the real question',
         paragraphs: [
           'Many owners ask us for an app. When we ask why, the answer is usually "customers should find us easily" or "we want to look serious". A website can do both.',
-          'An app is a bigger commitment. It needs design for two phones, store approvals, updates, and a reason for people to install it. So the first question is not "app or website". It is "what do my customers need to do, and how often?"'
+          'An app is a bigger commitment. It needs design for two kinds of phones, store approvals, updates, and a reason for people to install it. So the first question is not "app or website". It is "what do my customers need to do, and how often?"'
         ]
       },
       {
         heading: 'When a better website is enough',
         paragraphs: [
-          'If people visit you once in a while, they will not install anything. They will search, tap a link, read, and call or message you. A good website wins here.'
+          'If people visit you once in a while, they will not install anything. They will search, tap a link, read, and call or message you. A good website fits this well.'
         ],
         bullets: [
           'Customers want to see what you offer, your prices or your location.',
           'Most enquiries come from Google or WhatsApp.',
           'You want bookings, enquiries or callback requests, not daily use.',
-          'Your budget is limited and you need results soon.'
+          'Your budget is limited and you need to start soon.'
         ]
       },
       {
         heading: 'What "better" really means',
         paragraphs: [
-          'A better website is not a prettier one. It is one that loads fast on a cheap phone, says clearly what you do in the first few lines, and makes the next step obvious.',
-          'For example, a local clinic could put "Book a visit on WhatsApp" at the top of every page, list its timings, and show a map. That small change can do more than a new app.'
+          'A better website is not a prettier one. It loads fast on a basic phone, says clearly what you do in the first few lines, and makes the next step obvious.',
+          'For example, a local clinic could put "Book a visit on WhatsApp" at the top of every page, list its timings, and show a map. A small change like this may help more than a new app.'
         ],
         bullets: [
           'Fast on mobile data, not only on office Wi-Fi.',
           'One clear action on every page: call, message or book.',
           'Simple words. No long paragraphs about "our journey".',
           'Real photos, real address, real phone number.',
-          'A WhatsApp button, because that is where Indian customers already are.'
+          'A WhatsApp button, because many of your customers already use it daily.'
         ]
       },
       {
         heading: 'When an app starts to make sense',
         paragraphs: [
-          'An app earns its cost when people come back again and again, or when the phone itself is needed.'
+          'An app earns its cost when people come back again and again, or when you need the phone itself.'
         ],
         bullets: [
           'Customers use it often, like weekly ordering, tracking or learning.',
           'You need phone features such as camera, location, offline use or push alerts.',
           'Your staff need a tool in the field, like a delivery or service team.',
-          'You have a loyalty or subscription model that depends on repeat visits.'
+          'Your loyalty or subscription model depends on repeat visits.'
         ]
       },
       {
         heading: 'A middle path',
         paragraphs: [
-          'You do not have to choose fully. A modern website can work like an app. It can be added to the phone home screen, load fast, and remember a customer. This costs much less than two separate apps.',
-          'Many businesses start with a strong website, watch how customers behave for a few months, and only then decide on an app. This way the app is built on facts, not guesses.',
-          'Costs vary a lot by scope. As a rough example, a focused website is often a fraction of what a full app costs, and an app also needs yearly upkeep. We will give you a clear number after we understand your needs.'
+          'You do not have to choose fully. A modern website can be added to the phone home screen, load fast, and remember a customer. This is usually cheaper than building separate apps for each phone type.',
+          'Many businesses start with a strong website, watch how customers behave for a few months, and only then decide on an app. That way the app is built on facts, not guesses.',
+          'Costs vary a lot by scope. As a rough example, a focused website usually costs well below a full app, and an app also needs yearly upkeep. We will give you a clear number after we understand your needs.'
+        ]
+      },
+      {
+        heading: 'Common mistakes we see',
+        paragraphs: [
+          'The same mistakes repeat, whatever the size of the business. Knowing them early saves money.',
+          'The biggest one is building for how the business looks, not for how customers behave. A feature nobody asked for is still a cost. It has to be built, tested and kept running.'
+        ],
+        bullets: [
+          'Copying a big brand\'s app when your customers only need a phone number and a map.',
+          'Paying for a design that looks good but loads slowly on a basic phone.',
+          'Skipping basics like address, timings and photos on your Google listing.',
+          'Having no plan to update the site or app after launch.'
         ]
       },
       {
@@ -72,35 +85,22 @@ export const articles = [
         bullets: [
           'How many times a month will one customer need it?',
           'Can the same thing be done with a web page and WhatsApp?',
-          'Who will update the app and answer store reviews?',
+          'Who will update the app and reply to store reviews?',
           'What happens if only a few people install it?'
-        ]
-      },
-      {
-        heading: 'Common mistakes we see',
-        paragraphs: [
-          'Some mistakes repeat, whatever the size of the business. Knowing them early saves money.',
-          'The biggest one is building for how the business looks, not for how customers behave. A feature nobody asked for is still a cost. It has to be built, tested and kept running.'
-        ],
-        bullets: [
-          'Copying a big brand\'s app when your customers only need a phone number and a map.',
-          'Paying for a design that looks good but loads slowly on a basic phone.',
-          'Skipping basic search listing details like address, timings and photos.',
-          'Having no plan to update the site or app after launch.'
         ]
       },
       {
         heading: 'How to start this week',
         paragraphs: [
-          'You do not need a big plan to begin. Open your website on your own phone, on mobile data. Time how long it takes. Try to book or enquire as a new customer would. Note where you get stuck.',
-          'Then check your last twenty enquiries. How many came by call, WhatsApp, Google or walk-in? This tells you where your customers already are, and that is where to invest first.'
+          'You do not need a big plan to begin. Open your website on your own phone, on mobile data. Time how long it takes to load. Then try to book or enquire as a new customer would, and note where you get stuck.',
+          'Next, check your last twenty enquiries. How many came by call, WhatsApp, Google or walk-in? This shows where your customers already are, and that is where to invest first.'
         ]
       },
       {
         heading: "What we'd do",
         paragraphs: [
           'We would start with the website. Make it fast, clear and easy to act on. Add WhatsApp and a simple booking or enquiry form. Then look at real visits and questions for a few months.',
-          'If the data shows people coming back often, or your team needs a field tool, we would plan an app with you. If not, we will say so, and save you the cost.'
+          'If people come back often, or your team needs a field tool, we would plan an app with you. If not, we will say so and save you the cost.'
         ]
       }
     ]
@@ -108,7 +108,7 @@ export const articles = [
   {
     slug: 'whatsapp-automation-what-to-automate-first',
     title: 'WhatsApp automation for Indian businesses: what to automate first',
-    description: 'WhatsApp is where your customers already are. Here is a simple order for automating it, starting with the easy wins.',
+    description: 'A simple order for automating WhatsApp, from instant replies to reminders, and the Meta rules you need to follow along the way.',
     category: 'Automation',
     date: DATE,
     readMinutes: 4,
@@ -117,22 +117,36 @@ export const articles = [
       {
         heading: 'Why WhatsApp first',
         paragraphs: [
-          'In India, people message a business before they call or email. They ask price, timing, availability and order status. Many of these questions repeat all day.',
-          'That is good news. Repeated questions are the best thing to automate. But doing everything at once usually goes wrong. Here is the order we suggest.'
+          'In India, many people message a business before they call or email. They ask price, timing, availability and order status. Many of these questions repeat all day.',
+          'Repeated questions are the best thing to automate. But doing everything at once usually goes wrong. Here is the order we suggest.'
         ]
       },
       {
-        heading: '1. Instant replies and business hours',
+        heading: 'Know the WhatsApp rules first',
         paragraphs: [
-          'Start small. Set up a greeting, a short menu and an away message for after-hours. The customer knows you got the message and what happens next.',
-          'This takes little effort and removes the "no one replied" problem on day one.'
+          'Business automation should run on the official WhatsApp Business Platform (Cloud API), which comes through Meta or an approved provider. Automating a personal or regular app number is risky and can get the number blocked.',
+          'Three rules shape everything. When a customer messages you, you can reply freely for 24 hours. After that window, or if you want to message first, you must use a message template that Meta has approved. And you must have the customer\'s opt-in before sending business-initiated messages.'
+        ],
+        bullets: [
+          'Use a number dedicated to the business.',
+          'Ask customers before sending reminders or offers.',
+          'Let people say "stop" and respect it.',
+          'Expect a short setup period for business verification and template approval.',
+          'Meta may charge for some message types, so check current rates before you plan volumes.'
+        ]
+      },
+      {
+        heading: '1. Instant replies and a greeting',
+        paragraphs: [
+          'Start small. Set up a greeting, a short menu and an after-hours message. The customer knows you got the message and what happens next.',
+          'This takes little effort. It also removes the "no one replied" problem early.'
         ]
       },
       {
         heading: '2. Answers to common questions',
         paragraphs: [
-          'Write down the ten questions your team answers most. Prices, location, timings, delivery areas, payment options, return rules.',
-          'Turn these into ready answers. A chatbot can pick the right one, even if the customer writes in Hinglish, Hindi, Gujarati or English with spelling mistakes.'
+          'Write down the ten questions your team answers most. Prices, location, timings, delivery areas, payment options including UPI, return rules.',
+          'Turn these into ready answers. A chatbot can pick the right one, even if the customer writes in Hinglish, Hindi, Gujarati or English with spelling mistakes. Test this with real chats, because it will not be perfect.'
         ],
         bullets: [
           'Use your own real answers, not generic text.',
@@ -150,15 +164,15 @@ export const articles = [
       {
         heading: '4. Reminders and follow-ups',
         paragraphs: [
-          'Once bookings and orders are flowing, add reminders. Appointment tomorrow. Payment pending. Order shipped. These save missed visits and many small phone calls.',
-          'Use approved message templates and take customer consent. WhatsApp has rules for business messages, and following them protects your number.'
+          'Once bookings and orders are flowing, add reminders. Appointment tomorrow. Payment pending. Order shipped. These can cut missed visits and many small phone calls.',
+          'These are business-initiated messages. They need an approved template and the customer\'s opt-in, as covered above.'
         ]
       },
       {
         heading: '5. Connect it to your tools',
         paragraphs: [
-          'Only after the basics work, connect WhatsApp to your sheet, CRM or billing tool. Then a new lead can appear in your system without anyone copying and pasting.',
-          'This is where automation saves the most hours, but it needs the earlier steps to be stable first.'
+          'Only after the basics work, connect WhatsApp to your sheet, CRM or billing tool. Then a new lead can appear in your system without anyone copying and pasting. It can also help produce GST invoices from confirmed orders.',
+          'This is where automation can save the most hours, but it needs the earlier steps to be stable first.'
         ]
       },
       {
@@ -174,19 +188,6 @@ export const articles = [
         ]
       },
       {
-        heading: 'Getting WhatsApp set up properly',
-        paragraphs: [
-          'Automation on a personal WhatsApp number is risky. Business automation should run on the WhatsApp Business Platform, with an approved business profile.',
-          'This gives you templates for reminders, clear opt-in, and a number that is less likely to be blocked. It also needs a short setup period, so plan for that.'
-        ],
-        bullets: [
-          'Use a number dedicated to the business.',
-          'Ask customers before sending reminders or offers.',
-          'Let people say "stop" and respect it.',
-          'Keep a real person available during business hours.'
-        ]
-      },
-      {
         heading: 'How to know it is working',
         paragraphs: [
           'Pick two or three simple numbers before you start. How long does a customer wait for the first reply? How many chats needed a person? How many enquiries turned into bookings or orders?',
@@ -197,7 +198,7 @@ export const articles = [
       {
         heading: "What we'd do",
         paragraphs: [
-          'We would read your last month of chats with you and list the top repeated questions. Then we would build steps 1 and 2 in a few weeks, with a clear hand-off to your team.',
+          'We would read your last month of chats with you and list the top repeated questions. We would also set up the official WhatsApp Business Platform properly, with opt-in and templates. Then we would build steps 1 and 2 with a clear hand-off to your team.',
           'After that we measure what customers actually do, fix gaps, and add bookings and reminders. Small steps, checked each time. If a step does not help, we stop and tell you.'
         ]
       }
@@ -205,11 +206,11 @@ export const articles = [
   },
   {
     slug: 'ai-features-you-can-trust',
-    title: 'How we ship AI features you can trust: evals, guardrails and human review',
-    description: 'AI can be wrong. This is how we test it, limit it and keep people in the loop before it talks to your customers.',
+    title: 'How we test AI before it talks to your customers',
+    description: 'AI can be wrong. This is how we test it, set limits and keep a person in the loop before an AI feature goes live for your customers.',
     category: 'AI Quality',
     date: DATE,
-    readMinutes: 5,
+    readMinutes: 4,
     tags: ['AI', 'Testing', 'Safety'],
     sections: [
       {
@@ -223,12 +224,12 @@ export const articles = [
         heading: 'Evals: a test set before launch',
         paragraphs: [
           'An eval is a list of real questions with the answers we expect. We run the AI against the list and check how often it gets them right. Think of it as an exam.',
-          'We build the list with you, from your real chats, forms or documents. We include hard cases and tricky ones, not only easy ones.'
+          'We build the list with you, from your real chats, forms or documents. We include hard and tricky cases, not only easy ones.'
         ],
         bullets: [
           'We run the exam before launch and again after every change.',
           'If a change makes results worse, we do not ship it.',
-          'We keep the list growing as new cases appear.'
+          'We keep adding to the list as new cases appear.'
         ]
       },
       {
@@ -240,7 +241,7 @@ export const articles = [
         bullets: [
           'Answer only from approved sources.',
           'Refuse topics outside the job, such as medical or legal advice.',
-          'Never share private customer data.',
+          'Keep private customer data out of answers.',
           'Check outputs for format and risky content before sending.',
           'Limit actions, like refunds, to small safe steps.'
         ]
@@ -248,8 +249,16 @@ export const articles = [
       {
         heading: 'Human review: a person for the risky parts',
         paragraphs: [
-          'Some decisions should not be left to AI alone. We decide with you which ones. Usually these are money, contracts, complaints and anything that is hard to undo.',
-          'In those cases the AI prepares a draft and a person approves it. Over time, as the numbers show the AI is reliable on a task, we can reduce review for that task. Not before.'
+          'Some decisions should not be left to AI alone. We decide with you which ones. Usually these are money, contracts, complaints and anything hard to undo.',
+          'In those cases the AI prepares a draft and a person approves it. If the test results show the AI is reliable on a task, we can reduce review for that task. Not before.'
+        ]
+      },
+      {
+        heading: 'A small example',
+        paragraphs: [
+          'Take a support assistant for an online shop. A customer asks, "Is this available in blue, and when will it reach Pune?"',
+          'Without limits, the AI may guess. With this setup, it looks up stock and delivery rules from the shop\'s own data. If it cannot find a clear answer, it says so and hands the chat to a person.',
+          'Evals check this exact kind of question before launch, and review checks a sample after. The customer gets a fast answer or a fast hand-off. Either is better than a confident wrong reply.'
         ]
       },
       {
@@ -262,7 +271,7 @@ export const articles = [
           'Track wrong answers and hand-offs to people.',
           'Review a sample each week at first.',
           'Update the test list from real mistakes.',
-          'Have a switch to turn the feature off fast.'
+          'Keep a switch to turn the feature off fast.'
         ]
       },
       {
@@ -273,17 +282,9 @@ export const articles = [
         ]
       },
       {
-        heading: 'A small example',
-        paragraphs: [
-          'Take a support assistant for an online shop. A customer asks, "Is this available in blue, and when will it reach Pune?"',
-          'Without limits, the AI may guess. With our setup, it looks up stock and delivery rules from the shop\'s own data. If it cannot find a clear answer, it says so and hands the chat to a person. Evals check this exact kind of question before launch, and review checks a sample after.',
-          'The customer gets a fast answer or a fast hand-off. Either is better than a confident wrong reply.'
-        ]
-      },
-      {
         heading: 'Questions to ask any AI vendor',
         paragraphs: [
-          'Whoever builds your AI feature, including us, should be able to answer these in plain words.'
+          'Whoever builds your AI feature, including us, should answer these in plain words.'
         ],
         bullets: [
           'How do you test it before launch, and can I see the results?',
@@ -296,7 +297,7 @@ export const articles = [
       {
         heading: "What we'd do",
         paragraphs: [
-          'We would pick one narrow task and build the test list with you first. Then add limits and a review step for anything risky. We launch to a small group, watch the results, and widen only when the numbers hold up.',
+          'We would pick one narrow task and build the test list with you first. Then we add limits and a review step for anything risky. We launch to a small group, watch the results, and widen only when the results hold up.',
           'You see the test results at each step, in plain language, so the decision to go further is yours.'
         ]
       }
@@ -305,7 +306,7 @@ export const articles = [
   {
     slug: 'chatbot-or-ai-agent',
     title: 'Chatbot or AI agent? Picking the right level of automation',
-    description: 'A chatbot answers. An agent acts. Here is how to choose the simplest option that does the job.',
+    description: 'A chatbot answers. An agent acts. Here is how to choose the simplest option that does the job, and when plain automation is enough.',
     category: 'AI & Automation',
     date: DATE,
     readMinutes: 4,
@@ -315,7 +316,7 @@ export const articles = [
         heading: 'Two words, two different jobs',
         paragraphs: [
           'People use "chatbot" and "AI agent" as if they mean the same thing. They do not. The difference matters for cost, risk and results.',
-          'A chatbot talks. It answers questions and collects details. An agent does work. It can look things up, use your tools and take steps on its own to finish a task.'
+          'A chatbot talks. It answers questions and collects details. An agent does work. It can look things up, use your tools and take several steps to finish a task.'
         ]
       },
       {
@@ -333,8 +334,8 @@ export const articles = [
       {
         heading: 'What an agent adds',
         paragraphs: [
-          'An agent can do more than reply. It can check an order in your system, update a record, draft an email and ask for approval, all in one flow.',
-          'For example, an agent for a small distributor could read an incoming order message, check stock in a sheet, prepare the invoice draft and ask the owner to confirm. A chatbot alone could only take the message.'
+          'An agent can do more than reply. It can check an order in your system, update a record, or draft an email and ask for approval, all in one flow.',
+          'For example, an agent for a small distributor could read an incoming order message, check stock in a sheet, prepare a draft invoice and ask the owner to confirm. A chatbot alone could only take the message.'
         ],
         bullets: [
           'It connects to your tools such as sheets, CRM or billing.',
@@ -345,7 +346,7 @@ export const articles = [
       {
         heading: 'The cost of more power',
         paragraphs: [
-          'More power means more things that can go wrong. An agent that can change records can also change them wrongly. It needs more testing, tighter limits and often a person to approve key steps.',
+          'More power means more that can go wrong. An agent that can change records can also change them wrongly. It needs more testing, tighter limits and often a person to approve key steps.',
           'It also takes longer to build and costs more to run. That is fine when the saved time is large. It is wasteful when a simple chatbot would do.'
         ]
       },
@@ -362,18 +363,11 @@ export const articles = [
         ]
       },
       {
-        heading: 'You can grow into it',
-        paragraphs: [
-          'The best path is often to start with a chatbot and add abilities one by one. First it answers. Then it books. Then it checks stock. Then it drafts documents for approval.',
-          'Each step is tested before the next. You get value early, and you never pay for power you do not use.'
-        ]
-      },
-      {
         heading: 'Two quick examples',
         paragraphs: [
           'A chatbot case: a dental clinic could use a chatbot to answer timing and fee questions, and collect a name and preferred slot. The front desk then confirms. Simple, safe and useful.',
           'An agent case: a small logistics firm could use an agent that reads a customer\'s "where is my parcel?" message, checks the tracking sheet, and replies with the status. If the parcel is delayed, it drafts an apology and asks a staff member to approve it.',
-          'Both are good choices for their own job. Neither would be right for the other.'
+          'Each is a good fit for its own job. Neither would suit the other.'
         ]
       },
       {
@@ -389,15 +383,23 @@ export const articles = [
         ]
       },
       {
+        heading: 'You can grow into it',
+        paragraphs: [
+          'The best path is often to start with a chatbot and add abilities one by one. First it answers. Then it books. Then it checks stock. Then it drafts documents for approval.',
+          'Each step is tested before the next. You get value early, and you do not pay for power you do not use.'
+        ]
+      },
+      {
         heading: "What we'd do",
         paragraphs: [
           'We would sit with you and walk through one real task from start to finish. We note every question, every system and every decision involved.',
-          'If a chatbot covers it, we build a chatbot. If not, we build the smallest agent that can do the job, with limits and approval where it matters. We would rather be honest about "you do not need an agent yet" than sell you one.'
+          'If a chatbot covers it, we build a chatbot. If not, we build the smallest agent that can do the job, with limits and approval where it matters. We would rather say "you do not need an agent yet" than sell you one.'
         ]
       }
     ]
   }
 ]
+
 
 export const getAllArticles = () => articles
 export const getArticle = (slug) => articles.find((a) => a.slug === slug)
