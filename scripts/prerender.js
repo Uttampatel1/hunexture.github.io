@@ -84,7 +84,6 @@ const mainLinks = [
   { path: '/services', label: 'Services' },
   { path: '/ai', label: 'AI & Machine Learning' },
   { path: '/industries', label: 'Industries' },
-  { path: '/lab', label: 'Interactive AI lab' },
   { path: '/insights', label: 'Insights' },
   { path: '/portfolio', label: 'Portfolio' },
   { path: '/business-profile', label: 'Business profile' },
@@ -144,7 +143,6 @@ const llms =
   group('AI & machine learning', '/ai/', ['/ai']) +
   group('Industries', '/industries/', ['/industries']) +
   group('Insights', '/insights/', ['/insights']) +
-  group('Interactive lab', '/lab/', ['/lab']) +
   group('Optional', '/portfolio/', ['/portfolio', '/privacy-policy', '/terms-of-service', '/cookie-policy'])
 fs.writeFileSync(path.join(buildDir, 'llms.txt'), llms)
 

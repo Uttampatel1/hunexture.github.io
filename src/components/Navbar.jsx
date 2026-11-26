@@ -100,7 +100,6 @@ const Navbar = () => {
   const isActive = (name) => {
     if (name === 'industries') return path.startsWith('/industries')
     if (name === 'ai') return path.startsWith('/ai')
-    if (name === 'lab') return path.startsWith('/lab')
     if (name === 'insights') return path.startsWith('/insights')
     if (name === 'portfolio') return path.startsWith('/portfolio')
     return path === '/' && activeSection === name
@@ -318,15 +317,6 @@ const Navbar = () => {
           </div>
 
 
-          {/* Lab */}
-          <a
-            href="/lab"
-            className={linkClass('lab')}
-            {...activeProps('lab')}
-            onClick={(e) => { e.preventDefault(); closeAll(); navigate('/lab') }}
-          >
-            Lab
-          </a>
 
           {/* Insights (mobile menu only: desktop nav is already full) */}
           <a

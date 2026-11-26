@@ -10,7 +10,6 @@ const { aiExtra } = require('../src/data/aiExtra')
 const { industriesData } = require('../src/data/industriesData')
 const { industryExtra } = require('../src/data/industryExtra')
 const { portfolioData } = require('../src/data/portfolioData')
-const { getAllBlogPosts } = require('../src/data/blogData')
 const { articles, formatDate } = require('../src/data/articles')
 
 const link = (path) => `${SITE_URL}${path}/`
@@ -146,14 +145,6 @@ const article = (slug) => {
   ]
 }
 
-const labPost = (slug) => {
-  const p = getAllBlogPosts().find((x) => x.slug === slug)
-  return [
-    ...para('About this explainer', p.description),
-    ...list('Details', [{ b: 'Category', t: p.category }, p.tags && p.tags.length ? { b: 'Topics', t: p.tags.join(', ') } : null].filter(Boolean)),
-  ]
-}
-
 const indexOf = (title, rows) => [H2(title), UL(rows)]
 
 const buildDoc = (seo) => {
@@ -185,7 +176,6 @@ const buildDoc = (seo) => {
     if (path === '/industries') return indexOf('Industries', linkList(getFacts().industries))
     if (path === '/portfolio')
       return [P('Illustrative example projects. Metrics shown on the site are illustrative, not verified client results.'), UL(portfolioData.map((p) => ({ b: p.title, t: p.shortDescription, href: link(`/portfolio/${p.slug}`) })))]
-    if (path === '/lab') return indexOf('Experiments', getAllBlogPosts().map((p) => ({ b: p.title, t: p.description, href: link(`/lab/${p.slug}`) })))
     if (path === '/insights')
       return indexOf('Articles', articles.map((a) => ({ b: a.title, t: a.description, href: link(`/insights/${a.slug}`) })))
     if (seg[0] === 'services' && seg[1]) return service(seg[1])
@@ -193,7 +183,6 @@ const buildDoc = (seo) => {
     if (seg[0] === 'industries' && seg[1]) return industry(seg[1])
     if (seg[0] === 'portfolio' && seg[1]) return portfolio(seg[1])
     if (seg[0] === 'insights' && seg[1]) return article(seg[1])
-    if (seg[0] === 'lab' && seg[1]) return labPost(seg[1])
   } catch (e) {
     console.warn(`siteContent: fallback for ${path}: ${e.message}`)
   }
