@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getAllArticles, getArticle, formatDate, sectionId } from '../data/articles'
 import './PageKit.css'
-import './LabList.css'
 import './InsightsList.css'
 import './InsightPost.css'
 import './brand.css'
@@ -85,7 +84,7 @@ const InsightPost = () => {
                 )}
               </section>
             ))}
-            <ul className="lab-tags ip-tags" aria-label="Topics">
+            <ul className="ip-tags" aria-label="Topics">
               {post.tags.map((t) => <li key={t}>{t}</li>)}
             </ul>
           </article>

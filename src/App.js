@@ -10,7 +10,6 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
-import LabTeaser from './components/LabTeaser'
 import WorkingWithUs from './components/WorkingWithUs'
 import EngagementModels from './components/EngagementModels'
 import CookieBanner from './components/CookieBanner'
@@ -32,8 +31,6 @@ const WebDevelopmentPage = lazy(() => import('./components/WebDevelopmentPage'))
 const ServicesList = lazy(() => import('./components/ServicesList'))
 const IndustriesList = lazy(() => import('./components/IndustriesList'))
 const AIList = lazy(() => import('./components/AIList'))
-const LabList = lazy(() => import('./components/LabList'))
-const LabPost = lazy(() => import('./components/LabPost'))
 const InsightsList = lazy(() => import('./components/InsightsList'))
 const InsightPost = lazy(() => import('./components/InsightPost'))
 const FactsPage = lazy(() => import('./components/FactsPage'))
@@ -53,7 +50,6 @@ const HomePage = () => (
     <Services />
     <WorkingWithUs />
     <Portfolio />
-    <LabTeaser />
     <Testimonials />
     <EngagementModels />
     <FAQ />
@@ -108,11 +104,10 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
-            <Route path="/lab" element={<LabList />} />
-            <Route path="/lab/:slug" element={<LabPost />} />
+            <Route path="/lab/*" element={<Navigate to="/" replace />} />
             <Route path="/insights" element={<InsightsList />} />
             <Route path="/insights/:slug" element={<InsightPost />} />
-            <Route path="/blog/*" element={<Navigate to="/lab" replace />} />
+            <Route path="/blog/*" element={<Navigate to="/" replace />} />
           </Routes>
           </Suspense>
         </Layout>

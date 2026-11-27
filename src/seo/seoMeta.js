@@ -7,7 +7,6 @@ import { servicesData } from '../data/servicesData'
 import { aiData } from '../data/aiData'
 import { industriesData } from '../data/industriesData'
 import { portfolioData } from '../data/portfolioData'
-import { labStaticPages, labDynamicPages } from '../data/labSeo'
 import { insightsStaticPages, insightsDynamicPages } from '../data/insightsSeo'
 
 export const BRAND = 'Hunexture'
@@ -130,7 +129,7 @@ const dynamicPages = () => {
 
 let cache
 export const getAllSeoPages = () => {
-  if (!cache) cache = { ...staticPages, ...labStaticPages, ...insightsStaticPages, ...dynamicPages(), ...labDynamicPages(), ...insightsDynamicPages() }
+  if (!cache) cache = { ...staticPages, ...insightsStaticPages, ...dynamicPages(), ...insightsDynamicPages() }
   return cache
 }
 

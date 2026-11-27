@@ -73,10 +73,3 @@ export const portfolioNav = [
   { id: 23, slug: "conversion-rate-optimisation", title: "Conversion Rate Optimisation Program", category: "marketing", categoryLabel: "Digital Marketing", shortDescription: "Research-led testing program for a lead-generation website.", tags: ["GA4","A/B Testing","Analytics","UX Research"] },
 ]
 
-// Hand-picked Lab posts for the home teaser (kept tiny so the main bundle
-// doesn't pull in the full blogData).
-export const featuredLab = [
-  { slug: 'gradient-descent', title: 'Gradient Descent Visualizer', category: 'Machine Learning', description: 'Watch the algorithm follow the gradient downhill to the minimum of the loss.', art: 'descent' },
-  { slug: 'logistic-regression-3d', title: 'Logistic Regression', category: 'Machine Learning', description: 'See how the sigmoid turns a linear score into a probability.', art: 'sigmoid' },
-  { slug: '3d-dot-product', title: '3D Dot Product', category: 'Linear Algebra', description: 'Visualize how the angle between two vectors drives their dot product.', art: 'vectors' },
-]
