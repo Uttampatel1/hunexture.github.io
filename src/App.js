@@ -104,10 +104,9 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
-            <Route path="/lab/*" element={<Navigate to="/" replace />} />
             <Route path="/insights" element={<InsightsList />} />
             <Route path="/insights/:slug" element={<InsightPost />} />
-            <Route path="/blog/*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           </Suspense>
         </Layout>
