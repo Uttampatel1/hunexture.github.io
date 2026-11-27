@@ -29,7 +29,11 @@
 }
 .ip-article ul.ip-tags li::before { display: none; }
 .ip-article ul.ip-tags li { padding-left: 8px; margin: 0; }
-.ip-tags { margin-top: var(--space-8); }
+.ip-tags { list-style: none; margin: var(--space-8) 0 var(--space-4); padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.ip-tags li {
+  padding: 2px 8px; border: 1px solid var(--line); border-radius: var(--radius-pill);
+  font-family: var(--font-annot); font-size: var(--fs-label); color: var(--ink-muted);
+}
 
 .ip-toc { position: sticky; top: 96px; align-self: start; font-size: var(--fs-small); }
 .ip-toc-title { margin: 0 0 var(--space-3); font-family: var(--font-annot); font-size: var(--fs-label); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); }
